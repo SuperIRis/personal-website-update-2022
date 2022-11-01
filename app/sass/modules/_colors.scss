@@ -1,0 +1,27 @@
+/* ==========  Colors  ========== */
+
+$colorBlack: rgb(34, 34, 34);
+$colorGrayDark: rgb(70,70,70);
+$colorGray: rgba($colorBlack, .54);
+$colorGrayLight: rgba($colorBlack, .26);
+$colorGrayLighter: #e9e9e9;
+
+$headerWhite:#f5f5f5;
+$headerBorder:#c6c6c6;
+$menuGreen:#9ac21e;
+
+$loaderColor1:lighten($menuGreen, 15%);
+$loaderColor2:#666;
+$loaderColor3:darken($menuGreen, 15%);
+$loaderColor4:#ccc;
+
+@mixin menu-grad($pos){
+	background: #9ac21e; /* Old browsers */
+	background: -moz-linear-gradient(top, #9ac21e $pos, #ffffff 100%-$pos); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop($pos,#9ac21e), color-stop(100%-$pos,#ffffff)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, #9ac21e $pos,#ffffff 100%-$pos); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, #9ac21e $pos,#ffffff 100%-$pos); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, #9ac21e $pos,#ffffff 100%-$pos); /* IE10+ */
+	background: linear-gradient(to bottom, #9ac21e $pos,#ffffff 100%-$pos); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9ac21e', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+}

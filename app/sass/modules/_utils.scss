@@ -1,0 +1,130 @@
+/**
+*
+* Utils
+*
+**/
+
+/*==========  VARIABLES  ==========*/
+
+  // Defining breakpoints
+  $medium: 620px !default;
+  $wide: 800px !default;
+  $huge: 1600px !default;
+  $mediumContainer: 688px !default;
+  $wideContainer: 864px !default;
+
+  // Defining grid sizes
+  $mediumColCount: 3 !default;
+  $mediumColWidth: 30.3% !default;
+  $mediumGutterWidth: 4.5% !default;
+  $wideColCount: 4 !default;
+  $wideColWidth: 22.2% !default;
+  $wideGutterWidth: 3.7% !default;
+
+  // Defining font family
+  $fontDefault: 'Lato', Helvetica, Arial, sans-serif !default;
+  $fontHighlight: 'Lato', Helvetica, sans-serif !default;
+  //$fontIcon: 'icons' !default;
+
+  // Defining font sizes
+  $fontSmall: 13px !default;
+  $fontBase: 16px  !default;
+  $fontMedium: 20px !default;
+  $fontLarge: 26px !default;
+  $fontXLarge: 42px !default;
+  $fontXXLarge: 68px !default;
+  $fontHuge: 110px !default;
+
+  // Defining animation easings
+  $animationEasing: cubic-bezier(0.455, 0.030, 0.515, 0.955) !default;
+
+  
+
+
+/*==========  MIXINS  ==========*/
+@mixin transition ($prop: all, $time: 1s, $ease: linear, $delay:0s) {
+    -webkit-transition: $prop $time $ease $delay;
+    -moz-transition: $prop $time $ease $delay;
+    -o-transition: $prop $time $ease $delay;
+    -ms-transition: $prop $time $ease $delay;
+    transition: $prop $time $ease $delay;
+}
+@mixin transition2 ($prop: all, $time: 1s, $ease: linear, $delay:0s, $prop2: all, $time2: 1s, $ease2: linear, $delay2:0s) {
+    -webkit-transition: $prop $time $ease $delay, $prop2 $time2 $ease2 $delay2;
+    -moz-transition: $prop $time $ease $delay, $prop2 $time2 $ease2 $delay2;
+    -o-transition: $prop $time $ease $delay, $prop2 $time2 $ease2 $delay2;
+    -ms-transition: $prop $time $ease $delay, $prop2 $time2 $ease2 $delay2;
+    transition: $prop $time $ease $delay, $prop2 $time2 $ease2 $delay2;
+}
+@mixin transition-transform($time:1s, $ease:linear){
+  -webkit-transition: -webkit-transform $time $ease;
+  -moz-transition: -moz-transform $time $ease;
+  -o-transition: -o-transform $time $ease;
+  transition: transform $time $ease;
+}
+@mixin rotate($deg){
+  transform: rotate($deg);
+  -ms-transform: rotate($deg); /* IE 9 */
+  -webkit-transform: rotate($deg); /* Safari and Chrome */
+}
+
+@mixin scale($scaleX, $scaleY){
+  transform: scale($scaleX, $scaleY);
+  -ms-transform: scale($scaleX, $scaleY); /* IE 9 */
+  -webkit-transform: scale($scaleX, $scaleY); /* Safari and Chrome */
+}
+
+@mixin translate($x, $y){
+  transform: translate($x, $y);
+  -ms-transform: translate($x, $y); /* IE 9 */
+  -webkit-transform: translate($x, $y); /* Safari and Chrome */
+}
+@mixin border-radius($radius){
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+
+}
+@mixin rotateY($deg){
+  
+  -ms-transform-origin: right center; /* IE 9 */
+  -webkit-transform-origin: right center; /* Chrome, Safari, Opera */
+  transform-origin: right center;
+  transform: rotateY($deg);
+  -ms-transform: rotateY($deg); /* IE 9 */
+  -webkit-transform: rotateY($deg); /* Safari and Chrome */
+  -webkit-perspective: 1500px; /* Chrome, Safari, Opera */
+  perspective: 1500px;
+}
+@mixin transform ($rotate: 90deg, $scale: 1, $skew: 1deg, $translateX:0, $translateY: 0) {
+    -webkit-transform: rotate($rotate) scale($scale) skew($skew) translate($translateX, $translateY);
+    -moz-transform: rotate($rotate) scale($scale) skew($skew) translate($translateX, $translateY);
+    -o-transform: rotate($rotate) scale($scale) skew($skew) translate($translateX, $translateY);
+    -ms-transform: rotate($rotate) scale($scale) skew($skew) translate($translateX, $translateY);
+    transform: rotate($rotate) scale($scale) skew($skew) translate($translateX, $translateY);
+}
+
+@mixin keyframes($animationName) {
+    @-webkit-keyframes #{$animationName} {
+        @content;
+    }
+    @-moz-keyframes #{$animationName} {
+        @content;
+    }
+    @-o-keyframes #{$animationName} {
+        @content;
+    }
+    @keyframes #{$animationName} {
+        @content;
+    }
+}
+
+@mixin animation($str) {
+  -webkit-animation: #{$str};
+  -moz-animation: #{$str};
+  -ms-animation: #{$str};
+  -o-animation: #{$str};
+  animation: #{$str};      
+}
+
+ 

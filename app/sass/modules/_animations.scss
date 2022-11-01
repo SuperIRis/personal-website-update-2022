@@ -1,0 +1,32 @@
+// appear animation
+  @keyframes appear {
+    0%   {@include scale(0.8, 0.8);}
+    25%  {@include scale(1, 1);}
+    50%  {@include scale(1.2, 1.2);}
+    100% {@include scale(1, 1);}
+  }
+//converting bordered button in container (eg: extra-info into info)
+ @include keyframes(button-container) {
+ 	0%{
+ 		height:43px;
+ 		text-indent:0;
+ 		
+ 		width:143px;
+
+ 	}
+  10%{
+  	text-indent:-1000px;
+  	color:transparentize($menuGreen, 0.1);
+  	height:43px;
+  	width:100%;
+  }
+  30%{ 
+  	height:400px;
+  }
+  100%{
+  	//opacity:0;
+  	height:400px;
+  	text-indent:-1000px;
+  	width:100%;
+  }
+}

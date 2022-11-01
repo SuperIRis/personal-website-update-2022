@@ -1,0 +1,252 @@
+.arms-up{
+	@include transition-transform(1s, linear);
+	//transform ($rotate: 90deg, $scale: 1, $skew: 1deg, $translatex: , $translatey:0)
+	@include transform(1deg, 1, 0, 0, -8px);
+}
+.arms-down{
+	@include transition-transform(0.5s, linear);
+	//@include translate(0,0);
+	@include transform(0, 1, 0, 0, 0);
+}
+.paper-out{
+	@include transition-transform(0.4s, ease-out);
+	@include scale(1, 0);
+}
+.paper-in{
+	@include transition-transform(0.4s, ease-out);
+	@include scale(1, 1);
+}
+.contact-container{
+	background-color:white;
+}
+.map{
+	height:360px;
+	width:100%;
+}
+.freelance-status{
+	padding:2em 1em 0;
+	font-weight:300;
+	
+}
+.form-sent{
+	text-align:center;
+	
+	font-weight:900;
+	font-size:1.2em;
+	color:$menuGreen;
+	img{
+		width: 100%;
+	}
+
+}
+.contact-addresses{
+	font-size:0.8em;
+	font-weight:400;
+	list-style:none;
+	margin:2em 0;
+	padding:0;
+	//text-transform:uppercase;
+	li{
+		
+		margin:0.3em .6em 0.3em 0;
+		text-align: center;
+	}
+	a{
+		
+		color:darken(white, 60%);
+		display: block;
+		padding:0.5em;
+		position:relative;
+		text-decoration: none;
+		@include transition(all, 0.1s, ease-out);
+		i{
+			display: inline-block;
+			font-size:1.2em;
+			margin-right:0.2em;
+			position: relative;
+			text-align: center;
+			width:1em;
+		}
+	    -ms-transform-origin: 0 50%; /* IE 9 */
+	    -webkit-transform-origin: 0 50%; /* Chrome, Safari, Opera */
+	    transform-origin: 0 50%;
+	    z-index: 3;
+	    
+	}
+	a:before{
+		background-color:darken(white, 2%);
+		content:' ';
+		height:100%;
+		left:0;
+		position:absolute;
+		top:0;
+		width:100%;
+		z-index:-1;
+	}
+	a:after{
+		background-color:darken(white, 50%);
+		content:' ';
+		height:100%;
+		left:0;
+		position:absolute;
+		top:0;
+		width:0;
+		z-index:-1;
+		@include transition(width, 0.3s, ease-out);
+	}
+	a:hover{
+		color:white;
+		font-weight: 700;
+		&:after{
+			width:100%;
+		}
+		
+	}
+}
+.me-working{
+	margin-top:5em;
+	text-align:center;
+	p{
+		margin:0;
+	}
+}
+.availability-percentage, .meter-gauge{
+	background-color: darken(white, 5%);
+	height:8px;
+	margin:1em 0 0;
+	width:100%;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	&::-webkit-meter-bar{
+	  background: none; /* Required to get rid of the default background property */
+	  background-color: darken(white, 5%);
+	  box-shadow: none;
+	}
+	&::-webkit-meter-optimum-value{
+	  box-shadow: none;
+	  background-color:$menuGreen;
+	  background-image:none;
+	}
+	&::-moz-meter-bar{
+		box-shadow: none;
+		background-color:$menuGreen;
+		background-image:none;
+	}
+	.meter-gauge span {
+		box-shadow: none;
+		background-color:$menuGreen;
+		background-image:none;
+	}
+
+
+}
+.label-percent{
+	margin:0;
+	font-size:0.8em;
+	font-weight:600;
+	text-align:right;
+}
+.me-working-status{
+	margin-top:3em;
+}
+.contact-form{
+	padding:1em;
+	label{
+		font-weight:300;
+		width:100%;
+	}
+	input[type=text], input[type=email], textarea{
+		background-color:darken(white, 4%);
+		border:1px solid darken(white, 4%);
+		outline:none;
+		padding:0.5em;
+		width:100%;
+		@include transition(all, 0.4s, ease-out);
+		&:focus{
+			outline: none;
+		}
+		&:hover{
+			background-color:darken(white, 1%);
+			border-color:darken(white, 9%);
+		}
+		&:focus{
+			//transition-delay:0.2s;
+			background-color:$menuGreen;
+			color:white;
+		}
+	}
+	textarea{
+		height:5em;
+	}
+	.submit{
+		text-align: center;
+	}
+	button[type=submit]{
+		padding:0.3em 3em;
+	}
+}
+.note{
+	color:#999;
+	font-size:0.8em;
+	margin:1em;
+	text-align:center;
+	a{
+		color:darken(#999, 20%);
+		font-weight: 800;
+		text-decoration: none;
+		@include transition(color, 0.1s, ease-out);
+		&:hover{
+			color:darken($menuGreen, 10%);
+		}
+	}
+
+}
+.contact-container{
+	padding-bottom:60px;
+}
+@media only screen and (min-width: 600px) {
+	.freelance-status{
+		text-align:center;
+		p{
+			text-align: left;
+		}
+	}
+	.contact-addresses, .me-working{
+		display: inline-block;
+		margin:0;
+		vertical-align: top;
+		
+	}
+	.contact-addresses{
+		li{
+			text-align: left;
+		}
+		width:40%;
+	}
+	.me-working{
+		margin-top:1em;
+		width:45%;
+	}
+	.me-working-status{
+		margin-top:1em;
+	}
+}
+@media only screen and (min-width: 1000px) {
+
+	.freelance-status, .contact-form, .form-sent{
+		display: inline-block;
+		margin:2em 0;
+		padding:0 2em;
+		vertical-align: top;
+		width:50%;
+	}
+	.form-sent{
+		padding:2em;
+	}
+	.freelance-status{
+		border-right: 1px solid darken(white, 10%);
+	}
+	.me-working{
+		width:60%;
+	}
+}
