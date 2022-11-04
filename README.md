@@ -5,6 +5,12 @@ Updated from 2015 portfolio.
 - Updated information
 - Updated to ES6
 
+NOTES as of 3/11
+
+- Fixed serve, there was a loop where a change in main triggered a change and then changed bundle, which triggered an infinite change
+  Next:
+  - Need to test main.js
+
 NOTES as of 1/11
 
 - Fixed gulpfile, had to change bundle to bundle2.js, otherwise browserSync looked for bundle2.js/ and failed.

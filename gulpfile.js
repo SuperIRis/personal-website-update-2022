@@ -38,25 +38,18 @@ function browserSyncServe() {
 			baseDir: "./app",
 		},
 	});
-	watch("app/*.html").on("change", browserSync.reload);
-	/*watch("app/js/*.js").on("change", () => {
+	watch("app/**/!(bundle)*.js").on("change", () => {
 		processJSDev();
-		setTimeout(() => {
-			browserSync.reload();
-		}, 3000);
-	});*/
-	//watch("./app/js/*.js", { ignoreInitial: false }, processJSDev);
-	//watch("./app/*.html", { events: "all" }, () => browserSync.reload);
+		browserSync.reload();
+	});
 }
 
 const processJSDev = () => {
-	console.log("process");
-	const pipe = src("./app/js/main.js")
+	console.log("process JS");
+	return src("./app/js/main.js")
 		.pipe(babel())
 		.pipe(rename("bundle2.js"))
 		.pipe(dest("./app/js/", { overwrite: true }));
-	//browserSync.reload();
-	return pipe;
 };
 
 const copyHTML = () => src("./app/*.html").pipe(dest("./dist/"));
@@ -68,7 +61,7 @@ const copyServerCode = () => src("./app/process/*").pipe(dest("./dist/process/")
 const copySpritesheets = () => src("./app/spritesheets/*").pipe(dest("./dist/spritesheets/"));
 const optimizeImages = () => src("./app/images/**/*").pipe(imagemin()).pipe(dest("./dist/images"));
 
-exports.serve = series(browserSyncServe);
+exports.serve = series(processJSDev, browserSyncServe);
 
 exports.build = series(
 	copyHTML,

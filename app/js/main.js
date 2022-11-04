@@ -8,7 +8,7 @@
 //import Projects from "./sections/projects.js";
 import { toggleClass } from "./lib/Utils.js";
 
-console.log("Loading yeah! 23");
+console.log("Loading yeah! 43");
 
 const page = window.location.pathname.substring(1).replace(/.html/g, "");
 let current;
