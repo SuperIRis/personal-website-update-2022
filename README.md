@@ -5,6 +5,12 @@ Updated from 2015 portfolio.
 - Updated information
 - Updated to ES6
 
+NOTES as of 1/11
+
+- Fixed gulpfile, had to change bundle to bundle2.js, otherwise browserSync looked for bundle2.js/ and failed.
+  Next:
+  - watch is not working properly to re-process js
+
 NOTES as of 31/10
 
 - Implemented live reload and server with browserSync in gulpfile

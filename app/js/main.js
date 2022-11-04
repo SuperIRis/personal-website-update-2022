@@ -1,12 +1,14 @@
 "use strict";
-import Aboutme from "./sections/aboutme.js";
-import AnimatedJsonSprite from "./lib/AnimatedJsonSprite.js";
-import AnimatedLoader from "./lib/AnimatedLoader.js";
-import Contact from "./sections/contact.js";
-import Home from "./sections/home.js";
-import Project from "./sections/project.js";
-import Projects from "./sections/projects.js";
+//import Aboutme from "./sections/aboutme.js";
+//import AnimatedJsonSprite from "./lib/AnimatedJsonSprite.js";
+//import AnimatedLoader from "./lib/AnimatedLoader.js";
+//import Contact from "./sections/contact.js";
+//import Home from "./sections/home.js";
+//import Project from "./sections/project.js";
+//import Projects from "./sections/projects.js";
 import { toggleClass } from "./lib/Utils.js";
+
+console.log("Loading yeah! 23");
 
 const page = window.location.pathname.substring(1).replace(/.html/g, "");
 let current;
@@ -71,19 +73,19 @@ window.loadPage = function (page) {
 			}
 	}*/
 };
-AnimatedLoader.init(
+/*AnimatedLoader.init(
 	new AnimatedJsonSprite("spritesheets/loader.png", document.getElementById("loader-me"), {
 		loop: true,
 		frameRate: 40,
 		loopStartStep: 4,
 		loopEndStep: 22,
 	})
-);
+);*/
 window.initializeMap = function () {
 	/*needed for async load of gm, not used*/
 };
 window.loadPage(page);
-document.getElementById("mobile-menu").addEventListener("click", onToggleMobileMenu);
+/*document.getElementById("mobile-menu").addEventListener("click", onToggleMobileMenu);
 document.querySelector("[data-popup]").addEventListener("click", onOpenPopup);
 document.querySelector(".preload").classList.remove("preload");
 document.querySelector("[data-track]").addEventListener("click", function (e) {
@@ -93,3 +95,4 @@ window.addEventListener("load", function () {
 	document.getElementById("loader").classList.add("unshown");
 	AnimatedLoader.stop();
 });
+*/
