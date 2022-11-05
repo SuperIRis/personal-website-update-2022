@@ -3,3 +3,5 @@ node_modules
 .DS_Store
 dist
 .tmp
+app/css/*
+app/js/bundle2.js
