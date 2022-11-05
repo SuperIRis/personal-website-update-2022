@@ -5,6 +5,13 @@ Updated from 2015 portfolio.
 - Updated information
 - Updated to ES6
 
+Run the site in dev mode with gulp serve (live reload, JS and SASS transpiling)
+Build the site for prod with gulp build (copy static files to dist / babelify, concat, and uglify JS / transpile, concat, and minify CSS)
+
+NOTES as of 4/11
+
+- Finished gulpfile
+
 NOTES as of 3/11
 
 - Fixed serve, there was a loop where a change in main triggered a change and then changed bundle, which triggered an infinite change
