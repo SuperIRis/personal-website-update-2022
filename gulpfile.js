@@ -15,7 +15,7 @@ function browserSyncServe() {
 			baseDir: "./app",
 		},
 	});
-	watch("app/**/!(bundle)*.js").on("change", () => {
+	watch("app/**/!(bundle2)*.js").on("change", () => {
 		processJSDev();
 		browserSync.reload();
 	});
@@ -23,6 +23,7 @@ function browserSyncServe() {
 }
 
 const processJSDev = () => {
+	console.log("process JS");
 	return src("./app/js/main.js")
 		.pipe(babel())
 		.pipe(rename("bundle2.js"))

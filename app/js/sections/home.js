@@ -1,93 +1,106 @@
 "use strict";
-/* global $*/
-;(function(){
-	var Home = {};
-	var AnimatedJsonSprite = require("../lib/AnimatedJsonSprite.js");
-	var PROJECTS = require("../../data/projects.js");
-	var ScrollMonitor = require("../vendor/scrollMonitor.js");
-	var AnimatedLoader = require("../lib/AnimatedLoader.js");
-	var Utils = require("../lib/Utils.js");
-	var body = $("html, body");
-	var projectsWatcher;
-	
 
-	function onScrollHomeDown(e){
-		body.animate({scrollTop:$(document).height()}, "500", "swing");
+import PROJECTS from "../../data/projects.js";
+import { preloadImage } from "../lib/Utils.js";
+import ScrollMonitor from "../vendor/scrollMonitor.js";
+import AnimatedJsonSprite from "../lib/AnimatedJsonSprite.js";
+class Home {
+	init() {
+		const homeSprites = ["libro", "normal", "ds"];
+		const currentSprite = homeSprites[Math.floor(Math.random() * homeSprites.length)];
+		this.homeMe = new AnimatedJsonSprite(
+			"spritesheets/homes-" + currentSprite + ".png",
+			document.getElementById("me"),
+			{ loop: true, frameRate: 40 }
+		);
+		this.homeMe.start();
+		document.getElementById("home-down-btn").addEventListener("click", this.onScrollToProjects);
+		document.getElementById("intro-container").style.height = `${window.innerHeight - 86}px`;
+		this.parseProjects();
+		this.setProjects();
 	}
-	function parseProjects(){
+
+	onScrollToProjects() {
+		const introHeight = document.getElementById("intro-container").offsetHeight + 86;
+		window.scrollTo({ top: introHeight, behavior: "smooth" });
+	}
+
+	parseProjects() {
 		//find home projects
-		var projects = PROJECTS.projects;
-		Home.projects = [];
-		for(var i =0; i<projects.length; i++){
-			if(projects[i].images && projects[i].images.home){
-				Home.projects.push(projects[i]);
+		const projects = PROJECTS.projects;
+		this.projects = [];
+		for (var i = 0; i < projects.length; i++) {
+			if (projects[i].images && projects[i].images.home) {
+				this.projects.push(projects[i]);
 			}
 		}
-		
 	}
-	function setProjects(){
-		var jProjects = $("#projects-preview-list").find("li");
-		Home.loadedProjects = 0;
-		for(var i = 0; i<jProjects.length; i++){
-			$(jProjects[i]).find(".project-title").html(Home.projects[i].name);
-			$(jProjects[i]).find(".project-tech").html(Home.projects[i].tech);
-			$(jProjects[i]).find("a").attr("href", "proyecto.html#"+Home.projects[i].stringID);
-			$("<img/>").attr("data-index", i).attr("src", "images/projects/"+Home.projects[i].images.home).load(onImageLoaded);
-			$(jProjects[i]).find("a").on("click", onTrack);
-		}
 
-	}
-	function onTrack(e){
-		Utils.trackEvent("home-project", "click", $(e.currentTarget).find(".project-title").html());
-	}
-	function onImageLoaded(e) {
-		var jProjects = $("#projects-preview-list").find("li");
-		$(e.currentTarget).remove();
-		$(jProjects[$(e.currentTarget).attr("data-index")]).find(".project-preview-item").css("background-image", "url('images/projects/"+Home.projects[$(e.currentTarget).attr("data-index")].images.home+"')");
-		$(jProjects[$(e.currentTarget).attr("data-index")]).removeClass("loading");
-		Home.loadedProjects++;
-		if(Home.loadedProjects === jProjects.length){
-			setScrollMonitor();
-		}
-	}
-	function setScrollMonitor(){
-		projectsWatcher = ScrollMonitor.create($("#projects-preview-list")[0], -10);
-		projectsWatcher.enterViewport(function(){
-			$("#projects-preview-list").removeClass("unshown");
-		});
-		projectsWatcher.exitViewport(function(){
-			$("#projects-preview-list").addClass("unshown");
+	fillProjectData(projectNode, projectIndex) {
+		projectNode.querySelector(".project-title").innerHTML = this.projects[projectIndex].name;
+		projectNode.querySelector(".project-tech").innerHTML = this.projects[projectIndex].tech;
+		projectNode.querySelector("a").setAttribute("href", this.projects[projectIndex].stringID);
+		projectNode.querySelector("a").addEventListener("click", this.onProjectClick.bind(this));
+		preloadImage("images/projects/" + this.projects[projectIndex].images.home).then(() => {
+			this.onProjectImageLoaded(projectNode, projectIndex);
 		});
 	}
 
-	function onOpenSection(e){
+	setProjects() {
+		const allProjectNodes = document.querySelectorAll("#projects-preview-list li");
+		this.loadedProjects = 0;
+		allProjectNodes.forEach(this.fillProjectData.bind(this));
+	}
+
+	setScrollMonitor() {
+		this.projectsWatcher = ScrollMonitor.create(
+			document.querySelectorAll("#projects-preview-list li")[0],
+			-10
+		);
+		this.projectsWatcher.enterViewport(function () {
+			document.getElementById("projects-preview-list").classList.remove("unshown");
+		});
+		this.projectsWatcher.exitViewport(function () {
+			document.getElementById("projects-preview-list").classList.add("unshown");
+		});
+	}
+
+	onProjectImageLoaded(projectNode, projectIndex) {
+		projectNode.querySelector(
+			".project-preview-item"
+		).style.backgroundImage = `url(images/projects/${this.projects[projectIndex].images.home})`;
+
+		projectNode.classList.remove("loading");
+		this.loadedProjects++;
+		if (this.loadedProjects === this.projects.length) {
+			this.setScrollMonitor();
+		}
+	}
+
+	onProjectClick(e) {
 		e.preventDefault();
-		Home.homeMe.stop();
-		
-		AnimatedLoader.loadSection($(e.currentTarget).attr("href"));
+		this.onOpenProject(e);
+		Utils.trackEvent(
+			"home-project",
+			"click",
+			e.currentTarget.querySelector(".project-title").innerHTML
+		);
 	}
-	
-	Home.init = function(){
-		//var homeSprites = ["playa"];
-		var homeSprites = ["libro", "normal", "ds"];
-		var currentSprite = homeSprites[Math.floor(Math.random()*homeSprites.length)];
-		Home.homeMe = new AnimatedJsonSprite("spritesheets/homes-"+currentSprite+".png", document.getElementById("me"), {loop:true, frameRate:40});
-		Home.homeMe.start();
-		$("#home-down-btn").on("click", onScrollHomeDown);
-		$("#main-menu, #projects-preview-list").on("click", "a", onOpenSection);
-		$("#intro-container").css("height", $(window).height()-86);
-		parseProjects();
-		setProjects();
-	};
-	Home.destroy = function(){
-		$("#home-down-btn").off();
-		$("#main-menu").off();
-		Home.homeMe = null;
-		$("#me").html("");
-	};
-	module.exports = Home;
-})();
 
+	onOpenProject(e) {
+		e.preventDefault();
+		this.homeMe.stop();
+		// TODO: Instead of calling AnimatedLoader, emit an event so that main takes charge of loading instead of each section
+		//AnimatedLoader.loadSection($(e.currentTarget).attr("href"));
+	}
 
+	destroy() {
+		document.getElementById("home-down-btn").removeEventListener("click", this.onScrollToProjects);
+		this.homeMe = null;
+		document.getElementById("me").innerHTML = "";
+		this.projectsWatcher.destroy();
+	}
+}
 
-
+const homeSingleton = new Home();
+export default homeSingleton;

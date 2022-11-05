@@ -3,12 +3,10 @@
 //import AnimatedJsonSprite from "./lib/AnimatedJsonSprite.js";
 //import AnimatedLoader from "./lib/AnimatedLoader.js";
 //import Contact from "./sections/contact.js";
-//import Home from "./sections/home.js";
+import Home from "./sections/home.js";
 //import Project from "./sections/project.js";
 //import Projects from "./sections/projects.js";
 import { toggleClass } from "./lib/Utils.js";
-
-console.log("Loading yeah! 43");
 
 const page = window.location.pathname.substring(1).replace(/.html/g, "");
 let current;
@@ -40,8 +38,8 @@ window.loadPage = function (page) {
 		current.destroy();
 		ajaxLoaded = true;
 	}
-	console.log(page);
-	/*switch (page) {
+
+	switch (page) {
 		case "index":
 		case "/":
 		case "":
@@ -71,7 +69,7 @@ window.loadPage = function (page) {
 			} else {
 				console.warn("Se desconoce el html:", page);
 			}
-	}*/
+	}
 };
 /*AnimatedLoader.init(
 	new AnimatedJsonSprite("spritesheets/loader.png", document.getElementById("loader-me"), {
@@ -91,8 +89,9 @@ document.querySelector(".preload").classList.remove("preload");
 document.querySelector("[data-track]").addEventListener("click", function (e) {
 	Utils.trackEvent("external-link", "click", e.target.getAttribute("data-track"));
 });
+
+*/
 window.addEventListener("load", function () {
 	document.getElementById("loader").classList.add("unshown");
-	AnimatedLoader.stop();
+	//AnimatedLoader.stop();
 });
-*/

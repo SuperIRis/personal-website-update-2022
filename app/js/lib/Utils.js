@@ -57,3 +57,12 @@ export function toggleClass(element, className) {
 		element.classList.add(className);
 	}
 }
+
+export function preloadImage(imageURL) {
+	return new Promise((resolve, reject) => {
+		const imageContainer = document.createElement("img");
+		imageContainer.onload = resolve;
+		imageContainer.onerror = reject;
+		imageContainer.src = imageURL;
+	});
+}
