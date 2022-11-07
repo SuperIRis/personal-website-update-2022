@@ -66,3 +66,18 @@ export function preloadImage(imageURL) {
 		imageContainer.src = imageURL;
 	});
 }
+
+export function onAllImagesLoaded(node) {
+	Promise.all(
+		Array.from(node.querySelectorAll("img") ?? document.images)
+			.filter((img) => !img.complete)
+			.map(
+				(img) =>
+					new Promise((resolve) => {
+						img.onload = img.onerror = resolve;
+					})
+			)
+	).then(() => {
+		console.log("images finished loading");
+	});
+}

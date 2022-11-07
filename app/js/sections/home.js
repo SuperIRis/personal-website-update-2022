@@ -4,7 +4,9 @@ import PROJECTS from "../../data/projects.js";
 import { preloadImage } from "../lib/Utils.js";
 import ScrollMonitor from "../vendor/scrollMonitor.js";
 import AnimatedJsonSprite from "../lib/AnimatedJsonSprite.js";
-class Home {
+import EventfulClass from "../lib/EventfulClass.js";
+import { trackEvent } from "../lib/Utils.js";
+class Home extends EventfulClass {
 	init() {
 		const homeSprites = ["libro", "normal", "ds"];
 		const currentSprite = homeSprites[Math.floor(Math.random() * homeSprites.length)];
@@ -14,6 +16,7 @@ class Home {
 			{ loop: true, frameRate: 40 }
 		);
 		this.homeMe.start();
+		document.getElementById("main-container").classList.add("main-container");
 		document.getElementById("home-down-btn").addEventListener("click", this.onScrollToProjects);
 		document.getElementById("intro-container").style.height = `${window.innerHeight - 86}px`;
 		this.parseProjects();
@@ -80,16 +83,13 @@ class Home {
 	onProjectClick(e) {
 		e.preventDefault();
 		this.onOpenProject(e);
-		Utils.trackEvent(
-			"home-project",
-			"click",
-			e.currentTarget.querySelector(".project-title").innerHTML
-		);
+		trackEvent("home-project", "click", e.currentTarget.querySelector(".project-title").innerHTML);
 	}
 
 	onOpenProject(e) {
 		e.preventDefault();
 		this.homeMe.stop();
+		this.trigger("unload", { url: e.currentTarget.getAttribute("href") });
 		// TODO: Instead of calling AnimatedLoader, emit an event so that main takes charge of loading instead of each section
 		//AnimatedLoader.loadSection($(e.currentTarget).attr("href"));
 	}
@@ -99,6 +99,7 @@ class Home {
 		this.homeMe = null;
 		document.getElementById("me").innerHTML = "";
 		this.projectsWatcher.destroy();
+		this.removeAllEventListeners();
 	}
 }
 

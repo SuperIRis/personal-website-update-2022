@@ -1,38 +1,91 @@
-/* global $*/
-/* global Circles*/
-/* global Snap*/
+"use strict";
 
-;(function(){
-	"use strict";
+import ScrollMonitor from "../vendor/scrollMonitor.js";
+import AnimatedNumber from "../lib/AnimatedNumber.js";
+import EventfulClass from "../lib/EventfulClass.js";
 
-	var Aboutme = {};
-	
-	var ScrollMonitor = require("../vendor/scrollMonitor.js");
-	var AnimatedLoader = require("../lib/AnimatedLoader.js");
-	var AnimatedNumber = require("../lib/AnimatedNumber.js");
-	var percentageColors = ["#9ac21e", "#ffd43d", "#00ccd3"];
-	var circles = [], config;
-	var graphsWatchers = [];
-	//var statsWatcher = ScrollMonitor.create($("#stats")[0]);
-	var animatedStats=[];
-	var svgInterval, randomFactsInterval;
-	function svgAnimate(f){
-		
-		var leftEye = f.select("#left-eye");
-		var rightEye = f.select("#right-eye");
-		var leftEyeClosed = f.select("#left-eye-closed");
-		var rightEyeClosed = f.select("#right-eye-closed");
-		if(!leftEye || !rightEye || !leftEyeClosed || !rightEyeClosed){
-			return console.error("No se encuentran los elementos en el svg\n", leftEye, rightEye, leftEyeClosed, rightEyeClosed);
+const percentageColors = ["#9ac21e", "#ffd43d", "#00ccd3"];
+const circles = [];
+const graphsWatchers = [];
+const animatedStats = [];
+let svgInterval;
+
+class Aboutme extends EventfulClass {
+	init() {
+		this.setAnimateStats();
+		this.animateRandomFacts();
+		this.setSVG();
+		for (let i = 0; i < document.querySelectorAll("#programming-skills li").length; i++) {
+			graphsWatchers.push(
+				ScrollMonitor.create(document.querySelectorAll("#programming-skills li")[i], -10)
+			);
+			graphsWatchers[graphsWatchers.length - 1].enterViewport(this.graphEntering.bind(this));
+		}
+		//document.getElementById("#main-menu").on("click", "a", onOpenSection);
+	}
+	setAnimateStats() {
+		const statsNumbers = document.querySelectorAll(".stats-number");
+		for (var j = 0, limit = statsNumbers.length; j < limit; j++) {
+			const animatedStat = new AnimatedNumber(statsNumbers[j]);
+			animatedStats.push(animatedStat);
+			animatedStat.init();
+		}
+	}
+	animateRandomFacts() {
+		let factToGo, factToAppear;
+		this.randomFactsInterval = setInterval(function () {
+			factToAppear =
+				document.querySelector("#random-facts .active").nextElementSibling ??
+				document.querySelector("#random-facts li:nth-child(1)");
+			factToGo = document.querySelector("#random-facts .active");
+			factToGo.classList.add("unshown");
+			factToGo.classList.remove("active");
+			factToAppear.classList.remove("hidden");
+			factToAppear.classList.add("active", "unshown");
+			setTimeout(function () {
+				factToGo.classList.add("hidden");
+				factToAppear.classList.remove("unshown");
+			}, 400);
+		}, 5000);
+	}
+	setSVG() {
+		if (typeof Snap !== "function") {
+			console.error("No se encuentra la librería de Snap.svg");
+			return;
+		}
+		const svg = new Snap("#me-about");
+
+		Snap.load("images/aboutme-me.svg", (f) => {
+			if (!this.snapLoaded) {
+				this.characterAnimateBlink(f);
+				svg.append(f);
+				this.snapLoaded = true;
+				console.log("snap loaded");
+			}
+		});
+	}
+	characterAnimateBlink(f) {
+		const leftEye = f.select("#left-eye");
+		const rightEye = f.select("#right-eye");
+		const leftEyeClosed = f.select("#left-eye-closed");
+		const rightEyeClosed = f.select("#right-eye-closed");
+		if (!leftEye || !rightEye || !leftEyeClosed || !rightEyeClosed) {
+			return console.error(
+				"No se encuentran los elementos en el svg\n",
+				leftEye,
+				rightEye,
+				leftEyeClosed,
+				rightEyeClosed
+			);
 		}
 		leftEyeClosed.addClass("hidden");
 		rightEyeClosed.addClass("hidden");
-		svgInterval = setInterval(function(){
+		svgInterval = setInterval(function () {
 			leftEye.addClass("hidden");
 			rightEye.addClass("hidden");
 			leftEyeClosed.removeClass("hidden");
 			rightEyeClosed.removeClass("hidden");
-			setTimeout(function(){
+			setTimeout(function () {
 				leftEye.removeClass("hidden");
 				rightEye.removeClass("hidden");
 				leftEyeClosed.addClass("hidden");
@@ -40,117 +93,64 @@
 			}, 300);
 		}, 4000);
 	}
-	function getIdByPercentage(percentage){
-		if(percentage>90){
+	graphEntering(e, domElement) {
+		this.createGraph(domElement.querySelector("figure"));
+	}
+
+	createGraph(jElement) {
+		//for(var i = 0, limit = graphs.length; i<limit; i++){
+		const config = {
+			id: jElement.id,
+			value: jElement.getAttribute("data-percentage"),
+			radius: 25,
+			duration: 1000,
+			text: function (value) {
+				return "";
+			},
+			textClass: "circle-graph-" + this.getIdByPercentage(jElement.getAttribute("data-percentage")),
+			width: 5,
+			colors: [
+				"#e1e1e1",
+				percentageColors[this.getIdByPercentage(jElement.getAttribute("data-percentage"))],
+			],
+		};
+
+		circles.push(Circles.create(config));
+	}
+	getIdByPercentage(percentage) {
+		if (percentage > 90) {
 			return 0;
-		}
-		else if(percentage > 60){
+		} else if (percentage > 60) {
 			return 1;
-		}
-		else{
+		} else {
 			return 2;
 		}
 	}
-	
-	function setAnimateStats(){
-		var statsNumbers = $(".stats-number");
-		for(var j = 0, limit2 = statsNumbers.length; j<limit2; j++){
-			animatedStats.push(new AnimatedNumber(statsNumbers[j]));
-			animatedStats[animatedStats.length-1].init();
-		}
-	}
-	
-	function createGraph(jElement){
-		//for(var i = 0, limit = graphs.length; i<limit; i++){
-			if(!jElement.data("circle-graph")){
-				jElement.data("circle-graph", true);
-				config = {
-					id:			jElement[0].id,
-					value: 		jElement.attr("data-percentage"),
-					radius: 	25,
-					duration: 	1000,
-					/* jshint ignore:start */
-					text: 		function(value){return "";},
-					/* jshint ignore:end */
-					textClass: 	"circle-graph-"+getIdByPercentage(jElement.attr("data-percentage")),
-					width: 		5,
-					colors: 	["#e1e1e1", percentageColors[getIdByPercentage(jElement.attr("data-percentage"))]]
-				};
-
-				circles.push(Circles.create(config));
-			}
-			
-		//}
-	}
-	function animateRandomFacts(){
-		var factToGo, factToAppear;
-		randomFactsInterval = setInterval(function(){			
-			factToAppear = $("#random-facts").find(".active").next().length===0 ? $("#random-facts").find("li:nth-child(1)") :  $("#random-facts").find(".active").next();
-			factToGo = $("#random-facts").find(".active").addClass("unshown").removeClass("active");
-			factToAppear.removeClass("hidden").addClass("active").addClass("unshown");
-			setTimeout(function(){
-				factToGo.addClass("hidden");
-				factToAppear.removeClass("unshown");
-			}, 400);
-		},5000);
-	}
-	
-	function graphEntering(e, domElement){
-
-		createGraph($(domElement).find("figure"));
-	}
-	/*statsWatcher.enterViewport(function(){
-		animateStats();
-	});*/
-	function onOpenSection(e){
-		e.preventDefault();
-		AnimatedLoader.loadSection($(e.currentTarget).attr("href"));
-	}
-	
-	Aboutme.setSVG = function(){
-		if(typeof Snap !== "function"){
-			console.error("No se encuentra la librería de Snap.svg");
-			return;
-		}
-		console.log("snap!");
-			var svg = new Snap("#me-about");
-		
-			Snap.load("images/aboutme-me.svg", function(f){
-				if(!Aboutme.snapLoaded){
-					svgAnimate(f);
-					svg.append(f);
-					Aboutme.snapLoaded = true;
-					console.log("snap loaded");
-				}
-				
-				
-			});
-		
-		
-	};
-	Aboutme.init = function(){
-		setAnimateStats();
-		//createGraphs();
-		animateRandomFacts();
-		Aboutme.setSVG();
-		for (var i=0; i<$("#programming-skills li").length; i++){
-			graphsWatchers.push(ScrollMonitor.create($("#programming-skills li")[i], -10));
-			graphsWatchers[graphsWatchers.length-1].enterViewport(graphEntering);
-		}
-		$("#main-menu").on("click", "a", onOpenSection);
-	};
-	Aboutme.destroy = function(){
-		for(var i = 0; i<graphsWatchers.length; i++){
+	destroy() {
+		for (let i = 0; i < graphsWatchers.length; i++) {
 			graphsWatchers[i].destroy();
 		}
 		graphsWatchers.length = 0;
-		/*Aboutme.svg.remove();
-		$("<figure id='me-about' class='me-about'></figure>").insertBefore("#random-facts");*/
-		Aboutme.snapLoaded = false;
+		this.snapLoaded = false;
 		clearInterval(svgInterval);
-		clearInterval(randomFactsInterval);
-	};
+		clearInterval(this.randomFactsInterval);
+	}
+}
+/*
 
-	module.exports = Aboutme;
-})();
 
+
+
+
+
+
+
+
+
+function onOpenSection(e) {
+	e.preventDefault();
+	AnimatedLoader.loadSection($(e.currentTarget).attr("href"));
+}
+*/
+const aboutMeSingleton = new Aboutme();
+export default aboutMeSingleton;

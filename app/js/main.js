@@ -1,8 +1,8 @@
 "use strict";
-//import Aboutme from "./sections/aboutme.js";
+import Aboutme from "./sections/aboutme.js";
 //import AnimatedJsonSprite from "./lib/AnimatedJsonSprite.js";
-//import AnimatedLoader from "./lib/AnimatedLoader.js";
-//import Contact from "./sections/contact.js";
+import AnimatedLoader from "./lib/AnimatedLoader.js";
+import Contact from "./sections/contact.js";
 import Home from "./sections/home.js";
 //import Project from "./sections/project.js";
 //import Projects from "./sections/projects.js";
@@ -10,27 +10,6 @@ import { toggleClass } from "./lib/Utils.js";
 
 const page = window.location.pathname.substring(1).replace(/.html/g, "");
 let current;
-
-function onToggleMobileMenu(e) {
-	toggleClass(e.currentTarget, "active");
-	toggleClass(document.getElementById("main-container"), "mobile-menu-on");
-	toggleClass(document.getElementById("main-footer"), "mobile-menu-on");
-}
-function onOpenPopup(e) {
-	e.preventDefault();
-	const url = $(e.currentTarget).attr("href");
-	const popup = e.currentTarget.getAttribute("data-popup");
-	const width = popup === "twitter" ? 550 : 500;
-	const height = popup === "twitter" ? 400 : 320;
-	const top = window.innerHeight / 2 - height / 2;
-	const left = window.innerWidth / 2 - width / 2;
-
-	window.open(
-		url,
-		popup,
-		"width=" + width + ", height=" + height + ", left=" + left + ", top=" + top
-	);
-}
 
 window.loadPage = function (page) {
 	let ajaxLoaded = false;
@@ -71,14 +50,38 @@ window.loadPage = function (page) {
 			}
 	}
 };
-/*AnimatedLoader.init(
-	new AnimatedJsonSprite("spritesheets/loader.png", document.getElementById("loader-me"), {
+
+AnimatedLoader
+	.init
+	/*new AnimatedJsonSprite("spritesheets/loader.png", document.getElementById("loader-me"), {
 		loop: true,
 		frameRate: 40,
 		loopStartStep: 4,
 		loopEndStep: 22,
-	})
-);*/
+	})*/
+	();
+
+function onToggleMobileMenu(e) {
+	toggleClass(e.currentTarget, "active");
+	toggleClass(document.getElementById("main-container"), "mobile-menu-on");
+	toggleClass(document.getElementById("main-footer"), "mobile-menu-on");
+}
+function onOpenPopup(e) {
+	e.preventDefault();
+	const url = $(e.currentTarget).attr("href");
+	const popup = e.currentTarget.getAttribute("data-popup");
+	const width = popup === "twitter" ? 550 : 500;
+	const height = popup === "twitter" ? 400 : 320;
+	const top = window.innerHeight / 2 - height / 2;
+	const left = window.innerWidth / 2 - width / 2;
+
+	window.open(
+		url,
+		popup,
+		"width=" + width + ", height=" + height + ", left=" + left + ", top=" + top
+	);
+}
+
 window.initializeMap = function () {
 	/*needed for async load of gm, not used*/
 };
@@ -94,4 +97,9 @@ document.querySelector("[data-track]").addEventListener("click", function (e) {
 window.addEventListener("load", function () {
 	document.getElementById("loader").classList.add("unshown");
 	//AnimatedLoader.stop();
+});
+
+Home.addEventListener("unload", (data) => {
+	console.log("unloaded");
+	AnimatedLoader.loadSection(data.url);
 });
