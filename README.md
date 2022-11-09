@@ -8,6 +8,19 @@ Updated from 2015 portfolio.
 Run the site in dev mode with gulp serve (live reload, JS and SASS transpiling)
 Build the site for prod with gulp build (copy static files to dist / babelify, concat, and uglify JS / transpile, concat, and minify CSS)
 
+NOTES as of 8/11
+
+- Finished projects
+  Next:
+  - Project
+
+NOTES as of 7/11
+
+- Finished contact "migration"
+- Postponed redesign of contact (remove form, add social networks)
+  Next:
+  - Projects, and project
+
 NOTES as of 6/11
 
 - Finished about me

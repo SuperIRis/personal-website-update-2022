@@ -1,86 +1,87 @@
 "use strict";
-/* global $*/
-;(function(){
-	var Projects = {};
-	var PROJECTS = require("../../data/projects.js");
-	var AnimatedLoader = require("../lib/AnimatedLoader.js");
-	//var Utils = require("../lib/Utils.js");
-	function arrangeProjectsInOrder(){
-		var inRow=0;
-		Projects.list = [];
+
+import PROJECTS from "../../data/projects.js";
+import EventfulClass from "../lib/EventfulClass.js";
+
+class Projects extends EventfulClass {
+	init() {
+		this.list = [];
+		this.orderDisplayByImportance();
+		this.setProjects();
+		//$("#main-menu").on("click", "a", onOpenSection);
+		document
+			.getElementById("projects-list")
+			.addEventListener("click", this.onGoToProject.bind(this));
+	}
+	orderDisplayByImportance() {
+		let inRow = 0;
 		//console.log(PROJECTS.projects[0].importance);
-		for(var i = 0; i< PROJECTS.projects.length; i++){
-			inRow+=PROJECTS.projects[i].importance;
-			if(inRow>4){
+		for (let i = 0; i < PROJECTS.projects.length; i++) {
+			inRow += PROJECTS.projects[i].importance;
+			if (inRow > 4) {
 				inRow = 0;
-				Projects.list.push(selectProject(1, i));
+				this.list.push(this.getProjectByImportance(1, i));
 				i--;
-			}
-			else{
-				if(inRow===4){
+			} else {
+				if (inRow === 4) {
 					inRow = 0;
 				}
-				Projects.list.push(PROJECTS.projects[i]);
+				this.list.push(PROJECTS.projects[i]);
 			}
 		}
 	}
-	function selectProject(importance, index){
-		for(var i = index, limit = PROJECTS.projects.length; i<limit; i++){
-			if(importance === PROJECTS.projects[i].importance){
-				return PROJECTS.projects.splice(i,1)[0];
+	getProjectByImportance(importance, startIndex) {
+		for (let i = startIndex, limit = PROJECTS.projects.length; i < limit; i++) {
+			if (importance === PROJECTS.projects[i].importance) {
+				return PROJECTS.projects.splice(i, 1)[0];
 			}
-			
 		}
 	}
-	function onGoToProject(e){
-		e.preventDefault();
-		e.stopPropagation();
-		e.currentTarget = $(e.currentTarget).find("a")[0];
-		onOpenSection(e);
-	}
-	function onOpenSection(e){
-		e.preventDefault();
-		AnimatedLoader.loadSection($(e.currentTarget).attr("href"));
-	}
-	function setProjects(){
-		//$(".project").detach();
-		var originalProject = $(".project:first-child").detach();
-		var project;
-		var projectsList = $("#projects-list").html("").detach();
-		for(var i =0; i<Projects.list.length; i++){
-			project = originalProject.clone();
-			project.find("h1").html(Projects.list[i].client);
-			project.find("h2").html(Projects.list[i].name);
-			project.find("h3").html(Projects.list[i].tech);
-			project.find(".extra-info").html(Projects.list[i].participation);
-			project.find("a").attr("href", "proyecto.html#"+Projects.list[i].stringID);
-			project.find("s2").removeClass("s2");
-			project.find("s1").removeClass("s1");
-			project.addClass("s"+Projects.list[i].importance);
-			
-			if(Projects.list[i].images.thumb){
-				project.css("background-image", "url(images/projects/"+Projects.list[i].images.thumb+")");
+	setProjects() {
+		const originalProject = document.querySelector(".project:first-child");
+		originalProject.remove();
+		const projectsList = document.getElementById("projects-list");
+		projectsList.innerHTML = "";
+		projectsList.remove();
+		let project;
+
+		for (let i = 0; i < this.list.length; i++) {
+			project = originalProject.cloneNode(true);
+			project.querySelector("h1").innerHTML = this.list[i].client;
+			project.querySelector("h2").innerHTML = this.list[i].name;
+			project.querySelector("h3").innerHTML = this.list[i].tech;
+			project.querySelector(".extra-info").innerHTML = this.list[i].participation;
+			console.log("set href to ", this.list[i].stringID);
+			project.querySelector("a").setAttribute("href", "proyecto.html#" + this.list[i].stringID);
+			project.querySelector("s2")?.classList.remove("s2");
+			project.querySelector("s1")?.classList.remove("s1");
+			project.classList.add("s" + this.list[i].importance);
+
+			if (this.list[i].images.thumb) {
+				project.style.backgroundImage = "url(images/projects/" + this.list[i].images.thumb + ")";
 			}
 			projectsList.append(project);
 		}
-		$("#main-container").prepend(projectsList);
+		document.getElementById("main-container").prepend(projectsList);
 		//$(".project:first-child").detach();
-		
 	}
+	onGoToProject(e) {
+		e.preventDefault();
+		e.stopPropagation();
+		const project = e.target.closest(".project");
+		if (project) {
+			this.trigger("unload", { url: project.querySelector("a").getAttribute("href") });
+		}
+	}
+	destroy() {
+		//$("#projects-list").off("click", "a");
+		//$("#main-menu").off("click", "a");
+	}
+}
 
-	Projects.init = function(){
-		arrangeProjectsInOrder();
-		setProjects();
-		$("#main-menu").on("click", "a", onOpenSection);
-		$("#projects-list").on("click", "li", onGoToProject);
-	};
-	Projects.destroy = function(){
-		$("#projects-list").off("click", "a");
-		$("#main-menu").off("click", "a");
-	};
-	module.exports = Projects;
-})();
-
-
-
-
+/*function onOpenSection(e) {
+	e.preventDefault();
+	AnimatedLoader.loadSection($(e.currentTarget).attr("href"));
+}*/
+const projectsSingleton = new Projects();
+export default projectsSingleton;
