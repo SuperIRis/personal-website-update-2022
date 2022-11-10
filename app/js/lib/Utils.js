@@ -81,3 +81,9 @@ export function onAllImagesLoaded(node) {
 		console.log("images finished loading");
 	});
 }
+
+export function bulkNodeAction(actionFn, nodes) {
+	nodes.forEach((node) => {
+		node[actionFn]();
+	});
+}

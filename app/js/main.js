@@ -4,7 +4,7 @@ import Aboutme from "./sections/aboutme.js";
 import AnimatedLoader from "./lib/AnimatedLoader.js";
 import Contact from "./sections/contact.js";
 import Home from "./sections/home.js";
-//import Project from "./sections/project.js";
+import Project from "./sections/project.js";
 import Projects from "./sections/projects.js";
 import { toggleClass } from "./lib/Utils.js";
 
