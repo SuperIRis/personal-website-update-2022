@@ -8,6 +8,30 @@ Updated from 2015 portfolio.
 Run the site in dev mode with gulp serve (live reload, JS and SASS transpiling)
 Build the site for prod with gulp build (copy static files to dist / babelify, concat, and uglify JS / transpile, concat, and minify CSS)
 
+NOTEs as of 11/11
+
+Fixed:
+
+- ✔︎ Video load
+- Buttons not working (this is part of the main loading logic)
+- ✔︎ Next button hover effect not working
+- ✔︎ Extra info not working
+- ✔︎ Images not sliding
+  Next:
+  - Refactor of project
+  - Main loading logic
+
+NOTEs as of 9/11
+
+- Started working on project
+- Populated data, mostly working
+  Next:
+  - Video load
+  - Buttons not working
+  - Next button hover effect not working
+  - Extra info not working
+  - Images not sliding
+
 NOTES as of 8/11
 
 - Finished projects

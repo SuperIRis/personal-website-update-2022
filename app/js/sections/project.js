@@ -69,7 +69,7 @@ class Project extends EventfulClass {
 		this.nodes.lastBtn.setAttribute("data-id", this.info.lastProject.stringID);
 		this.nodes.lastBtn.querySelector(".title").innerHTML = this.info.lastProject.name;
 		this.nodes.nextBtn.setAttribute("data-id", this.info.nextProject.stringID);
-		this.nodes.lastBtn.querySelector(".title").innerHTML = this.info.nextProject.name;
+		this.nodes.nextBtn.querySelector(".title").innerHTML = this.info.nextProject.name;
 
 		this.nodes.name.innerHTML = this.info.name;
 
@@ -104,7 +104,7 @@ class Project extends EventfulClass {
 
 		if (this.info.video && this.info.video.length > 5) {
 			this.videoId = this.info.video.substr(this.info.video.indexOf("embed/") + 6);
-			this.loadYT();
+			this.loadYT(this.videoId);
 			this.nodes.fakeVideoContainer.setAttribute(
 				"src",
 				"images/projects/" + this.info.images.detail[0] + ""
@@ -113,7 +113,6 @@ class Project extends EventfulClass {
 
 			//$("#project-video").attr("src", Project.info.video+"?autoplay=1&controls=0&loop=1&rel=0&showinfo=0&wmode=transparent");
 		} else {
-			this.nodes.video.remove();
 			this.nodes.fakeVideoContainer.classList.add("hidden");
 			this.nodes.videoContainer.classList.add("video-container");
 			if (window.innerWidth >= 770) {
@@ -125,37 +124,56 @@ class Project extends EventfulClass {
 			"url(images/projects/" + this.info.images.detail[0] + ")";
 	}
 
-	loadYT() {
-		console.log("load yt");
-		/*if (!this.player) {
-			$.getScript("https://www.youtube.com/iframe_api", function (data, textStatus, jqxhr) {
-				if (typeof callback === "function") {
-					callback();
-				}
-				console.log("loaded yt");
-			});
-		} else {
-			player.destroy();
-			window.onYouTubeIframeAPIReady();
-			//player.loadVideoById(videoId);
-		}*/
+	loadYT(videoId) {
+		if (!window.YT) {
+			const tag = document.createElement("script");
+
+			tag.src = "https://www.youtube.com/iframe_api";
+			const firstScriptTag = document.getElementsByTagName("script")[0];
+			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+			window.onYouTubeIframeAPIReady = () => {
+				this.player = new window.YT.Player(this.nodes.videoContainer.id, {
+					height: window.innerHeight,
+					width: window.innerWidth,
+					videoId: videoId,
+					playerVars: {
+						playsinline: 1,
+						autoplay: 1,
+						controls: 0,
+						disablekb: 1,
+						enablejsapi: 1,
+						loop: 1,
+					},
+					events: {
+						onReady: (e) => {
+							e.target.mute();
+							e.target.playVideo();
+						},
+						//onStateChange: onPlayerStateChange,
+					},
+				});
+			};
+		}
 	}
 
 	onExtraInfoClick(e) {
-		if (e.currentTarget.disabled) {
+		const button = e.currentTarget;
+		if (button.disabled) {
 			return;
 		}
-		e.currentTarget.setAttribute("disabled", "disabled");
+
+		button.disabled = true;
 		if (this.nodes.extraInfo.classList.contains("unshown")) {
 			this.nodes.overlay.classList.remove("hidden");
 			this.changeExtraBtnTxtToMinus();
-			setTimeout(function () {
+			setTimeout(() => {
 				this.nodes.overlay.classList.remove("unshown");
 			}, 100);
 			//if($(window).width()>700){
-			setTimeout(function () {
+			setTimeout(() => {
 				this.nodes.extraInfo.classList.remove("unshown");
-				e.currentTarget.disabled = false;
+				button.disabled = false;
 			}, 500);
 			//}
 			//else{
@@ -165,46 +183,46 @@ class Project extends EventfulClass {
 			this.nodes.extraInfo.classList.add("unshown");
 
 			this.changeMinusBtnTxtToExtra();
-			setTimeout(function () {
+			setTimeout(() => {
 				this.nodes.overlay.classList.add("unshown");
 			}, 500);
-			setTimeout(function () {
-				this.overlay.classList.add("hidden");
-				e.currentTarget.disabled = false;
+			setTimeout(() => {
+				this.nodes.overlay.classList.add("hidden");
+				button.disabled = false;
 			}, 1000);
 		}
 	}
 	changeExtraBtnTxtToMinus() {
-		setTimeout(function () {
+		setTimeout(() => {
 			this.nodes.extraInfoBtn.innerHTML = "MXTRA INFO";
 		}, 500);
-		setTimeout(function () {
+		setTimeout(() => {
 			this.nodes.extraInfoBtn.innerHTML = "METRA INFO";
 		}, 650);
-		setTimeout(function () {
+		setTimeout(() => {
 			this.nodes.extraInfoBtn.innerHTML = "MENRA INFO";
 		}, 800);
-		setTimeout(function () {
+		setTimeout(() => {
 			this.nodes.extraInfoBtn.innerHTML = "MENOA INFO";
 		}, 950);
-		setTimeout(function () {
+		setTimeout(() => {
 			this.nodes.extraInfoBtn.innerHTML = "MENOS INFO";
 		}, 1100);
 	}
 	changeMinusBtnTxtToExtra() {
-		setTimeout(function () {
+		setTimeout(() => {
 			this.nodes.extraInfoBtn.innerHTML = "EXTRA INFO";
 		}, 1100);
-		setTimeout(function () {
+		setTimeout(() => {
 			this.nodes.extraInfoBtn.innerHTML = "MXTRA INFO";
 		}, 950);
-		setTimeout(function () {
+		setTimeout(() => {
 			this.nodes.extraInfoBtn.innerHTML = "METRA INFO";
 		}, 800);
-		setTimeout(function () {
+		setTimeout(() => {
 			this.nodes.extraInfoBtn.innerHTML = "MENRA INFO";
 		}, 650);
-		setTimeout(function () {
+		setTimeout(() => {
 			this.nodes.extraInfoBtn.innerHTML = "MENOA INFO";
 		}, 500);
 	}
@@ -212,22 +230,22 @@ class Project extends EventfulClass {
 		let currentImage = 0;
 		//$("#video-container").addClass("unshown");
 
-		this.sliderInterval = setInterval(function () {
+		this.sliderInterval = setInterval(() => {
 			currentImage++;
 			if (currentImage === this.info.images.detail.length) {
 				currentImage = 0;
 			}
-			this.container.classList.add("dark");
-			setTimeout(function () {
-				this.container.classList.remove("dark");
+			this.nodes.container.classList.add("dark");
+			setTimeout(() => {
+				this.nodes.container.classList.remove("dark");
 				this.nodes.videoContainer.style.backgroundImage =
-					"url(images/projects/" + Project.info.images.detail[currentImage] + ")";
+					"url(images/projects/" + this.info.images.detail[currentImage] + ")";
 			}, 1000);
 		}, 8000);
 	}
 
 	onGoToProject(e) {
-		this.trigger("load", "proyecto.html#" + $(e.currentTarget).attr("data-id"));
+		this.trigger("load", "proyecto.html#" + e.currentTarget.getAttribute("data-id"));
 	}
 	onCloseProjects(e) {
 		e.currentTarget.setAttribute("href", "proyectos.html");
