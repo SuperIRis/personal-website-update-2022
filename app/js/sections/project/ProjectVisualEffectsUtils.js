@@ -1,0 +1,50 @@
+export function slideImages(imagesContainer, mainContainer, images) {
+	let currentImage = 0;
+
+	this.sliderInterval = setInterval(() => {
+		currentImage++;
+		if (currentImage === images.length) {
+			currentImage = 0;
+		}
+		mainContainer.classList.add("dark");
+		setTimeout(() => {
+			mainContainer.classList.remove("dark");
+			imagesContainer.style.backgroundImage = "url(images/projects/" + images[currentImage] + ")";
+		}, 1000);
+	}, 8000);
+}
+
+export function changeExtraBtnTxtToMinus(btn) {
+	setTimeout(() => {
+		btn.innerHTML = "MXTRA INFO";
+	}, 500);
+	setTimeout(() => {
+		btn.innerHTML = "METRA INFO";
+	}, 650);
+	setTimeout(() => {
+		btn.innerHTML = "MENRA INFO";
+	}, 800);
+	setTimeout(() => {
+		btn.innerHTML = "MENOA INFO";
+	}, 950);
+	setTimeout(() => {
+		btn.innerHTML = "MENOS INFO";
+	}, 1100);
+}
+export function changeMinusBtnTxtToExtra(btn) {
+	setTimeout(() => {
+		btn.innerHTML = "EXTRA INFO";
+	}, 1100);
+	setTimeout(() => {
+		btn.innerHTML = "MXTRA INFO";
+	}, 950);
+	setTimeout(() => {
+		btn.innerHTML = "METRA INFO";
+	}, 800);
+	setTimeout(() => {
+		btn.innerHTML = "MENRA INFO";
+	}, 650);
+	setTimeout(() => {
+		btn.innerHTML = "MENOA INFO";
+	}, 500);
+}

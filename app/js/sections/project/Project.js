@@ -1,7 +1,13 @@
 "use strict";
-import PROJECTS from "../../data/projects.js";
-import EventfulClass from "../lib/EventfulClass.js";
-import { bulkNodeAction, getProjectByStringID, trackView } from "../lib/Utils.js";
+import PROJECTS from "../../../data/projects.js";
+import EventfulClass from "../../lib/EventfulClass.js";
+import { bulkNodeAction, getProjectByStringID, trackView } from "../../lib/Utils.js";
+import {
+	slideImages,
+	changeExtraBtnTxtToMinus,
+	changeMinusBtnTxtToExtra,
+} from "./ProjectVisualEffectsUtils.js";
+import VideoHandler from "./VideoHandler.js";
 class Project extends EventfulClass {
 	init() {
 		this.id = window.location.hash;
@@ -64,27 +70,50 @@ class Project extends EventfulClass {
 	}
 
 	populateData() {
-		let dataListItemTemp;
-		let imageListItemTemp;
-		this.nodes.lastBtn.setAttribute("data-id", this.info.lastProject.stringID);
-		this.nodes.lastBtn.querySelector(".title").innerHTML = this.info.lastProject.name;
-		this.nodes.nextBtn.setAttribute("data-id", this.info.nextProject.stringID);
-		this.nodes.nextBtn.querySelector(".title").innerHTML = this.info.nextProject.name;
+		this.populateMainInfo();
+		this.populateNavButtons();
+		this.populateExtrainfo();
+		this.populateFactsList();
+		if (window.innerWidth < 770) {
+			this.populateImages();
+		}
 
+		if (this.info.video && this.info.video.length > 5) {
+			this.populateVideo();
+		} else {
+			this.populateVideoAlternative();
+		}
+	}
+
+	populateMainInfo() {
 		this.nodes.name.innerHTML = this.info.name;
-
 		this.nodes.type.innerHTML = this.info.type;
-
 		if (this.info.urls[0]) {
 			this.nodes.typeLink.setAttribute("href", this.info.urls[0]);
 			this.nodes.type.append(this.nodes.typeLink);
 		}
+		this.nodes.videoContainer.style.backgroundImage =
+			"url(images/projects/" + this.info.images.detail[0] + ")";
+	}
+
+	populateNavButtons() {
+		this.nodes.lastBtn.setAttribute("data-id", this.info.lastProject.stringID);
+		this.nodes.lastBtn.querySelector(".title").innerHTML = this.info.lastProject.name;
+		this.nodes.nextBtn.setAttribute("data-id", this.info.nextProject.stringID);
+		this.nodes.nextBtn.querySelector(".title").innerHTML = this.info.nextProject.name;
+	}
+
+	populateExtrainfo() {
 		this.nodes.year.innerHTML = "Año: " + this.info.year;
 		this.nodes.via.innerHTML = "Vía: " + this.info.via;
 		this.nodes.participation.innerHTML = "Lo que yo hice: " + this.info.participation;
 		this.nodes.about.innerHTML = this.info.about.replace(/\n/g, "</p><p>");
 		this.nodes.technically.innerHTML = this.info.technically;
 		this.nodes.curious.innerHTML = this.info.curious;
+	}
+
+	populateFactsList() {
+		let dataListItemTemp;
 		for (let i = 0; i < this.info.list.length; i++) {
 			dataListItemTemp = this.nodes.listItem.cloneNode(true);
 			dataListItemTemp.querySelector("i").classList.add("fa-" + this.info.list[i].icon);
@@ -92,68 +121,35 @@ class Project extends EventfulClass {
 			this.nodes.list.append(dataListItemTemp);
 		}
 		this.nodes.listContainer.append(this.nodes.list);
+	}
 
-		for (let j = 0; j < this.info.images.detail.length; j++) {
+	populateImages() {
+		let imageListItemTemp;
+		for (let i = 0; i < this.info.images.detail.length; i++) {
 			imageListItemTemp = this.nodes.galleryItem.cloneNode(true);
 			imageListItemTemp
 				.querySelector("img")
-				.setAttribute("src", "images/projects/" + this.info.images.detail[j]);
+				.setAttribute("src", "images/projects/" + this.info.images.detail[i]);
 			this.nodes.gallery.append(imageListItemTemp);
 		}
 		this.nodes.galleryContainer.append(this.nodes.gallery);
-
-		if (this.info.video && this.info.video.length > 5) {
-			this.videoId = this.info.video.substr(this.info.video.indexOf("embed/") + 6);
-			this.loadYT(this.videoId);
-			this.nodes.fakeVideoContainer.setAttribute(
-				"src",
-				"images/projects/" + this.info.images.detail[0] + ""
-			);
-			this.nodes.fakeVideoContainer.classList.remove("hidden");
-
-			//$("#project-video").attr("src", Project.info.video+"?autoplay=1&controls=0&loop=1&rel=0&showinfo=0&wmode=transparent");
-		} else {
-			this.nodes.fakeVideoContainer.classList.add("hidden");
-			this.nodes.videoContainer.classList.add("video-container");
-			if (window.innerWidth >= 770) {
-				this.slideImages();
-			}
-		}
-
-		this.nodes.videoContainer.style.backgroundImage =
-			"url(images/projects/" + this.info.images.detail[0] + ")";
 	}
 
-	loadYT(videoId) {
-		if (!window.YT) {
-			const tag = document.createElement("script");
+	populateVideo() {
+		this.videoId = this.info.video.substr(this.info.video.indexOf("embed/") + 6);
+		this.videoHandler = new VideoHandler(this.nodes.videoContainer, this.videoId);
+		this.nodes.fakeVideoContainer.setAttribute(
+			"src",
+			"images/projects/" + this.info.images.detail[0] + ""
+		);
+		this.nodes.fakeVideoContainer.classList.remove("hidden");
+	}
 
-			tag.src = "https://www.youtube.com/iframe_api";
-			const firstScriptTag = document.getElementsByTagName("script")[0];
-			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-			window.onYouTubeIframeAPIReady = () => {
-				this.player = new window.YT.Player(this.nodes.videoContainer.id, {
-					height: window.innerHeight,
-					width: window.innerWidth,
-					videoId: videoId,
-					playerVars: {
-						playsinline: 1,
-						autoplay: 1,
-						controls: 0,
-						disablekb: 1,
-						enablejsapi: 1,
-						loop: 1,
-					},
-					events: {
-						onReady: (e) => {
-							e.target.mute();
-							e.target.playVideo();
-						},
-						//onStateChange: onPlayerStateChange,
-					},
-				});
-			};
+	populateVideoAlternative() {
+		this.nodes.fakeVideoContainer.classList.add("hidden");
+		this.nodes.videoContainer.classList.add("video-container");
+		if (window.innerWidth >= 770) {
+			slideImages(this.nodes.videoContainer, this.nodes.container, this.info.images.detail);
 		}
 	}
 
@@ -166,7 +162,7 @@ class Project extends EventfulClass {
 		button.disabled = true;
 		if (this.nodes.extraInfo.classList.contains("unshown")) {
 			this.nodes.overlay.classList.remove("hidden");
-			this.changeExtraBtnTxtToMinus();
+			changeExtraBtnTxtToMinus(this.nodes.extraInfoBtn);
 			setTimeout(() => {
 				this.nodes.overlay.classList.remove("unshown");
 			}, 100);
@@ -182,7 +178,7 @@ class Project extends EventfulClass {
 		} else {
 			this.nodes.extraInfo.classList.add("unshown");
 
-			this.changeMinusBtnTxtToExtra();
+			changeMinusBtnTxtToExtra(this.nodes.extraInfoBtn);
 			setTimeout(() => {
 				this.nodes.overlay.classList.add("unshown");
 			}, 500);
@@ -191,57 +187,6 @@ class Project extends EventfulClass {
 				button.disabled = false;
 			}, 1000);
 		}
-	}
-	changeExtraBtnTxtToMinus() {
-		setTimeout(() => {
-			this.nodes.extraInfoBtn.innerHTML = "MXTRA INFO";
-		}, 500);
-		setTimeout(() => {
-			this.nodes.extraInfoBtn.innerHTML = "METRA INFO";
-		}, 650);
-		setTimeout(() => {
-			this.nodes.extraInfoBtn.innerHTML = "MENRA INFO";
-		}, 800);
-		setTimeout(() => {
-			this.nodes.extraInfoBtn.innerHTML = "MENOA INFO";
-		}, 950);
-		setTimeout(() => {
-			this.nodes.extraInfoBtn.innerHTML = "MENOS INFO";
-		}, 1100);
-	}
-	changeMinusBtnTxtToExtra() {
-		setTimeout(() => {
-			this.nodes.extraInfoBtn.innerHTML = "EXTRA INFO";
-		}, 1100);
-		setTimeout(() => {
-			this.nodes.extraInfoBtn.innerHTML = "MXTRA INFO";
-		}, 950);
-		setTimeout(() => {
-			this.nodes.extraInfoBtn.innerHTML = "METRA INFO";
-		}, 800);
-		setTimeout(() => {
-			this.nodes.extraInfoBtn.innerHTML = "MENRA INFO";
-		}, 650);
-		setTimeout(() => {
-			this.nodes.extraInfoBtn.innerHTML = "MENOA INFO";
-		}, 500);
-	}
-	slideImages() {
-		let currentImage = 0;
-		//$("#video-container").addClass("unshown");
-
-		this.sliderInterval = setInterval(() => {
-			currentImage++;
-			if (currentImage === this.info.images.detail.length) {
-				currentImage = 0;
-			}
-			this.nodes.container.classList.add("dark");
-			setTimeout(() => {
-				this.nodes.container.classList.remove("dark");
-				this.nodes.videoContainer.style.backgroundImage =
-					"url(images/projects/" + this.info.images.detail[currentImage] + ")";
-			}, 1000);
-		}, 8000);
 	}
 
 	onGoToProject(e) {
@@ -260,33 +205,6 @@ class Project extends EventfulClass {
 		clearInterval(this.sliderInterval);
 	}
 }
-
-function onPlayerReady(event) {
-	event.target.playVideo();
-	event.target.mute();
-}
-function onPlayerStateChange(event) {
-	if (event.data == YT.PlayerState.PLAYING && !showingVideo) {
-		showingVideo = true;
-		//quitar imagen, mostrar video
-		$("#fake-video-container").addClass("unshown");
-	} else if (event.data == YT.PlayerState.ENDED) {
-		player.playVideo();
-	}
-}
-window.onYouTubeIframeAPIReady = function () {
-	console.log("iframe ready", videoId);
-	player = new YT.Player("video-container", {
-		height: "315",
-		width: "420",
-		videoId: videoId,
-		playerVars: { rel: 0, controls: 0 },
-		events: {
-			onReady: onPlayerReady,
-			onStateChange: onPlayerStateChange,
-		},
-	});
-};
 
 const projectSingleton = new Project();
 export default projectSingleton;
