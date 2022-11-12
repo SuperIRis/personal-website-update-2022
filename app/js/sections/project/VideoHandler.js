@@ -9,6 +9,7 @@ export default class VideoHandler {
 			disablekb: 1,
 			enablejsapi: 1,
 			loop: 1,
+			rel: 0,
 		};
 		window.onYouTubeIframeAPIReady = this.onYouTubeIframeAPIReady;
 		if (!window.YT) {
@@ -29,12 +30,17 @@ export default class VideoHandler {
 			playerVars: this.settings,
 			events: {
 				onReady: this.onVideoReady,
-				//onStateChange: onPlayerStateChange,
+				onStateChange: this.onPlayerStateChange.bind(this),
 			},
 		});
 	};
 	onVideoReady(e) {
 		e.target.mute();
 		e.target.playVideo();
+	}
+	onPlayerStateChange(e) {
+		if (e.data == YT.PlayerState.ENDED) {
+			this.player.playVideo();
+		}
 	}
 }
