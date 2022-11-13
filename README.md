@@ -11,6 +11,10 @@ Build the site for prod with gulp build (copy static files to dist / babelify, c
 NOTEs as of 12/11
 
 - Refactored project
+- Main loading logic WIP
+  Next:
+  - Load projects from home
+  - Load projects from projects
 
 NOTEs as of 11/11
 

@@ -1,105 +1,95 @@
 "use strict";
 import Aboutme from "./sections/aboutme.js";
-//import AnimatedJsonSprite from "./lib/AnimatedJsonSprite.js";
+import AnimatedJsonSprite from "./lib/AnimatedJsonSprite.js";
 import AnimatedLoader from "./lib/AnimatedLoader.js";
 import Contact from "./sections/contact.js";
 import Home from "./sections/home.js";
 import Project from "./sections/project/Project.js";
 import Projects from "./sections/projects.js";
-import { toggleClass } from "./lib/Utils.js";
+import { removeClassFromAll, toggleClass, trackEvent } from "./lib/Utils.js";
 
-const page = window.location.pathname.substring(1).replace(/.html/g, "");
-let current;
+const sections = [
+	{ enPath: ["aboutme"], esPath: ["acerca"], classObject: Aboutme },
+	{ enPath: [""], esPath: ["", "index"], classObject: Home },
+	{ enPath: ["contact"], esPath: ["contacto"], classObject: Contact },
+	{ enPath: ["projects"], esPath: ["proyectos"], classObject: Projects },
+	{ enPath: ["project"], esPath: ["proyecto"], classObject: Project },
+];
 
-window.loadPage = function (page) {
-	let ajaxLoaded = false;
-	if (current) {
-		current.destroy();
-		ajaxLoaded = true;
-	}
-
-	switch (page) {
-		case "index":
-		case "/":
-		case "":
-			Home.init(ajaxLoaded);
-			current = Home;
-			break;
-		case "acerca":
-			Aboutme.init(ajaxLoaded);
-			current = Aboutme;
-			break;
-		case "contacto":
-			Contact.init(ajaxLoaded);
-			current = Contact;
-			break;
-		case "proyectos":
-			Projects.init(ajaxLoaded);
-			current = Projects;
-			break;
-		case "proyecto":
-			Project.init(ajaxLoaded);
-			current = Project;
-			break;
-		default:
-			if (page.indexOf("proyecto#") !== -1) {
-				Project.init();
-				current = Project;
-			} else {
-				console.warn("Se desconoce el html:", page);
-			}
-	}
-};
-
-AnimatedLoader
-	.init
-	/*new AnimatedJsonSprite("spritesheets/loader.png", document.getElementById("loader-me"), {
+const libraries = [
+	{ script: "snap.svg-min.js", globalName: "Snap" },
+	{ script: "circles.min.js", globalName: "Circles" },
+	{ script: "js?v=3.exp&signed_in=true", globalName: "google" },
+];
+const loaderAnimation = new AnimatedJsonSprite(
+	"spritesheets/loader.png",
+	document.getElementById("loader-me"),
+	{
 		loop: true,
 		frameRate: 40,
 		loopStartStep: 4,
 		loopEndStep: 22,
-	})*/
-	();
+	}
+);
 
+let currentSection;
+
+AnimatedLoader.init(loaderAnimation, libraries);
+AnimatedLoader.addEventListener("done", loadPage);
+setNavigation();
+setTracking();
+//setLoads();
+window.addEventListener("load", setLoads);
+loadPage(window.location.href);
+
+function loadPage(url) {
+	const path = url.substring(0, url.indexOf(".html")).substring(url.lastIndexOf("/") + 1);
+	let ajaxLoaded = false;
+	if (currentSection) {
+		currentSection.destroy();
+		ajaxLoaded = true;
+	}
+	const section = sections.find((section) => {
+		return section.esPath.indexOf(path) !== -1;
+	});
+	section.classObject.init();
+	currentSection = section.classObject;
+}
+
+//document.querySelector("[data-popup]").addEventListener("click", onOpenPopup);
+
+function setNavigation() {
+	document.getElementById("mobile-menu").addEventListener("click", onToggleMobileMenu);
+	document.getElementById("main-menu").addEventListener("click", (e) => {
+		e.preventDefault();
+		const url = e.target.getAttribute("href");
+		AnimatedLoader.loadSection(url);
+	});
+}
+
+function setTracking() {
+	document.querySelector("body").addEventListener("click", (e) => {
+		const trackingElement = e.target.getAttribute("data-track") || e.target.closest("[data-track]");
+		if (trackingElement) {
+			console.log("track");
+			trackEvent("external-link", "click", trackingElement.getAttribute("data-track"));
+		}
+	});
+}
+
+function setLoads() {
+	removeClassFromAll(document.querySelectorAll(".preload"), "preload");
+	document.getElementById("loader").classList.add("unshown");
+	//AnimatedLoader.stop();
+}
 function onToggleMobileMenu(e) {
 	toggleClass(e.currentTarget, "active");
 	toggleClass(document.getElementById("main-container"), "mobile-menu-on");
 	toggleClass(document.getElementById("main-footer"), "mobile-menu-on");
 }
-function onOpenPopup(e) {
-	e.preventDefault();
-	const url = $(e.currentTarget).attr("href");
-	const popup = e.currentTarget.getAttribute("data-popup");
-	const width = popup === "twitter" ? 550 : 500;
-	const height = popup === "twitter" ? 400 : 320;
-	const top = window.innerHeight / 2 - height / 2;
-	const left = window.innerWidth / 2 - width / 2;
-
-	window.open(
-		url,
-		popup,
-		"width=" + width + ", height=" + height + ", left=" + left + ", top=" + top
-	);
-}
-
-window.initializeMap = function () {
-	/*needed for async load of gm, not used*/
-};
-window.loadPage(page);
-/*document.getElementById("mobile-menu").addEventListener("click", onToggleMobileMenu);
-document.querySelector("[data-popup]").addEventListener("click", onOpenPopup);
-document.querySelector(".preload").classList.remove("preload");
-document.querySelector("[data-track]").addEventListener("click", function (e) {
-	Utils.trackEvent("external-link", "click", e.target.getAttribute("data-track"));
-});
-
-*/
-window.addEventListener("load", function () {
-	document.getElementById("loader").classList.add("unshown");
-	//AnimatedLoader.stop();
-});
-
+/*
 Home.addEventListener("unload", (data) => {
 	console.log("unloaded");
 	AnimatedLoader.loadSection(data.url);
 });
+*/

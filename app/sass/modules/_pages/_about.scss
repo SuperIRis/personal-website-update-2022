@@ -189,7 +189,7 @@
 	.me-about{
 		//background-color:white;
 		position:absolute;
-		top:14em;
+		top:0;
 		padding-right:2em;
 		right:0;
 		width:22%;
@@ -211,6 +211,7 @@
 	.info-container{
 		margin:0 auto;
 		max-width:900px;
+		position: relative;
 	}
 	.text-skills{
 		li{

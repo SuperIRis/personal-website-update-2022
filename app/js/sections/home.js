@@ -8,6 +8,7 @@ import EventfulClass from "../lib/EventfulClass.js";
 import { trackEvent } from "../lib/Utils.js";
 class Home extends EventfulClass {
 	init() {
+		console.log("init home");
 		const homeSprites = ["libro", "normal", "ds"];
 		const currentSprite = homeSprites[Math.floor(Math.random() * homeSprites.length)];
 		this.homeMe = new AnimatedJsonSprite(
@@ -82,24 +83,15 @@ class Home extends EventfulClass {
 
 	onProjectClick(e) {
 		e.preventDefault();
-		this.onOpenProject(e);
+		this.homeMe.stop();
+		this.trigger("openSection", { url: e.currentTarget.getAttribute("href") });
 		trackEvent("home-project", "click", e.currentTarget.querySelector(".project-title").innerHTML);
 	}
 
-	onOpenProject(e) {
-		e.preventDefault();
-		this.homeMe.stop();
-		this.trigger("unload", { url: e.currentTarget.getAttribute("href") });
-		// TODO: Instead of calling AnimatedLoader, emit an event so that main takes charge of loading instead of each section
-		//AnimatedLoader.loadSection($(e.currentTarget).attr("href"));
-	}
-
 	destroy() {
-		document.getElementById("home-down-btn").removeEventListener("click", this.onScrollToProjects);
 		this.homeMe = null;
-		document.getElementById("me").innerHTML = "";
 		this.projectsWatcher.destroy();
-		this.removeAllEventListeners();
+		//this.removeAllEventListeners();
 	}
 }
 

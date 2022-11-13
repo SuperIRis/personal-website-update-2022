@@ -58,6 +58,12 @@ export function toggleClass(element, className) {
 	}
 }
 
+export function removeClassFromAll(elementCollection, className) {
+	elementCollection.forEach((element) => {
+		element.classList.remove(className);
+	});
+}
+
 export function preloadImage(imageURL) {
 	return new Promise((resolve, reject) => {
 		const imageContainer = document.createElement("img");
@@ -68,7 +74,7 @@ export function preloadImage(imageURL) {
 }
 
 export function onAllImagesLoaded(node) {
-	Promise.all(
+	return Promise.all(
 		Array.from(node.querySelectorAll("img") ?? document.images)
 			.filter((img) => !img.complete)
 			.map(
@@ -86,4 +92,20 @@ export function bulkNodeAction(actionFn, nodes) {
 	nodes.forEach((node) => {
 		node[actionFn]();
 	});
+}
+
+export function onOpenPopup(e) {
+	e.preventDefault();
+	const url = $(e.currentTarget).attr("href");
+	const popup = e.currentTarget.getAttribute("data-popup");
+	const width = popup === "twitter" ? 550 : 500;
+	const height = popup === "twitter" ? 400 : 320;
+	const top = window.innerHeight / 2 - height / 2;
+	const left = window.innerWidth / 2 - width / 2;
+
+	window.open(
+		url,
+		popup,
+		"width=" + width + ", height=" + height + ", left=" + left + ", top=" + top
+	);
 }

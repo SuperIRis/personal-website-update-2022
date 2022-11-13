@@ -3,15 +3,11 @@ import { trackEvent } from "../lib/Utils.js";
 //var AnimatedLoader = require("../lib/AnimatedLoader.js");
 
 class Contact {
-	init(ajaxLoaded) {
+	init() {
 		this.obfuscateMailTo();
 		this.setFreelanceStatusSVG();
-		if (!ajaxLoaded) {
-			google.maps.event.addDomListener(window, "load", this.setMap.bind(this));
-		} else {
-			document.getElementById("main-container").prepend(this.mapContainer);
-			this.setMap();
-		}
+		console.log("contacto init");
+		this.setMap();
 		google.maps.event.addDomListener(window, "resize", this.resizeMap.bind(this));
 		//document.getElementById("main-menu").addEventListener("click", "a", onOpenSection);
 	}
@@ -107,6 +103,7 @@ class Contact {
 		const mapOptions = this.getMapOptions();
 		//
 		this.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
 		setTimeout(() => {
 			this.addMarker(whereMarkerIs);
 		}, 2000);
@@ -151,7 +148,7 @@ class Contact {
 		google.maps.event.clearListeners(window, "resize");
 		google.maps.event.clearListeners(window, "load");
 		//document.getElementById("main-menu").removeEventListener("click", "a");
-		this.mapContainer = document.getElementById("map").remove();
+		//this.mapContainer = document.getElementById("map").remove();
 		this.snapLoaded = false;
 	}
 }
