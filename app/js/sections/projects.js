@@ -8,14 +8,12 @@ class Projects extends EventfulClass {
 		this.list = [];
 		this.orderDisplayByImportance();
 		this.setProjects();
-		//$("#main-menu").on("click", "a", onOpenSection);
 		document
 			.getElementById("projects-list")
 			.addEventListener("click", this.onGoToProject.bind(this));
 	}
 	orderDisplayByImportance() {
 		let inRow = 0;
-		//console.log(PROJECTS.projects[0].importance);
 		for (let i = 0; i < PROJECTS.projects.length; i++) {
 			inRow += PROJECTS.projects[i].importance;
 			if (inRow > 4) {
@@ -43,44 +41,38 @@ class Projects extends EventfulClass {
 		const projectsList = document.getElementById("projects-list");
 		projectsList.innerHTML = "";
 		projectsList.remove();
-		let project;
 
 		for (let i = 0; i < this.list.length; i++) {
-			project = originalProject.cloneNode(true);
-			project.querySelector("h1").innerHTML = this.list[i].client;
-			project.querySelector("h2").innerHTML = this.list[i].name;
-			project.querySelector("h3").innerHTML = this.list[i].tech;
-			project.querySelector(".extra-info").innerHTML = this.list[i].participation;
-			project.querySelector("a").setAttribute("href", "proyecto.html#" + this.list[i].stringID);
-			project.querySelector("s2")?.classList.remove("s2");
-			project.querySelector("s1")?.classList.remove("s1");
-			project.classList.add("s" + this.list[i].importance);
-
-			if (this.list[i].images.thumb) {
-				project.style.backgroundImage = "url(images/projects/" + this.list[i].images.thumb + ")";
-			}
-			projectsList.append(project);
+			projectsList.append(this.createProject(this.list[i]));
 		}
 		document.getElementById("main-container").prepend(projectsList);
-		//$(".project:first-child").detach();
 	}
+	createProject(projectData) {
+		const project = originalProject.cloneNode(true);
+		project.querySelector("h1").innerHTML = projectData.client;
+		project.querySelector("h2").innerHTML = projectData.name;
+		project.querySelector("h3").innerHTML = projectData.tech;
+		project.querySelector(".extra-info").innerHTML = projectData.participation;
+		project.querySelector("a").setAttribute("href", "proyecto.html#" + projectData.stringID);
+		project.querySelector("s2")?.classList.remove("s2");
+		project.querySelector("s1")?.classList.remove("s1");
+		project.classList.add("s" + projectData.importance);
+
+		if (projectData.images.thumb) {
+			project.style.backgroundImage = "url(images/projects/" + projectData.images.thumb + ")";
+		}
+		return project;
+	}
+
 	onGoToProject(e) {
 		e.preventDefault();
-		//e.stopPropagation();
 		const project = e.target.closest(".project");
 		if (project) {
 			this.trigger("openProject", project.querySelector("a").getAttribute("href"));
 		}
 	}
-	destroy() {
-		//$("#projects-list").off("click", "a");
-		//$("#main-menu").off("click", "a");
-	}
+	destroy() {}
 }
 
-/*function onOpenSection(e) {
-	e.preventDefault();
-	AnimatedLoader.loadSection($(e.currentTarget).attr("href"));
-}*/
 const projectsSingleton = new Projects();
 export default projectsSingleton;

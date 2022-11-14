@@ -6,24 +6,17 @@ import EventfulClass from "../lib/EventfulClass.js";
 
 const percentageColors = ["#9ac21e", "#ffd43d", "#00ccd3"];
 const circles = [];
-const graphsWatchers = [];
-const animatedStats = [];
-let svgInterval;
-
 class Aboutme extends EventfulClass {
 	init() {
+		this.graphsWatchers = [];
 		this.setAnimateStats();
 		this.animateRandomFacts();
 		this.setSVG();
-		for (let i = 0; i < document.querySelectorAll("#programming-skills li").length; i++) {
-			graphsWatchers.push(
-				ScrollMonitor.create(document.querySelectorAll("#programming-skills li")[i], -10)
-			);
-			graphsWatchers[graphsWatchers.length - 1].enterViewport(this.graphEntering.bind(this));
-		}
+		this.setScrollMonitor();
 		//document.getElementById("#main-menu").on("click", "a", onOpenSection);
 	}
 	setAnimateStats() {
+		const animatedStats = [];
 		const statsNumbers = document.querySelectorAll(".stats-number");
 		for (var j = 0, limit = statsNumbers.length; j < limit; j++) {
 			const animatedStat = new AnimatedNumber(statsNumbers[j]);
@@ -63,6 +56,7 @@ class Aboutme extends EventfulClass {
 			}
 		});
 	}
+
 	characterAnimateBlink(f) {
 		const leftEye = f.select("#left-eye");
 		const rightEye = f.select("#right-eye");
@@ -92,6 +86,18 @@ class Aboutme extends EventfulClass {
 			}, 300);
 		}, 4000);
 	}
+
+	setScrollMonitor() {
+		for (let i = 0; i < document.querySelectorAll("#programming-skills li").length; i++) {
+			this.graphsWatchers.push(
+				ScrollMonitor.create(document.querySelectorAll("#programming-skills li")[i], -10)
+			);
+			this.graphsWatchers[this.graphsWatchers.length - 1].enterViewport(
+				this.graphEntering.bind(this)
+			);
+		}
+	}
+
 	graphEntering(e, domElement) {
 		this.createGraph(domElement.querySelector("figure"));
 	}
@@ -131,25 +137,10 @@ class Aboutme extends EventfulClass {
 		}
 		graphsWatchers.length = 0;
 		this.snapLoaded = false;
-		clearInterval(svgInterval);
+		clearInterval(this.svgInterval);
 		clearInterval(this.randomFactsInterval);
 	}
 }
-/*
 
-
-
-
-
-
-
-
-
-
-function onOpenSection(e) {
-	e.preventDefault();
-	AnimatedLoader.loadSection($(e.currentTarget).attr("href"));
-}
-*/
 const aboutMeSingleton = new Aboutme();
 export default aboutMeSingleton;

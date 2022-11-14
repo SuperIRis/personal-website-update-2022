@@ -1,6 +1,6 @@
 
 .intro-container{
-	min-height:700px;
+	height: calc(100vh - 86px);
 	background-size:50%;
 	width:100%;
 	h1{
@@ -180,7 +180,6 @@
   	.intro-container{
   		font-size:0.7em;
   		min-height:600px;
-  		height:64%;
   		margin:0 auto;
   		padding:10% 0 0;
   		text-align: center;

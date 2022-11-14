@@ -171,15 +171,10 @@ class Project extends EventfulClass {
 			setTimeout(() => {
 				this.nodes.overlay.classList.remove("unshown");
 			}, 100);
-			//if($(window).width()>700){
 			setTimeout(() => {
 				this.nodes.extraInfo.classList.remove("unshown");
 				button.disabled = false;
 			}, 500);
-			//}
-			//else{
-			//	$("#extra-info-sec").removeClass("unshown");
-			//}
 		} else {
 			this.nodes.extraInfo.classList.add("unshown");
 
@@ -200,13 +195,8 @@ class Project extends EventfulClass {
 	onCloseProjects(e) {
 		e.currentTarget.setAttribute("href", "proyectos.html");
 		this.trigger("openSection", "proyectos.html");
-		//onOpenSection(e);
 	}
 	destroy() {
-		/*$("#next-btn, #last-btn").off();
-		this.nodes.extraInfoBtn.off();
-		$("#close-btn").off();
-		$("#main-menu").off("click", "a");*/
 		clearInterval(this.sliderInterval);
 	}
 }

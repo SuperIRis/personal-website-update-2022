@@ -1,11 +1,11 @@
 "use strict";
-import Aboutme from "./sections/aboutme.js";
+import Aboutme from "./sections/Aboutme.js";
 import AnimatedJsonSprite from "./lib/AnimatedJsonSprite.js";
 import AnimatedLoader from "./lib/AnimatedLoader.js";
-import Contact from "./sections/contact.js";
-import Home from "./sections/home.js";
+import Contact from "./sections/Contact.js";
+import Home from "./sections/Home.js";
 import Project from "./sections/project/Project.js";
-import Projects from "./sections/projects.js";
+import Projects from "./sections/Projects.js";
 import { removeClassFromAll, toggleClass, trackEvent } from "./lib/Utils.js";
 
 const sections = [
@@ -16,7 +16,7 @@ const sections = [
 	{ enPath: ["project"], esPath: ["proyecto"], classObject: Project },
 ];
 
-const libraries = [
+const scriptLibraries = [
 	{ script: "snap.svg-min.js", globalName: "Snap" },
 	{ script: "circles.min.js", globalName: "Circles" },
 	{ script: "js?v=3.exp&signed_in=true", globalName: "google" },
@@ -34,19 +34,19 @@ const loaderAnimation = new AnimatedJsonSprite(
 
 let currentSection;
 
-AnimatedLoader.init(loaderAnimation, libraries);
+AnimatedLoader.init(loaderAnimation, scriptLibraries);
 AnimatedLoader.addEventListener("done", initPage);
+initPage(window.location.href);
+window.addEventListener("load", setLoads);
 setNavigation();
 setTracking();
-//setLoads();
-window.addEventListener("load", setLoads);
-initPage(window.location.href);
 
 function initPage(url) {
 	const path = url.substring(0, url.indexOf(".html")).substring(url.lastIndexOf("/") + 1);
 	let ajaxLoaded = false;
 	if (currentSection) {
 		currentSection.destroy();
+		resetTracking();
 		ajaxLoaded = true;
 	}
 	const section = sections.find((section) => {
@@ -56,7 +56,10 @@ function initPage(url) {
 	currentSection = section.classObject;
 }
 
-//document.querySelector("[data-popup]").addEventListener("click", onOpenPopup);
+function setLoads() {
+	removeClassFromAll(document.querySelectorAll(".preload"), "preload");
+	document.getElementById("loader").classList.add("unshown");
+}
 
 function setNavigation() {
 	document.getElementById("mobile-menu").addEventListener("click", onToggleMobileMenu);
@@ -75,20 +78,21 @@ function setNavigation() {
 }
 
 function setTracking() {
-	document.querySelector("body").addEventListener("click", (e) => {
-		const trackingElement = e.target.getAttribute("data-track") || e.target.closest("[data-track]");
-		if (trackingElement) {
-			console.log("track");
-			trackEvent("external-link", "click", trackingElement.getAttribute("data-track"));
-		}
-	});
+	document.querySelector("body").addEventListener("click", track);
 }
 
-function setLoads() {
-	removeClassFromAll(document.querySelectorAll(".preload"), "preload");
-	document.getElementById("loader").classList.add("unshown");
-	//AnimatedLoader.stop();
+function track(e) {
+	const trackingElement = e.target.getAttribute("data-track") || e.target.closest("[data-track]");
+	if (trackingElement) {
+		trackEvent("external-link", "click", trackingElement.getAttribute("data-track"));
+	}
 }
+
+function resetTracking() {
+	document.querySelector("body").removeEventListener("click", track);
+	setTracking();
+}
+
 function onToggleMobileMenu(e) {
 	toggleClass(e.currentTarget, "active");
 	toggleClass(document.getElementById("main-container"), "mobile-menu-on");

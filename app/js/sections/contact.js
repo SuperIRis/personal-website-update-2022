@@ -1,15 +1,10 @@
 "use strict";
-import { trackEvent } from "../lib/Utils.js";
-//var AnimatedLoader = require("../lib/AnimatedLoader.js");
-
 class Contact {
 	init() {
 		this.obfuscateMailTo();
 		this.setFreelanceStatusSVG();
-		console.log("contacto init");
 		this.setMap();
 		google.maps.event.addDomListener(window, "resize", this.resizeMap.bind(this));
-		//document.getElementById("main-menu").addEventListener("click", "a", onOpenSection);
 	}
 
 	obfuscateMailTo() {
@@ -52,7 +47,7 @@ class Contact {
 			alternateScreenColor = "#ccc";
 		let i = 0;
 
-		setInterval(function () {
+		this.svgInterval = setInterval(function () {
 			i++;
 			computerScreen.animate(
 				{ fill: i % 2 === 0 ? initialScreenColor : alternateScreenColor },
@@ -98,7 +93,6 @@ class Contact {
 			console.warn("Map already created");
 		}
 		this.whereIAm = new google.maps.LatLng(37.6852183, -122.1817252);
-		const mapTypeId = "custom_style";
 		const whereMarkerIs = new google.maps.LatLng(37.4592183, -122.1817252);
 		const mapOptions = this.getMapOptions();
 		//
@@ -106,7 +100,7 @@ class Contact {
 
 		setTimeout(() => {
 			this.addMarker(whereMarkerIs);
-		}, 2000);
+		}, 1500);
 	}
 
 	getMapOptions(mapTypeId) {
@@ -147,17 +141,10 @@ class Contact {
 	destroy() {
 		google.maps.event.clearListeners(window, "resize");
 		google.maps.event.clearListeners(window, "load");
-		//document.getElementById("main-menu").removeEventListener("click", "a");
-		//this.mapContainer = document.getElementById("map").remove();
+		clearInterval(this.svgInterval);
 		this.snapLoaded = false;
 	}
 }
-/*
-function onOpenSection(e) {
-	console.log("open section!");
-	e.preventDefault();
-	AnimatedLoader.loadSection($(e.currentTarget).attr("href"));
-}
-*/
+
 const contactSingleton = new Contact();
 export default contactSingleton;

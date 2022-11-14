@@ -8,6 +8,18 @@ import EventfulClass from "../lib/EventfulClass.js";
 import { trackEvent } from "../lib/Utils.js";
 class Home extends EventfulClass {
 	init() {
+		this.setHomeAnimation();
+		this.getProjectData();
+		this.setProjects();
+		document.getElementById("home-down-btn").addEventListener("click", this.onScrollToProjects);
+	}
+
+	onScrollToProjects() {
+		const introHeight = document.getElementById("intro-container").offsetHeight + 86;
+		window.scrollTo({ top: introHeight, behavior: "smooth" });
+	}
+
+	setHomeAnimation() {
 		const homeSprites = ["libro", "normal", "ds"];
 		const currentSprite = homeSprites[Math.floor(Math.random() * homeSprites.length)];
 		this.homeMe = new AnimatedJsonSprite(
@@ -16,57 +28,30 @@ class Home extends EventfulClass {
 			{ loop: true, frameRate: 40 }
 		);
 		this.homeMe.start();
-		document.getElementById("main-container").classList.add("main-container");
-		document.getElementById("home-down-btn").addEventListener("click", this.onScrollToProjects);
-		document.getElementById("intro-container").style.height = `${window.innerHeight - 86}px`;
-		this.parseProjects();
-		this.setProjects();
 	}
 
-	onScrollToProjects() {
-		const introHeight = document.getElementById("intro-container").offsetHeight + 86;
-		window.scrollTo({ top: introHeight, behavior: "smooth" });
-	}
-
-	parseProjects() {
+	getProjectData() {
 		//find home projects
 		const projects = PROJECTS.projects;
-		this.projects = [];
-		for (var i = 0; i < projects.length; i++) {
-			if (projects[i].images && projects[i].images.home) {
-				this.projects.push(projects[i]);
-			}
-		}
-	}
-
-	fillProjectData(projectNode, projectIndex) {
-		projectNode.querySelector(".project-title").innerHTML = this.projects[projectIndex].name;
-		projectNode.querySelector(".project-tech").innerHTML = this.projects[projectIndex].tech;
-		projectNode
-			.querySelector("a")
-			.setAttribute("href", "proyecto.html#" + this.projects[projectIndex].stringID);
-		projectNode.querySelector("a").addEventListener("click", this.onProjectClick.bind(this));
-		preloadImage("images/projects/" + this.projects[projectIndex].images.home).then(() => {
-			this.onProjectImageLoaded(projectNode, projectIndex);
-		});
+		this.projects = projects.filter((project) => project.images && project.images.home);
 	}
 
 	setProjects() {
 		const allProjectNodes = document.querySelectorAll("#projects-preview-list li");
 		this.loadedProjects = 0;
-		allProjectNodes.forEach(this.fillProjectData.bind(this));
+		allProjectNodes.forEach(this.populateProjectData.bind(this));
 	}
 
-	setScrollMonitor() {
-		this.projectsWatcher = ScrollMonitor.create(
-			document.querySelectorAll("#projects-preview-list li")[0],
-			-10
-		);
-		this.projectsWatcher.enterViewport(function () {
-			document.getElementById("projects-preview-list").classList.remove("unshown");
-		});
-		this.projectsWatcher.exitViewport(function () {
-			document.getElementById("projects-preview-list").classList.add("unshown");
+	populateProjectData(projectNode, projectIndex) {
+		const projectURL = "proyecto.html#" + this.projects[projectIndex].stringID;
+		projectNode.querySelector(".project-title").innerHTML = this.projects[projectIndex].name;
+		projectNode.querySelector(".project-tech").innerHTML = this.projects[projectIndex].tech;
+		projectNode.querySelector("a").setAttribute("href", projectURL);
+
+		projectNode.querySelector("a").addEventListener("click", this.onProjectClick.bind(this));
+
+		preloadImage("images/projects/" + this.projects[projectIndex].images.home).then(() => {
+			this.onProjectImageLoaded(projectNode, projectIndex);
 		});
 	}
 
@@ -82,8 +67,20 @@ class Home extends EventfulClass {
 		}
 	}
 
+	setScrollMonitor() {
+		this.projectsWatcher = ScrollMonitor.create(
+			document.querySelectorAll("#projects-preview-list li")[0],
+			-10
+		);
+		this.projectsWatcher.enterViewport(function () {
+			document.getElementById("projects-preview-list").classList.remove("unshown");
+		});
+		this.projectsWatcher.exitViewport(function () {
+			document.getElementById("projects-preview-list").classList.add("unshown");
+		});
+	}
+
 	onProjectClick(e) {
-		console.log("project click", e.currentTarget);
 		e.preventDefault();
 		this.homeMe.stop();
 		this.trigger("openSection", e.currentTarget.getAttribute("href"));
@@ -93,7 +90,7 @@ class Home extends EventfulClass {
 	destroy() {
 		this.homeMe = null;
 		this.projectsWatcher.destroy();
-		//this.removeAllEventListeners();
+		this.loadedProjects = 0;
 	}
 }
 
