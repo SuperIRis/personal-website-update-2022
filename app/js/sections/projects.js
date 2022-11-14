@@ -51,7 +51,6 @@ class Projects extends EventfulClass {
 			project.querySelector("h2").innerHTML = this.list[i].name;
 			project.querySelector("h3").innerHTML = this.list[i].tech;
 			project.querySelector(".extra-info").innerHTML = this.list[i].participation;
-			console.log("set href to ", this.list[i].stringID);
 			project.querySelector("a").setAttribute("href", "proyecto.html#" + this.list[i].stringID);
 			project.querySelector("s2")?.classList.remove("s2");
 			project.querySelector("s1")?.classList.remove("s1");
@@ -67,10 +66,10 @@ class Projects extends EventfulClass {
 	}
 	onGoToProject(e) {
 		e.preventDefault();
-		e.stopPropagation();
+		//e.stopPropagation();
 		const project = e.target.closest(".project");
 		if (project) {
-			this.trigger("unload", { url: project.querySelector("a").getAttribute("href") });
+			this.trigger("openProject", project.querySelector("a").getAttribute("href"));
 		}
 	}
 	destroy() {

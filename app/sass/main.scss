@@ -33,12 +33,14 @@ body{
 
 
 .wrapper{
-  background-color:white;
+  /*background-color:white;
   min-height:100%;
   height:auto !important;
   height:100%;
   margin: 0 auto -84px;
- 
+ */
+ min-height:calc(100% - 42px);
+ width: 100%;
 }
 
 
@@ -60,7 +62,7 @@ body{
 		width: 100%;
 	}
 }
-.main-container{
+.home-container{
 	background-color:$colorGrayLighter;
 	@include transition-transform(.3s, ease-out);
 }
@@ -124,9 +126,7 @@ body{
   cursor:default;
   opacity:0.3;
 }
-.push{
-  height:42px;
-}
+
 .main-footer{
 	background-color:darken($menuGreen, 5%);
 	color:white;

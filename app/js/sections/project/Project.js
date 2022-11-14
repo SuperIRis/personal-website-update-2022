@@ -11,6 +11,7 @@ import VideoHandler from "./VideoHandler.js";
 class Project extends EventfulClass {
 	init() {
 		this.id = window.location.hash;
+		console.log("id", this.id);
 		this.nodes = this.getNodes();
 		this.info = getProjectByStringID(this.id.substring(1), PROJECTS.projects);
 		this.removeSetupNodes();

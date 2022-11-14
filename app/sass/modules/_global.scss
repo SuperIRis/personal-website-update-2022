@@ -26,6 +26,9 @@ body {
 }
 body{
   font-family: 'Lato', sans-serif;
+  margin: 0;
+  min-height: 100%;
+  padding: 0;
 }
 ::-moz-selection {
   color:white;
@@ -365,4 +368,8 @@ $breadHeight:4px;
   -webkit-transform-origin: 50% 50%;
   transform-origin: 50% 50%;
   @include rotate(45deg);
+}
+
+.main-container{
+  height:calc(100% - 86px);
 }

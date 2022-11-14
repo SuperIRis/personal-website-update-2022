@@ -10,7 +10,7 @@ class AnimatedLoader extends EventfulClass {
 			mainHeader: document.querySelector(".main-header"),
 			mainFooter: document.querySelector(".main-footer"),
 			mainWrapper: document.getElementById("main-wrapper"),
-			mainContainer: document.querySelector(".main-container"),
+			mainContainer: document.querySelector("#main-container"),
 			pusher: document.getElementById("pusher"),
 		};
 	}
@@ -38,25 +38,20 @@ class AnimatedLoader extends EventfulClass {
 	}
 	cleanPageState() {
 		document.querySelector(".selected")?.classList.remove("selected");
-		this.nodes["body"].classList.remove("project-detail-body");
+		/*this.nodes["body"].classList.remove("project-detail-body");
 		this.nodes["mainHeader"].classList.remove("project-header");
-		this.nodes["mainFooter"].classList.remove("project-footer");
-		this.nodes["mainWrapper"].className = "";
+		//this.nodes["mainFooter"].classList.remove("project-footer");
+		//this.nodes["mainWrapper"].className = "";
 		//this.nodes["mainContainer"].className = "";
 		this.nodes["mainHeader"].className = "";
 		this.nodes["mainHeader"].classList.add("main-header");
 		this.nodes["pusher"].classList.remove("push");
-		//this.nodes["mainContainer"].className = "";
+		//this.nodes["mainContainer"].className = "";*/
 	}
 	loadSection(url) {
 		if (!this.animation) {
 			return console.error("AnimatedLoader hasn't been initiated");
 		}
-		console.log(
-			"load section",
-			document.getElementById("main-wrapper"),
-			document.querySelector(".main-container")
-		);
 		this.nodes = this.getNodes();
 		this.url = url;
 		this.loadReady = false;
@@ -74,27 +69,6 @@ class AnimatedLoader extends EventfulClass {
 			}
 			this.cleanPageState();
 			document.querySelector("a[href='" + this.url + "']")?.classList.add("selected");
-
-			/*if (url === "acerca.html") {
-				$("#main-container").removeClass().addClass("aboutme-container container");
-			} else if (url.indexOf("proyecto.html") !== -1) {
-				$("a[href='proyectos.html']").addClass("selected");
-				$("#main-container").addClass("project-container").addClass("container");
-				$("#main-wrapper").addClass("wrapper project-wrapper");
-				$("body").addClass("project-detail-body");
-				$(".main-header").addClass("project-header");
-				$("#main-footer").addClass("project-footer");
-			} else if (url === "/") {
-				//$("#main-container").removeClass().addClass("main-container");
-			} else if (url === "contacto.html") {
-				$("#main-wrapper").removeClass().addClass("wrapper");
-				$("#main-container").addClass("container contact-container");
-				$("#pusher").addClass("push");
-			}
-			if ($("#mobile-menu").hasClass("active")) {
-				$("#mobile-menu").click();
-				$(".mobile-menu-on").removeClass("mobile-menu-on");
-			}*/
 		}, 1000);
 	}
 	onSectionDOMReady(data) {
@@ -110,7 +84,7 @@ class AnimatedLoader extends EventfulClass {
 			const tempElement = document.createElement("div");
 			tempElement.innerHTML = this.htmlData;
 			const title = tempElement.querySelector("title").innerHTML;
-			console.log(document.querySelector(".main-container"));
+			console.log(document.querySelector("#main-container"));
 			this.nodes["mainContainer"].innerHTML =
 				tempElement.querySelector("#main-container").innerHTML;
 			onAllImagesLoaded(tempElement.querySelector("#main-container")).then(() => {
@@ -136,19 +110,14 @@ class AnimatedLoader extends EventfulClass {
 	loadScriptsIfNeeded(scripts) {
 		const allScriptsPromises = [];
 		scripts.forEach((scriptURL) => {
-			//const scriptName = scriptURL.src.substr(scriptURL.src.lastIndexOf("/") + 1);
 			const script = this.libraries.find((library) => scriptURL.src.indexOf(library.script) !== -1);
-			if (script) {
-				if (!window[script.globalName]) {
-					console.log("load", script.globalName);
-					allScriptsPromises.push(this.loadScript(scriptURL.src));
-				}
+			if (script && !window[script.globalName]) {
+				allScriptsPromises.push(this.loadScript(scriptURL.src));
 			}
 		});
 		return Promise.all(allScriptsPromises);
 	}
 	loadScript(url) {
-		//return fetch(script);
 		return new Promise((resolve, reject) => {
 			const script = document.createElement("script");
 			document.body.appendChild(script);

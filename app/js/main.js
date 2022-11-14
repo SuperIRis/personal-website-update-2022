@@ -35,15 +35,16 @@ const loaderAnimation = new AnimatedJsonSprite(
 let currentSection;
 
 AnimatedLoader.init(loaderAnimation, libraries);
-AnimatedLoader.addEventListener("done", loadPage);
+AnimatedLoader.addEventListener("done", initPage);
 setNavigation();
 setTracking();
 //setLoads();
 window.addEventListener("load", setLoads);
-loadPage(window.location.href);
+initPage(window.location.href);
 
-function loadPage(url) {
+function initPage(url) {
 	const path = url.substring(0, url.indexOf(".html")).substring(url.lastIndexOf("/") + 1);
+	console.log("path", path, url);
 	let ajaxLoaded = false;
 	if (currentSection) {
 		currentSection.destroy();
@@ -64,6 +65,11 @@ function setNavigation() {
 		e.preventDefault();
 		const url = e.target.getAttribute("href");
 		AnimatedLoader.loadSection(url);
+	});
+	Projects.addEventListener("openProject", (url) => {
+		AnimatedLoader.loadSection(url);
+
+		//loadPage(url);
 	});
 }
 

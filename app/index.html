@@ -37,7 +37,7 @@
     <!--[if lte IE 9]>
             <p class="browsehappy"></p>
     <![endif]-->
-   <div id="main-wrapper">
+   <div id="main-wrapper" class="wrapper">
       <header class="main-header">
         <nav id="main-menu" class="main-menu">
           <a class="main-logo" href="/"><img src="images/logo-iris.svg" alt="SuperIRis" /></a>
@@ -51,61 +51,63 @@
       </header>
       
       <main id="main-container" class="main-container">
-        <section id="intro-container" class="intro-container">
-          <figure id="me" class="me"></figure>
-          <article class="intro">
-            <h1>¡Super hola!</h1>
-            <p>Me llamo Iris, me dedico al desarrollo web y las nuevas tecnologías digitales.</p>
-            <nav class="social-menu">
-              <ul>
-                <li><a data-track="home-twitter" href="http://twitter.com/SuperIRis" target="_blank"><i class="fa fa-twitter"></i></a></li>
-                <li><a data-track="home-github" href="http://github.com/SuperIRis" target="_blank"><i class="fa fa-github-alt"></i></a></li>
-                <li><a data-track="home-tumblr" href="http://super1ris.tumblr.com" target="_blank"><i class="fa fa-tumblr"></i></a></li>
-                <li><a data-track="home-linkedin" href="https://mx.linkedin.com/in/superiris" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-              </ul>
-            </nav>
-          </article>
-          <button id="home-down-btn" class="down-btn"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="15.38px" height="10.274px" viewBox="0 0 15.38 10.274" enable-background="new 0 0 15.38 10.274" xml:space="preserve"><polyline class="arrow"fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="13.183,2.163 7.682,7.664 2.181,2.163 "/></svg></button>
-        </section>
-        <section class="projects-preview">
-          <header class="projects-preview-header">
-            <h1>Proyectos recientes</h1>
-          </header>
-          <ul id="projects-preview-list" class="projects-preview-list unshown">
-            <li class="loading">
-              <a href="#">
-                <article class="project-preview-item">
-                  <div class="project-preview-data">
-                    <h1 class="project-title"></h1>
-                    <h2 class="project-tech"></h2>
-                  </div>
-                </article>
-              </a>
-            </li><li class="loading">
-              <a href="#">
-                <article class="project-preview-item">
-                  <div class="project-preview-data">
-                    <h1 class="project-title"></h1>
-                    <h2 class="project-tech"></h2>
-                  </div>
-                </article>
-              </a>
-            </li><li class="loading">
-              <a href="#">
-                <article class="project-preview-item">
-                  <div class="project-preview-data">
-                    <h1 class="project-title"></h1>
-                    <h2 class="project-tech"></h2>
-                  </div>
-                </article>
-              </a>
-            </li>
-          </ul>
-        </section>
+        <div  class="home-container">
+
+          <section id="intro-container" class="intro-container">
+            <figure id="me" class="me"></figure>
+            <article class="intro">
+              <h1>¡Super hola!</h1>
+              <p>Me llamo Iris, me dedico al desarrollo web y las nuevas tecnologías digitales.</p>
+              <nav class="social-menu">
+                <ul>
+                  <li><a data-track="home-twitter" href="http://twitter.com/SuperIRis" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                  <li><a data-track="home-github" href="http://github.com/SuperIRis" target="_blank"><i class="fa fa-github-alt"></i></a></li>
+                  <li><a data-track="home-tumblr" href="http://super1ris.tumblr.com" target="_blank"><i class="fa fa-tumblr"></i></a></li>
+                  <li><a data-track="home-linkedin" href="https://mx.linkedin.com/in/superiris" target="_blank"><i class="fa fa-linkedin"></i></a></li>
+                </ul>
+              </nav>
+            </article>
+            <button id="home-down-btn" class="down-btn"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="15.38px" height="10.274px" viewBox="0 0 15.38 10.274" enable-background="new 0 0 15.38 10.274" xml:space="preserve"><polyline class="arrow"fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" points="13.183,2.163 7.682,7.664 2.181,2.163 "/></svg></button>
+          </section>
+          <section class="projects-preview">
+            <header class="projects-preview-header">
+              <h1>Proyectos recientes</h1>
+            </header>
+            <ul id="projects-preview-list" class="projects-preview-list unshown">
+              <li class="loading">
+                <a href="#">
+                  <article class="project-preview-item">
+                    <div class="project-preview-data">
+                      <h1 class="project-title"></h1>
+                      <h2 class="project-tech"></h2>
+                    </div>
+                  </article>
+                </a>
+              </li><li class="loading">
+                <a href="#">
+                  <article class="project-preview-item">
+                    <div class="project-preview-data">
+                      <h1 class="project-title"></h1>
+                      <h2 class="project-tech"></h2>
+                    </div>
+                  </article>
+                </a>
+              </li><li class="loading">
+                <a href="#">
+                  <article class="project-preview-item">
+                    <div class="project-preview-data">
+                      <h1 class="project-title"></h1>
+                      <h2 class="project-tech"></h2>
+                    </div>
+                  </article>
+                </a>
+              </li>
+            </ul>
+          </section>
+        </div>
       </main>
       
       </div>
-      <div id="pusher"></div>
     <footer id="main-footer" class="main-footer">
       <nav class="footer-menu">
         <ul>
