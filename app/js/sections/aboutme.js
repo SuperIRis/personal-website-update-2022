@@ -60,7 +60,6 @@ class Aboutme extends EventfulClass {
 				this.characterAnimateBlink(f);
 				svg.append(f);
 				this.snapLoaded = true;
-				console.log("snap loaded");
 			}
 		});
 	}

@@ -11,7 +11,6 @@ import VideoHandler from "./VideoHandler.js";
 class Project extends EventfulClass {
 	init() {
 		this.id = window.location.hash;
-		console.log("id", this.id);
 		this.nodes = this.getNodes();
 		this.info = getProjectByStringID(this.id.substring(1), PROJECTS.projects);
 		this.removeSetupNodes();
@@ -56,7 +55,7 @@ class Project extends EventfulClass {
 
 	removeSetupNodes() {
 		bulkNodeAction("remove", [
-			this.nodes.type,
+			this.nodes.typeLink,
 			this.nodes.list,
 			this.nodes.listItem,
 			this.nodes.gallery,
@@ -89,6 +88,7 @@ class Project extends EventfulClass {
 	populateMainInfo() {
 		this.nodes.name.innerHTML = this.info.name;
 		this.nodes.type.innerHTML = this.info.type;
+
 		if (this.info.urls[0]) {
 			this.nodes.typeLink.setAttribute("href", this.info.urls[0]);
 			this.nodes.type.append(this.nodes.typeLink);
@@ -150,7 +150,11 @@ class Project extends EventfulClass {
 		this.nodes.fakeVideoContainer.classList.add("hidden");
 		this.nodes.videoContainer.classList.add("video-container");
 		if (window.innerWidth >= 770) {
-			slideImages(this.nodes.videoContainer, this.nodes.container, this.info.images.detail);
+			this.sliderInterval = slideImages(
+				this.nodes.videoContainer,
+				this.nodes.container,
+				this.info.images.detail
+			);
 		}
 	}
 
@@ -191,11 +195,11 @@ class Project extends EventfulClass {
 	}
 
 	onGoToProject(e) {
-		this.trigger("load", "proyecto.html#" + e.currentTarget.getAttribute("data-id"));
+		this.trigger("openProject", "proyecto.html#" + e.currentTarget.getAttribute("data-id"));
 	}
 	onCloseProjects(e) {
 		e.currentTarget.setAttribute("href", "proyectos.html");
-		this.trigger("unload");
+		this.trigger("openSection", "proyectos.html");
 		//onOpenSection(e);
 	}
 	destroy() {

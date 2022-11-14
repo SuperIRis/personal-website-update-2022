@@ -8,7 +8,6 @@ import EventfulClass from "../lib/EventfulClass.js";
 import { trackEvent } from "../lib/Utils.js";
 class Home extends EventfulClass {
 	init() {
-		console.log("init home");
 		const homeSprites = ["libro", "normal", "ds"];
 		const currentSprite = homeSprites[Math.floor(Math.random() * homeSprites.length)];
 		this.homeMe = new AnimatedJsonSprite(
@@ -43,7 +42,9 @@ class Home extends EventfulClass {
 	fillProjectData(projectNode, projectIndex) {
 		projectNode.querySelector(".project-title").innerHTML = this.projects[projectIndex].name;
 		projectNode.querySelector(".project-tech").innerHTML = this.projects[projectIndex].tech;
-		projectNode.querySelector("a").setAttribute("href", this.projects[projectIndex].stringID);
+		projectNode
+			.querySelector("a")
+			.setAttribute("href", "proyecto.html#" + this.projects[projectIndex].stringID);
 		projectNode.querySelector("a").addEventListener("click", this.onProjectClick.bind(this));
 		preloadImage("images/projects/" + this.projects[projectIndex].images.home).then(() => {
 			this.onProjectImageLoaded(projectNode, projectIndex);
@@ -82,9 +83,10 @@ class Home extends EventfulClass {
 	}
 
 	onProjectClick(e) {
+		console.log("project click", e.currentTarget);
 		e.preventDefault();
 		this.homeMe.stop();
-		this.trigger("openSection", { url: e.currentTarget.getAttribute("href") });
+		this.trigger("openSection", e.currentTarget.getAttribute("href"));
 		trackEvent("home-project", "click", e.currentTarget.querySelector(".project-title").innerHTML);
 	}
 

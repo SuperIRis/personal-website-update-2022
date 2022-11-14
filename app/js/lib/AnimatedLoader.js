@@ -38,15 +38,6 @@ class AnimatedLoader extends EventfulClass {
 	}
 	cleanPageState() {
 		document.querySelector(".selected")?.classList.remove("selected");
-		/*this.nodes["body"].classList.remove("project-detail-body");
-		this.nodes["mainHeader"].classList.remove("project-header");
-		//this.nodes["mainFooter"].classList.remove("project-footer");
-		//this.nodes["mainWrapper"].className = "";
-		//this.nodes["mainContainer"].className = "";
-		this.nodes["mainHeader"].className = "";
-		this.nodes["mainHeader"].classList.add("main-header");
-		this.nodes["pusher"].classList.remove("push");
-		//this.nodes["mainContainer"].className = "";*/
 	}
 	loadSection(url) {
 		if (!this.animation) {
@@ -84,7 +75,6 @@ class AnimatedLoader extends EventfulClass {
 			const tempElement = document.createElement("div");
 			tempElement.innerHTML = this.htmlData;
 			const title = tempElement.querySelector("title").innerHTML;
-			console.log(document.querySelector("#main-container"));
 			this.nodes["mainContainer"].innerHTML =
 				tempElement.querySelector("#main-container").innerHTML;
 			onAllImagesLoaded(tempElement.querySelector("#main-container")).then(() => {
@@ -100,9 +90,6 @@ class AnimatedLoader extends EventfulClass {
 						this.trigger("done", this.url);
 						this.hideLoader();
 					});
-					setTimeout(() => {
-						//window.loadPage(title.toLowerCase(), true);
-					}, 200);
 				}
 			});
 		}, 1000);

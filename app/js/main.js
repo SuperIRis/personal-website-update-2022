@@ -44,7 +44,6 @@ initPage(window.location.href);
 
 function initPage(url) {
 	const path = url.substring(0, url.indexOf(".html")).substring(url.lastIndexOf("/") + 1);
-	console.log("path", path, url);
 	let ajaxLoaded = false;
 	if (currentSection) {
 		currentSection.destroy();
@@ -62,15 +61,17 @@ function initPage(url) {
 function setNavigation() {
 	document.getElementById("mobile-menu").addEventListener("click", onToggleMobileMenu);
 	document.getElementById("main-menu").addEventListener("click", (e) => {
-		e.preventDefault();
-		const url = e.target.getAttribute("href");
-		AnimatedLoader.loadSection(url);
+		const target = e.target.closest("a");
+		if (target) {
+			e.preventDefault();
+			const url = target.getAttribute("href");
+			AnimatedLoader.loadSection(url);
+		}
 	});
-	Projects.addEventListener("openProject", (url) => {
-		AnimatedLoader.loadSection(url);
-
-		//loadPage(url);
-	});
+	Projects.addEventListener("openProject", (url) => AnimatedLoader.loadSection(url));
+	Project.addEventListener("openProject", (url) => AnimatedLoader.loadSection(url));
+	Project.addEventListener("openSection", (url) => AnimatedLoader.loadSection(url));
+	Home.addEventListener("openSection", (url) => AnimatedLoader.loadSection(url));
 }
 
 function setTracking() {
@@ -93,9 +94,3 @@ function onToggleMobileMenu(e) {
 	toggleClass(document.getElementById("main-container"), "mobile-menu-on");
 	toggleClass(document.getElementById("main-footer"), "mobile-menu-on");
 }
-/*
-Home.addEventListener("unload", (data) => {
-	console.log("unloaded");
-	AnimatedLoader.loadSection(data.url);
-});
-*/

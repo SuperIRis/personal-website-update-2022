@@ -1,7 +1,7 @@
 export function slideImages(imagesContainer, mainContainer, images) {
 	let currentImage = 0;
 
-	this.sliderInterval = setInterval(() => {
+	return setInterval(() => {
 		currentImage++;
 		if (currentImage === images.length) {
 			currentImage = 0;

@@ -83,9 +83,7 @@ export function onAllImagesLoaded(node) {
 						img.onload = img.onerror = resolve;
 					})
 			)
-	).then(() => {
-		console.log("images finished loading");
-	});
+	);
 }
 
 export function bulkNodeAction(actionFn, nodes) {
