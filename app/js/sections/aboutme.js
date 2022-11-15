@@ -73,7 +73,7 @@ class Aboutme extends EventfulClass {
 		}
 		leftEyeClosed.addClass("hidden");
 		rightEyeClosed.addClass("hidden");
-		svgInterval = setInterval(function () {
+		this.svgInterval = setInterval(function () {
 			leftEye.addClass("hidden");
 			rightEye.addClass("hidden");
 			leftEyeClosed.removeClass("hidden");
@@ -132,10 +132,10 @@ class Aboutme extends EventfulClass {
 		}
 	}
 	destroy() {
-		for (let i = 0; i < graphsWatchers.length; i++) {
-			graphsWatchers[i].destroy();
+		for (let i = 0; i < this.graphsWatchers.length; i++) {
+			this.graphsWatchers[i].destroy();
 		}
-		graphsWatchers.length = 0;
+		this.graphsWatchers.length = 0;
 		this.snapLoaded = false;
 		clearInterval(this.svgInterval);
 		clearInterval(this.randomFactsInterval);

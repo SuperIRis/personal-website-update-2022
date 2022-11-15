@@ -1,28 +1,9 @@
 "use strict";
 class Contact {
 	init() {
-		this.obfuscateMailTo();
 		this.setFreelanceStatusSVG();
 		this.setMap();
 		google.maps.event.addDomListener(window, "resize", this.resizeMap.bind(this));
-	}
-
-	obfuscateMailTo() {
-		const coded = "MbyS@JOtlGQGQJ.ZbL";
-		const key = "stZ5MUTquSkAXVl2Q4J7RxnPF3OgBmdfyWrHjEIoDN1CzpcLhv80Ga9Y6beKiw";
-		const shift = coded.length;
-		let link = "";
-		let ltr;
-		for (let i = 0; i < coded.length; i++) {
-			if (key.indexOf(coded.charAt(i)) === -1) {
-				ltr = coded.charAt(i);
-				link += ltr;
-			} else {
-				ltr = (key.indexOf(coded.charAt(i)) - shift + key.length) % key.length;
-				link += key.charAt(ltr);
-			}
-		}
-		document.getElementById("contact-mail").setAttribute("href", "mailto:" + link);
 	}
 
 	setFreelanceStatusSVG() {

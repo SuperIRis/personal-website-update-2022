@@ -36,8 +36,8 @@ class Projects extends EventfulClass {
 		}
 	}
 	setProjects() {
-		const originalProject = document.querySelector(".project:first-child");
-		originalProject.remove();
+		this.originalProject = document.querySelector(".project:first-child");
+		this.originalProject.remove();
 		const projectsList = document.getElementById("projects-list");
 		projectsList.innerHTML = "";
 		projectsList.remove();
@@ -48,7 +48,7 @@ class Projects extends EventfulClass {
 		document.getElementById("main-container").prepend(projectsList);
 	}
 	createProject(projectData) {
-		const project = originalProject.cloneNode(true);
+		const project = this.originalProject.cloneNode(true);
 		project.querySelector("h1").innerHTML = projectData.client;
 		project.querySelector("h2").innerHTML = projectData.name;
 		project.querySelector("h3").innerHTML = projectData.tech;

@@ -8,7 +8,7 @@ Updated from 2015 portfolio.
 Run the site in dev mode with gulp serve (live reload, JS and SASS transpiling)
 Build the site for prod with gulp build (copy static files to dist / babelify, concat, and uglify JS / transpile, concat, and minify CSS)
 
-NOTEs as of 12/11
+NOTES as of 12/11
 
 - Refactored project
 - Main loading logic WIP
@@ -16,7 +16,7 @@ NOTEs as of 12/11
   - Load projects from home
   - Load projects from projects
 
-NOTEs as of 11/11
+NOTES as of 11/11
 
 Fixed:
 
@@ -29,7 +29,7 @@ Fixed:
   - Refactor of project
   - Main loading logic
 
-NOTEs as of 9/11
+NOTES as of 9/11
 
 - Started working on project
 - Populated data, mostly working
