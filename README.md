@@ -8,6 +8,22 @@ Updated from 2015 portfolio.
 Run the site in dev mode with gulp serve (live reload, JS and SASS transpiling)
 Build the site for prod with gulp build (copy static files to dist / babelify, concat, and uglify JS / transpile, concat, and minify CSS)
 
+NOTES as of 14/11
+
+- Updated home, added lately
+  Next:
+  - Fix Project css, content should be vertically centered (open Batalla 300)
+  - Agregar inglés
+
+NOTES as of 13/11
+
+- Load projects
+- Finished migration
+- Updated about me
+- Updated contact, removed form
+  Next:
+  - Add lately to home
+
 NOTES as of 12/11
 
 - Refactored project
