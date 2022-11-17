@@ -8,6 +8,14 @@ Updated from 2015 portfolio.
 Run the site in dev mode with gulp serve (live reload, JS and SASS transpiling)
 Build the site for prod with gulp build (copy static files to dist / babelify, concat, and uglify JS / transpile, concat, and minify CSS)
 
+NOTES as of 16/11
+
+- Fixed Project css, only for desktop
+  Next:
+  - Fix Project css on mobile
+  - Fix slide images on mobile
+  - Fix image gallery on mobile
+
 NOTES as of 14/11
 
 - Updated home, added lately
