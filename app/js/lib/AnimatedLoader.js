@@ -39,10 +39,11 @@ class AnimatedLoader extends EventfulClass {
 	cleanPageState() {
 		document.querySelector(".selected")?.classList.remove("selected");
 	}
-	loadSection(url) {
+	loadSection(url, browserNav = false) {
 		if (!this.animation) {
 			return console.error("AnimatedLoader hasn't been initiated");
 		}
+		this.browserNav = browserNav;
 		this.nodes = this.getNodes();
 		this.url = url;
 		this.loadReady = false;
@@ -82,7 +83,7 @@ class AnimatedLoader extends EventfulClass {
 					const scripts = tempElement.querySelectorAll("script");
 
 					document.title = title;
-					if (window.history.pushState) {
+					if (window.history.pushState && !this.browserNav) {
 						window.history.pushState(title, title, this.url);
 					}
 					this.loadScriptsIfNeeded(scripts).then(() => {

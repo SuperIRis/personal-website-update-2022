@@ -38,6 +38,7 @@ AnimatedLoader.init(loaderAnimation, scriptLibraries);
 AnimatedLoader.addEventListener("done", initPage);
 initPage(window.location.href);
 window.addEventListener("load", setLoads);
+window.addEventListener("popstate", handleBrowserNav);
 setNavigation();
 setTracking();
 
@@ -59,6 +60,10 @@ function initPage(url) {
 function setLoads() {
 	removeClassFromAll(document.querySelectorAll(".preload"), "preload");
 	document.getElementById("loader").classList.add("unshown");
+}
+
+function handleBrowserNav() {
+	AnimatedLoader.loadSection(window.location.href, true);
 }
 
 function setNavigation() {

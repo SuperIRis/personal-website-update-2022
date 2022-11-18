@@ -1,14 +1,14 @@
-export function slideImages(imagesContainer, mainContainer, images) {
+export function slideImages(imagesContainer, projectContainer, images) {
 	let currentImage = 0;
-
+	projectContainer.classList.add("transition");
 	return setInterval(() => {
 		currentImage++;
 		if (currentImage === images.length) {
 			currentImage = 0;
 		}
-		mainContainer.classList.add("dark");
+		projectContainer.classList.add("dark");
 		setTimeout(() => {
-			mainContainer.classList.remove("dark");
+			projectContainer.classList.remove("dark");
 			imagesContainer.style.backgroundImage = "url(images/projects/" + images[currentImage] + ")";
 		}, 1000);
 	}, 8000);

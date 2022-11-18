@@ -8,6 +8,8 @@ import {
 	changeMinusBtnTxtToExtra,
 } from "./ProjectVisualEffectsUtils.js";
 import VideoHandler from "./VideoHandler.js";
+
+const mobileWidthLimit = 1030;
 class Project extends EventfulClass {
 	init() {
 		this.id = window.location.hash;
@@ -25,7 +27,7 @@ class Project extends EventfulClass {
 	}
 	getNodes() {
 		const nodes = {};
-		nodes.container = document.getElementById("main-container");
+		nodes.container = document.querySelector(".project-container");
 		nodes.name = document.getElementById("project-name");
 		nodes.type = document.getElementById("project-type");
 		nodes.typeLink = nodes.type.querySelector("a");
@@ -49,6 +51,7 @@ class Project extends EventfulClass {
 		nodes.fakeVideoContainer = document.getElementById("fake-video-container");
 		nodes.video = document.getElementById("project-video");
 		nodes.videoContainer = document.getElementById("video-container");
+		nodes.videoBackground = document.querySelector(".video-background");
 		nodes.overlay = document.getElementById("info-overlay");
 		return nodes;
 	}
@@ -74,7 +77,7 @@ class Project extends EventfulClass {
 		this.populateNavButtons();
 		this.populateExtrainfo();
 		this.populateFactsList();
-		if (window.innerWidth < 770) {
+		if (window.innerWidth < mobileWidthLimit) {
 			this.populateImages();
 		}
 
@@ -93,7 +96,7 @@ class Project extends EventfulClass {
 			this.nodes.typeLink.setAttribute("href", this.info.urls[0]);
 			this.nodes.type.append(this.nodes.typeLink);
 		}
-		this.nodes.videoContainer.style.backgroundImage =
+		this.nodes.videoBackground.style.backgroundImage =
 			"url(images/projects/" + this.info.images.detail[0] + ")";
 	}
 
@@ -166,27 +169,40 @@ class Project extends EventfulClass {
 
 		button.disabled = true;
 		if (this.nodes.extraInfo.classList.contains("unshown")) {
-			this.nodes.overlay.classList.remove("hidden");
-			changeExtraBtnTxtToMinus(this.nodes.extraInfoBtn);
-			setTimeout(() => {
-				this.nodes.overlay.classList.remove("unshown");
-			}, 100);
-			setTimeout(() => {
-				this.nodes.extraInfo.classList.remove("unshown");
-				button.disabled = false;
-			}, 500);
+			this.showExtraInfo(button);
 		} else {
-			this.nodes.extraInfo.classList.add("unshown");
-
-			changeMinusBtnTxtToExtra(this.nodes.extraInfoBtn);
-			setTimeout(() => {
-				this.nodes.overlay.classList.add("unshown");
-			}, 500);
-			setTimeout(() => {
-				this.nodes.overlay.classList.add("hidden");
-				button.disabled = false;
-			}, 1000);
+			this.hideExtraInfo(button);
 		}
+	}
+
+	showExtraInfo(button) {
+		this.nodes.overlay.classList.remove("hidden");
+		this.nodes.extraInfo.classList.remove("hidden");
+		const extraInfoTop = this.nodes.extraInfo.offsetTop;
+
+		changeExtraBtnTxtToMinus(this.nodes.extraInfoBtn);
+		setTimeout(() => {
+			this.nodes.overlay.classList.remove("unshown");
+			window.scrollTo({ top: extraInfoTop, behavior: "smooth" });
+		}, 100);
+		setTimeout(() => {
+			this.nodes.extraInfo.classList.remove("unshown");
+			button.disabled = false;
+		}, 500);
+	}
+
+	hideExtraInfo(button) {
+		this.nodes.extraInfo.classList.add("unshown");
+		window.scrollTo({ top: 0, behavior: "smooth" });
+		changeMinusBtnTxtToExtra(this.nodes.extraInfoBtn);
+		setTimeout(() => {
+			this.nodes.overlay.classList.add("unshown");
+		}, 500);
+		setTimeout(() => {
+			window.innerWidth >= mobileWidthLimit && this.nodes.overlay.classList.add("hidden");
+			this.nodes.extraInfo.classList.add("hidden");
+			button.disabled = false;
+		}, 1000);
 	}
 
 	onGoToProject(e) {
