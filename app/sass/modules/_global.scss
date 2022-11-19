@@ -372,4 +372,5 @@ $breadHeight:4px;
 
 .main-container{
   height:calc(100% - 86px);
+  @include transition-transform(.3s, ease-out);
 }

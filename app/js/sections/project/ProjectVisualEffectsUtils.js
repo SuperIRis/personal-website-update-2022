@@ -1,5 +1,6 @@
 export function slideImages(imagesContainer, projectContainer, images) {
 	let currentImage = 0;
+	imagesContainer.style.backgroundImage = "url(images/projects/" + images[currentImage] + ")";
 	projectContainer.classList.add("transition");
 	return setInterval(() => {
 		currentImage++;

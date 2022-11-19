@@ -70,9 +70,18 @@ function setNavigation() {
 	document.getElementById("mobile-menu").addEventListener("click", onToggleMobileMenu);
 	document.getElementById("main-menu").addEventListener("click", (e) => {
 		const target = e.target.closest("a");
-		if (target) {
-			e.preventDefault();
-			const url = target.getAttribute("href");
+		e.preventDefault();
+		if (target && !target.classList.contains("selected")) {
+			let url = target.getAttribute("href");
+			/*if (target.getAttribute("data-url-lang")) {
+				//change language
+				const language = target.getAttribute("data-url-lang");
+				console.log("change language", currentSection === Home);
+				const sectionClass = sections.find((section) => section.classObject === currentSection);
+				let newPath = sectionClass[`${language}Path`];
+				newPath = newPath === "" ? `index${language === "es" && "-es"}.html` : newPath;
+				url = `${window.location.origin}/${newPath}.html`;
+			}*/
 			AnimatedLoader.loadSection(url);
 		}
 	});

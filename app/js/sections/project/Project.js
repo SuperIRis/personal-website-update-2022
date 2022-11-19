@@ -1,7 +1,14 @@
 "use strict";
 import PROJECTS from "../../../data/projects.js";
 import EventfulClass from "../../lib/EventfulClass.js";
-import { bulkNodeAction, getProjectByStringID, trackView, isDesktop } from "../../lib/Utils.js";
+import {
+	bulkNodeAction,
+	getProjectByStringID,
+	trackView,
+	isDesktop,
+	throttle,
+	appearOutphased,
+} from "../../lib/Utils.js";
 import {
 	slideImages,
 	changeExtraBtnTxtToMinus,
@@ -12,17 +19,17 @@ import VideoHandler from "./VideoHandler.js";
 class Project extends EventfulClass {
 	init() {
 		this.id = window.location.hash;
-		this.nodes = this.getNodes();
 		this.info = getProjectByStringID(this.id.substring(1), PROJECTS.projects);
-		this.removeSetupNodes();
-		this.addSetupEvents();
-
 		if (!this.info) {
 			window.location = "/";
-		} else {
-			this.populateData();
-			trackView("Proyecto-" + this.info.client + "-" + this.info.name);
+			return;
 		}
+		this.isDesktop = isDesktop();
+		this.nodes = this.getNodes();
+		this.removeSetupNodes();
+		this.addSetupEvents();
+		this.populateData();
+		trackView("Proyecto-" + this.info.client + "-" + this.info.name);
 	}
 	getNodes() {
 		const nodes = {};
@@ -83,15 +90,10 @@ class Project extends EventfulClass {
 		this.populateNavButtons();
 		this.populateExtrainfo();
 		this.populateFactsList();
+		this.populateImagesOrVideo();
 
-		if (this.hasVideo() && this.shouldShowVideo()) {
-			this.populateVideo();
-		} else if (this.shouldShowVideo()) {
-			this.populateVideoAlternative();
-		} else {
-			this.populateImages();
-			this.populateImageBackground();
-		}
+		this.throttledResize = throttle(this.onResize.bind(this));
+		window.addEventListener("resize", this.throttledResize);
 	}
 
 	populateMainInfo() {
@@ -135,11 +137,13 @@ class Project extends EventfulClass {
 		let imageListItemTemp;
 		for (let i = 0; i < this.info.images.detail.length; i++) {
 			imageListItemTemp = this.nodes.galleryItem.cloneNode(true);
+			imageListItemTemp.classList.add("unshown");
 			imageListItemTemp
 				.querySelector("img")
 				.setAttribute("src", "images/projects/" + this.info.images.detail[i]);
 			this.nodes.gallery.append(imageListItemTemp);
 		}
+		appearOutphased(this.nodes.gallery.children, 1000);
 		this.nodes.galleryContainer.append(this.nodes.gallery);
 	}
 
@@ -148,7 +152,11 @@ class Project extends EventfulClass {
 			"src",
 			"images/projects/" + this.info.images.detail[0] + ""
 		);
+		this.nodes.fakeVideoContainer.classList.add("unshown");
 		this.nodes.fakeVideoContainer.classList.remove("hidden");
+		setTimeout(() => {
+			this.nodes.fakeVideoContainer.classList.remove("unshown");
+		}, 100);
 	}
 
 	populateVideo() {
@@ -159,12 +167,32 @@ class Project extends EventfulClass {
 	populateVideoAlternative() {
 		this.nodes.fakeVideoContainer.classList.add("hidden");
 		this.nodes.videoContainer.classList.add("video-container");
-
 		this.sliderInterval = slideImages(
 			this.nodes.videoContainer,
 			this.nodes.container,
 			this.info.images.detail
 		);
+	}
+
+	populateImagesOrVideo() {
+		if (this.hasVideo() && this.shouldShowVideo()) {
+			this.populateVideo();
+		} else if (this.shouldShowVideo()) {
+			this.populateVideoAlternative();
+		} else {
+			this.populateImages();
+			this.populateImageBackground();
+		}
+	}
+
+	onResize() {
+		if (this.isDesktop !== isDesktop()) {
+			this.destroyVideo();
+			this.destroyImageSlider();
+			this.nodes.gallery.innerHTML = "";
+			this.populateImagesOrVideo();
+			this.isDesktop = isDesktop();
+		}
 	}
 
 	onExtraInfoClick(e) {
@@ -219,8 +247,15 @@ class Project extends EventfulClass {
 		this.trigger("openSection", "proyectos.html");
 	}
 	destroy() {
+		this.destroyVideo();
+		this.destroyImageSlider();
+		window.removeEventListener("resize", this.throttledResize);
+	}
+	destroyVideo() {
+		this.videoHandler?.destroy();
+	}
+	destroyImageSlider() {
 		clearInterval(this.sliderInterval);
-		this.videoHandler.destroy();
 	}
 }
 

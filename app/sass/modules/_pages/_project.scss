@@ -182,7 +182,11 @@
 		padding:0;
 		list-style: none;
 		li{
+			@include transition(opacity, 0.8s, ease-out);
 			margin:1em;
+			&.unshown{
+				opacity:0;
+			}
 		}
 	}
 	img{

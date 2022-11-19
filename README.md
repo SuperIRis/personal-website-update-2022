@@ -12,10 +12,11 @@ NOTES as of 18/11
 
 - Bug bash
   ✔︎ Navigating from one project to the next breaks the youtube video
-  - AND adds an extra background
-  - Navigating from one project (reload here) to projects (close button) breaks footer UI
-  - When resizing down, no image background. When resizing up, no slide images
-    - Need to listen to resize and set video / slider / image background if necessary
+  ✔︎ Navigating from one project (reload here) to projects (close button) breaks footer UI
+  ✔︎ On projects with slider first slide doesn't load
+  ✔︎ When resizing down, no image background. When resizing up, no slide images
+  ✔︎ Need to listen to resize and set video / slider / image background if necessary
+  ✔︎ Need to appear the images on mobile with transition
 
 NOTES as of 17/11
 

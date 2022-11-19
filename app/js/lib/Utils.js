@@ -112,3 +112,25 @@ export function isDesktop() {
 	const mobileWidthLimit = 1030;
 	return window.innerWidth >= mobileWidthLimit;
 }
+
+export function throttle(callback, time = 1000) {
+	let timer;
+	return () => {
+		clearTimeout(timer);
+		timer = setTimeout(() => {
+			callback();
+		}, time);
+	};
+}
+
+export function appearOutphased(elements, delay, intervalTime = 1000) {
+	let index = 0;
+	setTimeout(() => {
+		for (let i = 0; i < elements.length; i++) {
+			setTimeout(() => {
+				elements[index].classList.remove("unshown");
+				index++;
+			}, (i + 1) * intervalTime);
+		}
+	}, delay);
+}
