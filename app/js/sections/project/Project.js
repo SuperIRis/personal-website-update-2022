@@ -1,7 +1,7 @@
 "use strict";
 import PROJECTS from "../../../data/projects.js";
 import EventfulClass from "../../lib/EventfulClass.js";
-import { bulkNodeAction, getProjectByStringID, trackView } from "../../lib/Utils.js";
+import { bulkNodeAction, getProjectByStringID, trackView, isDesktop } from "../../lib/Utils.js";
 import {
 	slideImages,
 	changeExtraBtnTxtToMinus,
@@ -9,7 +9,6 @@ import {
 } from "./ProjectVisualEffectsUtils.js";
 import VideoHandler from "./VideoHandler.js";
 
-const mobileWidthLimit = 1030;
 class Project extends EventfulClass {
 	init() {
 		this.id = window.location.hash;
@@ -51,7 +50,6 @@ class Project extends EventfulClass {
 		nodes.fakeVideoContainer = document.getElementById("fake-video-container");
 		nodes.video = document.getElementById("project-video");
 		nodes.videoContainer = document.getElementById("video-container");
-		nodes.videoBackground = document.querySelector(".video-background");
 		nodes.overlay = document.getElementById("info-overlay");
 		return nodes;
 	}
@@ -72,19 +70,27 @@ class Project extends EventfulClass {
 		this.nodes.closeBtn.addEventListener("click", this.onCloseProjects.bind(this));
 	}
 
+	hasVideo() {
+		return this.info.video && this.info.video.length > 5;
+	}
+
+	shouldShowVideo() {
+		return isDesktop();
+	}
+
 	populateData() {
 		this.populateMainInfo();
 		this.populateNavButtons();
 		this.populateExtrainfo();
 		this.populateFactsList();
-		if (window.innerWidth < mobileWidthLimit) {
-			this.populateImages();
-		}
 
-		if (this.info.video && this.info.video.length > 5) {
+		if (this.hasVideo() && this.shouldShowVideo()) {
 			this.populateVideo();
-		} else {
+		} else if (this.shouldShowVideo()) {
 			this.populateVideoAlternative();
+		} else {
+			this.populateImages();
+			this.populateImageBackground();
 		}
 	}
 
@@ -96,8 +102,6 @@ class Project extends EventfulClass {
 			this.nodes.typeLink.setAttribute("href", this.info.urls[0]);
 			this.nodes.type.append(this.nodes.typeLink);
 		}
-		this.nodes.videoBackground.style.backgroundImage =
-			"url(images/projects/" + this.info.images.detail[0] + ")";
 	}
 
 	populateNavButtons() {
@@ -139,9 +143,7 @@ class Project extends EventfulClass {
 		this.nodes.galleryContainer.append(this.nodes.gallery);
 	}
 
-	populateVideo() {
-		this.videoId = this.info.video.substr(this.info.video.indexOf("embed/") + 6);
-		this.videoHandler = new VideoHandler(this.nodes.videoContainer, this.videoId);
+	populateImageBackground() {
 		this.nodes.fakeVideoContainer.setAttribute(
 			"src",
 			"images/projects/" + this.info.images.detail[0] + ""
@@ -149,16 +151,20 @@ class Project extends EventfulClass {
 		this.nodes.fakeVideoContainer.classList.remove("hidden");
 	}
 
+	populateVideo() {
+		this.videoId = this.info.video.substr(this.info.video.indexOf("embed/") + 6);
+		this.videoHandler = new VideoHandler(this.nodes.videoContainer, this.videoId);
+	}
+
 	populateVideoAlternative() {
 		this.nodes.fakeVideoContainer.classList.add("hidden");
 		this.nodes.videoContainer.classList.add("video-container");
-		if (window.innerWidth >= 770) {
-			this.sliderInterval = slideImages(
-				this.nodes.videoContainer,
-				this.nodes.container,
-				this.info.images.detail
-			);
-		}
+
+		this.sliderInterval = slideImages(
+			this.nodes.videoContainer,
+			this.nodes.container,
+			this.info.images.detail
+		);
 	}
 
 	onExtraInfoClick(e) {
@@ -214,6 +220,7 @@ class Project extends EventfulClass {
 	}
 	destroy() {
 		clearInterval(this.sliderInterval);
+		this.videoHandler.destroy();
 	}
 }
 

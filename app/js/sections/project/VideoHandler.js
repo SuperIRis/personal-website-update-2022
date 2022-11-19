@@ -11,9 +11,11 @@ export default class VideoHandler {
 			loop: 1,
 			rel: 0,
 		};
-		window.onYouTubeIframeAPIReady = this.onYouTubeIframeAPIReady;
 		if (!window.YT) {
+			window.onYouTubeIframeAPIReady = this.onYouTubeIframeAPIReady;
 			this.loadYTAPI();
+		} else {
+			this.onYouTubeIframeAPIReady();
 		}
 	}
 	loadYTAPI() {
@@ -42,5 +44,8 @@ export default class VideoHandler {
 		if (e.data == YT.PlayerState.ENDED) {
 			this.player.playVideo();
 		}
+	}
+	destroy() {
+		this.player.destroy();
 	}
 }

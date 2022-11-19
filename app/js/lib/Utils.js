@@ -107,3 +107,8 @@ export function onOpenPopup(e) {
 		"width=" + width + ", height=" + height + ", left=" + left + ", top=" + top
 	);
 }
+
+export function isDesktop() {
+	const mobileWidthLimit = 1030;
+	return window.innerWidth >= mobileWidthLimit;
+}
