@@ -20,7 +20,7 @@ export default {
 				],
 			},
 			video: "",
-			urls: ["http://batalla300.element.com.mx"],
+			urls: [],
 			participation: "Desarrollo en NodeJS para backend e implementación Javascript del sitio.",
 			about:
 				"La segunda parte de la película 300 estaba cerca de estrenarse en México y querían generar expectativa entre la comunidad. Dado que el argumento de la película se desarrollaba en batallas navales de griegos contra persas, se propuso un juego al estilo “battleship” a través de Twitter en contra del ejército persa (los “villanos” de la película).",
@@ -60,7 +60,7 @@ export default {
 				],
 			},
 			video: "https://www.youtube.com/embed/F88z4-s3FJE",
-			urls: ["http://sonrics.com.mx/mundoinspireka"],
+			urls: [],
 			participation:
 				"Desarrollo del juego en Javascript con PhaserJS. Creación de concepto y diseño de niveles.",
 			about:
@@ -169,7 +169,7 @@ export default {
 				],
 			},
 			video: "https://www.youtube.com/embed/Q3SmLlu4qTg",
-			urls: ["http://rescatextreme.com"],
+			urls: [],
 			participation:
 				"Propuesta del concepto de juego, desarrollo del juego en Javascript con PhaserJS, maquetado y programación del sitio a nivel frontend.",
 			about:
@@ -198,7 +198,7 @@ export default {
 				detail: ["projects-sonrics-1.jpg", "projects-sonrics-2.jpg", "projects-sonrics-3.jpg"],
 			},
 			video: "https://www.youtube.com/embed/YKi-4Tg6OPE",
-			urls: ["http://sonrics.com.mx"],
+			urls: [],
 			participation: "Maquetado en HTML5 y CSS con efectos en Javascript.",
 			about:
 				"El sitio de Sonrics estaba enfocado en mostrar todos sus productos, de una manera atractiva para los niños. Se hicieron una serie de ilustraciones, que representaban mundos donde vivían ciertas líneas de productos, en los que podías ver toda la información de cada uno de ellos. Hice una navegación horizontal con un efecto de planos para darle profundidad y mayor impacto visual.",
@@ -342,7 +342,7 @@ export default {
 				],
 			},
 			video: "https://www.youtube.com/embed/Dkiya_FJ5Js",
-			urls: ["http://element.com.mx"],
+			urls: [],
 			participation: "Desarrollo frontend.",
 			about:
 				"Element quería rediseñar su sitio para mostrar una imagen actual, tecnológica y resaltar los proyectos y logros recientes.",
