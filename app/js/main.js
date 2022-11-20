@@ -10,7 +10,7 @@ import { removeClassFromAll, toggleClass, trackEvent } from "./lib/Utils.js";
 
 const sections = [
 	{ enPath: ["aboutme"], esPath: ["acerca"], classObject: Aboutme },
-	{ enPath: [""], esPath: ["", "index"], classObject: Home },
+	{ enPath: ["index", ""], esPath: ["index-es"], classObject: Home },
 	{ enPath: ["contact"], esPath: ["contacto"], classObject: Contact },
 	{ enPath: ["projects"], esPath: ["proyectos"], classObject: Projects },
 	{ enPath: ["project"], esPath: ["proyecto"], classObject: Project },
@@ -50,11 +50,23 @@ function initPage(url) {
 		resetTracking();
 		ajaxLoaded = true;
 	}
+	let language;
 	const section = sections.find((section) => {
-		return section.esPath.indexOf(path) !== -1;
+		if (section.enPath.indexOf(path) !== -1) {
+			language = "en";
+		} else if (section.esPath.indexOf(path) !== -1) {
+			language = "es";
+		}
+		return !!language;
 	});
+	selectCurrentLanguageMenuItem(language);
 	section.classObject.init();
 	currentSection = section.classObject;
+}
+
+function selectCurrentLanguageMenuItem(language) {
+	document.querySelector("[data-url-lang]").classList.remove("selected");
+	document.querySelector(`[data-url-lang="${language}"]`).classList.add("selected");
 }
 
 function setLoads() {
@@ -72,16 +84,9 @@ function setNavigation() {
 		const target = e.target.closest("a");
 		e.preventDefault();
 		if (target && !target.classList.contains("selected")) {
-			let url = target.getAttribute("href");
-			/*if (target.getAttribute("data-url-lang")) {
-				//change language
-				const language = target.getAttribute("data-url-lang");
-				console.log("change language", currentSection === Home);
-				const sectionClass = sections.find((section) => section.classObject === currentSection);
-				let newPath = sectionClass[`${language}Path`];
-				newPath = newPath === "" ? `index${language === "es" && "-es"}.html` : newPath;
-				url = `${window.location.origin}/${newPath}.html`;
-			}*/
+			const url = target.getAttribute("data-url-lang")
+				? getCurrentURLByLanguage(target.getAttribute("data-url-lang"))
+				: target.getAttribute("href");
 			AnimatedLoader.loadSection(url);
 		}
 	});
@@ -89,6 +94,17 @@ function setNavigation() {
 	Project.addEventListener("openProject", (url) => AnimatedLoader.loadSection(url));
 	Project.addEventListener("openSection", (url) => AnimatedLoader.loadSection(url));
 	Home.addEventListener("openSection", (url) => AnimatedLoader.loadSection(url));
+}
+
+function getCurrentURLByLanguage(language) {
+	const section = sections.find((section) => {
+		return section.classObject === currentSection;
+	});
+	if (!section) {
+		return console.warn("Cannot find current section");
+	}
+	const newPath = section[`${language}Path`][0];
+	return `${window.location.origin}/${newPath}.html`;
 }
 
 function setTracking() {
