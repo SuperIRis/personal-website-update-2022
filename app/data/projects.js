@@ -21,22 +21,23 @@ export default {
 			},
 			video: "",
 			urls: [],
-			participation: "Desarrollo en NodeJS para backend e implementación Javascript del sitio.",
+			participation:
+				"Architecture, system design, backend in NodeJS, Javascript frontend and styling.",
 			about:
-				"La segunda parte de la película 300 estaba cerca de estrenarse en México y querían generar expectativa entre la comunidad. Dado que el argumento de la película se desarrollaba en batallas navales de griegos contra persas, se propuso un juego al estilo “battleship” a través de Twitter en contra del ejército persa (los “villanos” de la película).",
+				"The sequel to 300 was close to be released in Mexico, and WB wanted to create awareness and community engagement. As the movie argument evolved in naval battles of greeks vs persians, we proposed a battleship game through Twitter, where the user became a greek soldier and mentioned one of our persian accounts to attack.",
 			technically:
-				"El proyecto se desarrolló en NodeJS con MySQL y la API de Twitter. A través de ésta, se creaba un stream que monitoreaba en todo momento cualquier mención al hashtag #Batalla300 y la guardaba en base de datos. Un demonio corriendo cada 30 segundos descargaba todos los tweets nuevos y contestaba de acuerdo con el caso a través de literalmente un ejército de cuentas de soldados, capitanes, comandantes y demás militares persas. Cada turno lo iniciaba el usuario intentando hundir los barcos del enemigo dentro de un mapa variable (3x3 o 4x4 espacios según el nivel), en cierto número de tiros. De lograrlo, avanzaba al siguiente nivel y así sucesivamente hasta llegar con Artemisa, el personaje antagónico de la película.",
+				"The projects was developed in Javascript, MySQL, and used the Twitter API. Through it I created a stream that monitored all tweets with the #Batalla300 hashtag and stored it in MySQL. A daemon downloaded all new tweets, created a game board for each, and responded if the user had successfully hit a ship. We had a full army of Twitter accounts of various levels, so when the user won a match they automatically moved up to the next level until they reached the final boss (Artemisa)",
 			curious:
-				"Originalmente no estábamos seguros de que la idea fuera realizable, en teoría lo era pero con APIs externas es difícil estar seguro hasta no hacer pruebas. Tuvimos que hacer varios ajustes debido a las políticas de Twitter y fue un gran riesgo dado que el tiempo estaba muy limitado y el tiempo de pruebas fue corto, pero resultó en un gran proyecto muy divertido de hacer, que generó casi 20,000 tweets de juego. El juego ganó un bronce en los IAB por mejor Advergaming.",
+				"Originally we were not completely sure that the idea was feasible, as it was in theory but it had certain risk as it fully depended on a third party. We had to make several adjustments to avoid violating Twitter's policies, in a very tight schedule and with very little room to test. The game was quite successful, generating tens of thousands of tweets in a very short time. It was super fun, and we won an IAB bronze award for best Advergaming",
 			list: [
-				{ icon: "trophy", info: "Bronce por Advergaming en los IAB" },
+				{ icon: "trophy", info: "IAB Bronze Advergaming" },
 				{
 					icon: "twitter",
-					info: "Tuvimos muchos soldados caídos en batalla. Levantamos varias cuentas para compensar las bloqueadas por Twitter",
+					info: "Many soldiers were cancelled. We had to create accounts on the run to compensate them.",
 				},
 				{
 					icon: "smile-o",
-					info: "Warner nos invitó a ver la película antes de su estreno en cines",
+					info: "Warner invited us to watch the movie in a special screening before the premiere.",
 				},
 			],
 		},
@@ -62,27 +63,27 @@ export default {
 			video: "https://www.youtube.com/embed/F88z4-s3FJE",
 			urls: [],
 			participation:
-				"Desarrollo del juego en Javascript con PhaserJS. Creación de concepto y diseño de niveles.",
+				"Game development in Javascript with PhaserJS. Concept creation, game design, and level design.",
 			about:
-				"El sitio de Sonrics alberga varios juegos con el tema de sus productos principales. Al convertirse Inspireka en una línea de varios dulces, surgió la necesidad de generar una nueva sección con su propio juego. El cliente deseaba que resaltáramos las cualidades de cada uno de los dulces, reforzando la idea de construcción y creación.\n La idea entonces se enfocó en utilizar cada dulce como un bloque de construcción con el cual Fink (la mascota de Inspireka), se abriera camino para atravesar los niveles.",
+				"Sonrics's site used to have a bunch of minigames showcasing their main products. When Inspireka became a full product line, a need arose to generate a new website section with its own minigame. Inspireka is a candy that promotes creativity and building (like legos), so in the game we presented all the different products and used them as building blocks on the game to help Fink (the product mascot) to advance through the levels",
 			technically:
-				"Utilicé el framework de PhaserJS y la herramienta de Tilemap para crear cada uno de los niveles, en base a un spritesheet.",
+				"I used PhaserJS framework and Tilemap tool to create each level, using a spritesheet.",
 			curious:
-				"La parte más difícil fue el diseño de los niveles. Es el primer juego de niveles tipo puzzle que realizo y tenía que hacerlos de forma que fueran posibles de resolver, pero no demasiado obvios.",
+				"The hardest part was designing the levels. It was the first game of this kind that I developed, and I needed to make it easy enough to get resolved, but not too easy so it was boring.",
 			list: [
-				{ icon: "smile-o", info: "Probé cada dulce de la línea de Inspireka" },
-				{ icon: "lightbulb-o", info: "Los niveles fueron diseñados con Tiled, es increíble" },
-				{ icon: "gamepad", info: "El modo de juego está basado en Mario VS DK" },
-				{ icon: "child", info: "Mis sobrinos amaron el juego" },
+				{ icon: "smile-o", info: "I tasted each one of the Inspireka candies" },
+				{ icon: "lightbulb-o", info: "Tiled is an excellent tool for level design" },
+				{ icon: "gamepad", info: "I got inspiration from Mario VS DK" },
+				{ icon: "child", info: "My nephews loved the game" },
 			],
 		},
 		{
 			id: 6,
 			stringID: "mustang50",
-			name: "Mustang 50 años",
+			name: "Mustang 50 years",
 			client: "Ford",
 			via: "Element",
-			type: "Aplicación web",
+			type: "Web microsite",
 			tech: "html5 + javascript + nodejs + twitter api",
 			year: "2014",
 			importance: 1,
@@ -98,16 +99,19 @@ export default {
 			video: "https://www.youtube.com/embed/nbuzxBZuElY",
 			urls: [],
 			participation:
-				"Desarrollo del backend en NodeJS / MongoDB y el frontend en HTML5 / CSS / JS.",
+				"NodeJS backend development with MongoDB, and frontend development HTML / CSS / JS",
 			about:
-				"En el aniversario de Mustang, hicieron un evento en Acapulco donde se proyectaba en pantallas gigantes este micrositio que mostraba en tiempo real todos los tweets con los términos relacionados con el evento. A su vez, el sitio estuvo vivo un tiempo más en línea, de esta forma podías buscar por username de Twitter en la base de datos.",
+				"During Mustang anniversary, the company hosted an event in Acapulco where they projected this microsite in giant screens, showing up real time tweets containing terms related to Mustang. The microsite was left alive for some months, so anyone could see the Mustang car created from tweets, and search for their own tweet",
 			technically:
-				"Se utilizó el Stream API de Twitter para guardar todos los tweets conforme el usuario los generaba. Posteriormente mediante Express y Socket.io se transmitía la información al frontend, reemplazando una foto de perfil aleatoria con la nueva.",
+				"I used the Twitter Stream API to store all relevant tweets as soon as they were generated. Later, through Express and Socket.io I sent the info to the frontend.",
 			curious:
-				"El desarrollo fue muy rápido porque teníamos poco tiempo. Todo el proyecto se completó en alrededor de 5 días.",
+				"The implementation had to be super fast because we had a very tight deadline. Everything was completed in ~5 days.",
 			list: [
-				{ icon: "photo", info: "Probamos con más de cinco fotos para elegir la mejor" },
-				{ icon: "github-alt", info: "El código para el foto mosaico está en mi Github" },
+				{ icon: "photo", info: "We tested five photos before picking one." },
+				{
+					icon: "smile-o",
+					info: "People in the event were excitedly looking for their tweets in the screens.",
+				},
 			],
 		},
 		{
@@ -116,7 +120,7 @@ export default {
 			name: "Minitoons",
 			client: "Metlife",
 			via: "Wunderman",
-			type: "Aplicación web",
+			type: "Web application",
 			tech: "html5 + javascript",
 			year: "2013",
 			importance: 1,
@@ -132,19 +136,24 @@ export default {
 			},
 			video: "https://www.youtube.com/embed/G4__MYjhEJo",
 			urls: [],
-			participation: "Desarrollo en PHP y Javascript de la interfaz (no el generador).",
+			participation:
+				"PHP backend development and HTML/CSS/JS for frontend (not including generator).",
 			about:
-				"Pretendíamos desarrollar una app para generar avatares al estilo de Peanuts. Esto con el objetivo de utilizarlas como foto de perfil y/o de portada, pudiendo escoger todos los aspectos incluyendo ropa, fondos, color de piel, cabello y rasgos faciales.",
+				"We developed a web app to create Peanuts styled avatars, so that they could be used as profile and cover pics. The user could pick every small aspect, including eyes, clothes, noses, skin color, etc.",
 			technically:
-				"Esta app está pensada para tres idiomas: inglés, español y portugués. Se cargaron los textos dinámicamente mediante PHP, junto con MySQL. El proceso de generar el avatar fue manejado con canvas y Javascript, con la ayuda de jQuery. Hice una pequeña interfaz de backoffice con un listado del registro de usuarios y sus avatares.",
+				"This app was developed in three languages (English, Spanish, and Portuguese). Texts were dynamically created through PHP and MySQL. The avatar generation process was done through canvas and JS, with jQuery. I made a small admin with a list of users and their avatars.",
 			curious:
-				"El desarrollo se complicó muchísimo porque el cliente requirió soporte para IE8. Hubo que hacer un fallback en AS3 para compensar la falta de canvas en este browser, pero dadas las limitaciones para cierta longitud en base64, hubo que invertirle mucho más tiempo del esperado.",
+				"The implementation became increasingly complicated as the client required IE8 support. I had to do a fallback version in Flash (AS3) to compensate the lack of canvas on this browser, but due to limitations on length (as I was using base64), I had to invest a lot more time than originally expected.",
 			list: [
 				{
 					icon: "internet-explorer",
-					info: "Para hacerlo compatible con IE8, se hizo un fallback en AS3",
+					info: "To add IE8 compatible, I had to do a fallback version with Flash.",
 				},
-				{ icon: "smile-o", info: "Fue increíble trabajar con los personajes de Peanuts" },
+				{ icon: "smile-o", info: "I love Snoopy, so this was a very fun experience." },
+				{
+					icon: "lock",
+					info: "Peanuts is very strict with how the characters / illustrations are handled.",
+				},
 			],
 		},
 		{
@@ -171,16 +180,16 @@ export default {
 			video: "https://www.youtube.com/embed/Q3SmLlu4qTg",
 			urls: [],
 			participation:
-				"Propuesta del concepto de juego, desarrollo del juego en Javascript con PhaserJS, maquetado y programación del sitio a nivel frontend.",
+				"Concept proposal, game design, game development in JS, UI implementation of the website",
 			about:
-				"Speed Stick pretendía desarrollar un juego para atraer usuarios jóvenes para familiarizarse con la marca. Como es usual, querían que funcionara en la mayor cantidad de plataformas posibles y de una forma que no se le complicara al usuario. Propusimos un juego en HTML5 tipo runner que encajaba muy bien con la campaña general de la marca en el momento. El juego no tiene fin, de modo que cada usuario avanza hasta donde su habilidad le permite, la velocidad y la cantidad de enemigos que aparecen aumenta progresivamente, mientras que todos los elementos (items, huecos en el escenario, enemigos) se generan de modo aleatorio, lo que convierte al juego en un reto de habilidad con un toque de suerte.",
+				"Speed Stick wanted a game to attract young people to the brand. As usual, they wanted it to work on all (or most) devices in a really easy way. We proposed a runner in HTML that was a great fit with the overall marketing campaign. The game has no ending, so each player can get as far as their skill allows it. Speed and enemies get progressively harder, and the stage, items, and powerups were generated randomly, so the game was a mix of skill and luck.",
 			technically:
-				"Utilicé el framework de PhaserJS. Optimicé el juego para su uso en móviles y tabletas, de modo que corre bien en una gran cantidad de dispositivos, aunque obviamente, en algunos con poca capacidad puede no tener un rendimiento óptimo.",
+				"I used PhaserJS, and optimized it to be used in mobile devices and tablets. It was tested in several of them and the performace was pretty good.",
 			curious:
-				"El juego inicialmente estaba pensado para funcionar solamente en México, pero tuvo tanto éxito que se extendió a toda Latinoamérica con diferentes premios dependiendo del país. Conseguimos más de 40,000 usuarios recurrentes.",
+				"The game originally was only meant to be used in Mexico, but it was so successful that it was released in all Latin America with different prizes depending on the country. We got more than 40K returning players.",
 			list: [
-				{ icon: "thumbs-o-down", info: "Atrapamos a muchos usuarios intentando hacer trampa" },
-				{ icon: "television", info: "El juego fue anunciado por televisión nacional" },
+				{ icon: "thumbs-o-down", info: "We caught a lot of users trying to cheat" },
+				{ icon: "television", info: "The game was advertised on a national TV ad" },
 			],
 		},
 		{
@@ -189,7 +198,7 @@ export default {
 			name: "Sonrics",
 			client: "Sonrics",
 			via: "Element",
-			type: "Sitio web",
+			type: "Website",
 			tech: "html5 + css + js",
 			year: "2012",
 			importance: 1,
@@ -199,20 +208,23 @@ export default {
 			},
 			video: "https://www.youtube.com/embed/YKi-4Tg6OPE",
 			urls: [],
-			participation: "Maquetado en HTML5 y CSS con efectos en Javascript.",
+			participation: "Markup in HTML and CSS with JS visual effects",
 			about:
-				"El sitio de Sonrics estaba enfocado en mostrar todos sus productos, de una manera atractiva para los niños. Se hicieron una serie de ilustraciones, que representaban mundos donde vivían ciertas líneas de productos, en los que podías ver toda la información de cada uno de ellos. Hice una navegación horizontal con un efecto de planos para darle profundidad y mayor impacto visual.",
+				"The Sonrics website had the goal of showcasing all of their product lines, in an attractive way for children. We made a series of illustrations representing imaginary worlds where the products 'lived', where you could see all the information of each one of them. I made a horizontal navigation with a parallax effect to give it depth and more visual impact.",
 			technically:
-				"Está desarrollado con Javascript y jQuery, programando todos los efectos manualmente (sin plugins), lo que dio mucha libertad para lograr el efecto visual exacto que se pretendía lograr.",
+				"I used jQuery, coding all the effect formulas manually in JS (no plugins). This gave me a lot of freedom to get the exact visual effect that I wanted.",
 			curious:
-				"El sitio tenía varios juegos en HTML5, pero esos los desarrollaron de manera externa. Posteriormente se agregó un mundo más, el mundo de Inspireka, donde sí hicimos nosotros el juego.",
+				"The website had a bunch of HTML games embedded, but most of them were developed externally. As we did a great job with the website, later on they asked us to develop the game of their latest product Inspireka.",
 			list: [
-				{ icon: "paint-brush", info: "Las ilustraciones son por parte del talentoso @Rafahu" },
-				{ icon: "smile-o", info: "Nos regalaron un ejemplar de cada dulce y probé casi todos" },
-				{ icon: "code", info: "Libre de plugins" },
+				{ icon: "paint-brush", info: "Illustrations were made by the talented @Rafahu" },
+				{
+					icon: "smile-o",
+					info: "They gave us a sample of each product and of course I ate them all",
+				},
+				{ icon: "code", info: "No plugins!" },
 				{
 					icon: "lightbulb-o",
-					info: "Junto con el director de arte ideamos los conceptos de cada mundo",
+					info: "Me and the art director together came up with each world's concept",
 				},
 			],
 		},
@@ -222,7 +234,7 @@ export default {
 			name: "Piojo Escúchanos",
 			client: "Telcel",
 			via: "Element",
-			type: "Aplicación web",
+			type: "Web application",
 			tech: "nodejs + mongodb + html5 + javascript",
 			year: "2014",
 			importance: 2,
@@ -240,20 +252,20 @@ export default {
 			video: "",
 			urls: [],
 			participation:
-				"Desarrollo de backend con NodeJS y MongoDB, desarrollo frontend incluyendo maquetado y animaciones.",
+				"Backend with NodeJS and MongoDB, frontend including animations with HTML/CSS/JS",
 			about:
-				"Para el mundial 2014, hicimos este proyecto totalmente enfocado en Twitter y en brindar al usuario datos relevantes en tiempo real que enriquecieran la experiencia de vivir el torneo. Mediante el API de Twitter, el sistema evaluaba en tiempo real las palabras utilizadas para medir el humor de la afición, así como la cantidad de personas celebrando cada gol, los jugadores más mencionados, las reacciones más comunes, etc. A su vez, un especialista narraba el partido a través de la app, mostrando los puntos sobresalientes mientras el partido transcurría.",
+				"We released this project for the 2014 World Cup, totally based on Twitter and bringing relevant real time data to the user to enrich the matches experience. Through the Twitter API, the system evaluated the words in real time to measure the communitie's mood, the amount of fans celebrating each goal, the most mentioned players, most common reactions, etc. We also had a specialist narrating the games and mentioning important highlights through each match.",
 			technically:
-				"El proyecto estuvo vivo mientras México se mantenía en el torneo. Se generaron módulos nuevos y funcionalidades conforme avanzaban los partidos, para darle a la afición cada vez más contenidos y análisis. Todo en la app estaba disponible para redes sociales individualmente, para que los usuarios pudieran compartir cada dato por separado.",
+				"The project lived while Mexico stayed in the World Cup. We generated new modules and features as the matches went by, to keep the site fresh and give the fans more content and analysis. Everything was shareable, so users could share each piece of data individually.",
 			curious:
-				"La interfaz era diferente en los partidos que el resto del tiempo. En los partidos mostraba datos del juego, mientras que el resto del tiempo mostraba predicciones de los usuarios, memes y menciones.",
+				"The UI was different while the matches were ongoing. It showed matches real time data, while the rest of the time it showed general statistics, users predictions, and memes.",
 			list: [
 				{
 					icon: "television",
-					info: "Cada partido nos reunimos en la sala de juntas para monitorear la transmisión.",
+					info: "The whole team met during the matches to monitor transimission.",
 				},
-				{ icon: "soccer-ball-o", info: "Miles de usuarios vitoreaban cada gol." },
-				{ icon: "users", info: "Me aprendí los nombres de todos los jugadores de la selección." },
+				{ icon: "soccer-ball-o", info: "Thousands of users celebrated every goal in Twitter." },
+				{ icon: "users", info: "I learned the names of all the players in the Mexican team." },
 			],
 		},
 		{
@@ -262,7 +274,7 @@ export default {
 			name: "Urban Fonts",
 			client: "Nike",
 			via: "JWT",
-			type: "Aplicación web",
+			type: "Web application",
 			tech: "html5 + javascript + google maps",
 			year: "2012",
 			importance: 1,
@@ -277,14 +289,13 @@ export default {
 			},
 			video: "https://www.youtube.com/embed/fY5aRCo7P1A",
 			urls: [],
-			participation:
-				"Desarrollo en HTML5 y Javascript del micrositio excluyendo funcionalidad de póster.",
+			participation: "Frontend implementation for the microsite excluding the poster generation.",
 			about:
-				"Nike, en su objetivo de hacer una cultura de corredores urbanos, lanzó este sitio que de acuerdo con tu ubicación, le asignaba una tipografía al usuario. A través de un mensaje escrito por él, podía generar un póster mediante canvas y posteriormente descargarlo, junto con la tipografía, además de dejarlo en un pin en el mapa para que otros usuarios se inspiraran.",
+				"Nike was trying to create a community of urban runners, and launched this website that assigned each user to an urban tribe. Each tribe had its own custom designed typography, and could create a message that turned into a nice downloadable poster. The poster was saved in the map, so other runners could be inspired by their tribes' messages.",
 			technically:
-				"Este proyecto lo trabajé en conjunto con un buen amigo, que se encargó del módulo del póster en canvas. Por mi parte, hice el maquetado, el desarrollo de la interfaz con el mapa, la carga de markers y las animaciones.",
+				"I worked on this project with a good friend, who made the poster module in canvas. I made the rest of the UI, the Google Maps implementation, markers, and animations.",
 			curious:
-				"Trabajé con gente muy talentosa en la elaboración de este sitio, fue una gran experiencia que me permitió crecer y aprender mucho en su momento.",
+				"I worked with very talented people while creating this website, it was a great experience that taught me a lot.",
 			list: [],
 		},
 		{
@@ -293,7 +304,7 @@ export default {
 			name: "Inferno",
 			client: "Doritos",
 			via: "Element",
-			type: "Sitio web",
+			type: "Web application",
 			tech: "flash + as3",
 			year: "2012",
 			importance: 1,
@@ -310,15 +321,15 @@ export default {
 			},
 			video: "https://www.youtube.com/embed/ldho-VJ5QFY",
 			urls: [],
-			participation: "Propuesta de funcionalidades, desarrollo en AS3 y Flash.",
+			participation: "Feature proposals, Flash/AS3 implementation",
 			about:
-				"El concepto de Doritos Inferno y el elevador era parte de la campaña que se planteó para el nuevo sabor de Doritos. La esencia del sitio era un infierno sexy, con chicas seductoras y un viaje hacia el inframundo. Se hicieron tres niveles antes de llegar a él: en el primero, se analizaba la cuenta de Facebook del usuario y se evaluaba para darle como resultado uno de los pecados capitales; en el segundo una chica stalker mostraba cómo tenía ubicados todos los movimientos del usuario en un mapa y llena de alfileres la foto de su pareja; por último el tercero permitía descargar material gráfico mediante una experiencia voyeurista. Al final, al llegar al infierno, la única forma de salvarse era vendiendo el alma de tres de tus amigos (compartiendo la experiencia).",
+				"The whole Doritos Inferno concept and the elevator was part of the marketing campaign proposed for the new Doritos flavor. The essence of the website was a sexy hell, with seductive women and a trip down to hell. The user had to cross three levels to reach it: the first analyzed their Facebook account and evaluated it to come up with the most prevalent sin of the user. The second featured a stalker woman that showed how she had located every place the user had been, and had stabbed their partner's photo. The third one allowed to download graphic material through a voyeurist experience. In the end, the user arrived to hell, and to save themself they had to sell the soul of three friends by sharing their Facebook profiles.",
 			technically:
-				"Se utilizaron videos cargados mediante AS3 y el API de Facebook. El análisis inicial de la cuenta fue elaborado, ya que tomaba en cuenta gustos, actividad, pareja, cantidad de amigos, palabras utilizadas en los posteos, etc. para decidir un pecado que quedara de acuerdo con el usuario.",
-			curious: "Este sitio ganó plata en los premios IAB como Mejor Sitio Web.",
+				"We used videos loaded through AS3 and the Facebook API. The initial account analysis took into account general page likes, activities, relationship status, amount of friends, most used words in posts, etc.",
+			curious: "We won silver IAB for best Website.",
 			list: [
-				{ icon: "lock", info: "No diré el pecado que me diagnosticó el sistema" },
-				{ icon: "smile-o", info: "Hicimos una versión de broma especial para el FBID de mi jefe" },
+				{ icon: "lock", info: "I won't say what sin I got in the first floor" },
+				{ icon: "smile-o", info: "We made a special buggy version as a prank for my boss" },
 			],
 		},
 		{
@@ -327,7 +338,7 @@ export default {
 			name: "Sitio Element",
 			client: "Element",
 			via: "Element",
-			type: "Sitio web",
+			type: "Website",
 			tech: "html5 + css + js",
 			year: "2015",
 			importance: 1,
@@ -343,18 +354,17 @@ export default {
 			},
 			video: "https://www.youtube.com/embed/Dkiya_FJ5Js",
 			urls: [],
-			participation: "Desarrollo frontend.",
+			participation: "Frontend implementation with HTML/CSS/JS.",
 			about:
-				"Element quería rediseñar su sitio para mostrar una imagen actual, tecnológica y resaltar los proyectos y logros recientes.",
+				"Element meant to redesign their website to show a fresher image and highlight its recent projects and achievements.",
 			technically:
-				"Lo hice todo a mano, con Browserify, SASS y jQuery. Los proyectos se obtienen mediante un JSON externo, para hacer más fácil la administración. Posteriormente se implementó el sitio en inglés, lo cual se resolvió a nivel de frontend. Programé un plugin de jQuery para l18n que carga los contenidos de JSON externos que contienen los textos.",
-			curious:
-				"El sitio tiene un easter egg en la consola, que utilizamos para las entrevistas de los programadores aspirantes a trabajar en Element.",
+				"I made it everything from scratch, with Browersify, SASS, and jQuery. The projects were read through an external JSON file, to make it easier to update. The site later integrated an English version, solved in the frontend. I created a jQuery plugin for l18n that loaded the JSON contents on the texts.",
+			curious: "The site has an easter egg in the JS console, used for developers interviews.",
 			list: [
-				{ icon: "code", info: "Libre de plugins" },
+				{ icon: "code", info: "Plugin free" },
 				{
 					icon: "smile-o",
-					info: "Siempre es bonito desarrollar el sitio de la empresa en que trabajas :)",
+					info: "It's always nice to be the one doing the website of your company :)",
 				},
 			],
 		},
@@ -364,7 +374,7 @@ export default {
 			name: "Gracias 2014",
 			client: "Televisa",
 			via: "Element",
-			type: "Aplicación web",
+			type: "Web application",
 			tech: "html5 + css + js + backbone",
 			year: "2014",
 			importance: 1,
@@ -379,17 +389,17 @@ export default {
 			},
 			video: "https://www.youtube.com/embed/ipt_Lv3KuYw",
 			urls: [],
-			participation: "Desarrollo frontend.",
+			participation: "Frontend development with HTML/CSS/JS.",
 			about:
-				"Televisa quería generar una experiencia interactiva que integrara a sus estrellas con los usuarios. Se hizo un video donde se integraron los mejores momentos del año del usuario, intercalados con escenas de diversos programas de televisión.",
+				"Televisa wanted an interactive experience that brought their stars (celebrities) closer to the users. We made a video where we integrated the best moments of the user's year, integrated with famous TV show scenes.",
 			technically:
-				"Las fotos se escogían mediante Facebook y se asignaban a celebraciones específicas:  los viajes (se escogía la foto más reciente del usuario donde estuviera fuera de su ciudad de origen), los amigos (se escogía la foto con más tags), los cambios (se mostraban las fotos de perfil que el usuario tuvo en el año) y las celebraciones (se mostraban las fotos tomadas en fechas célebres como primero de enero, cumpleaños del usuario, etc).",
+				"The photos were picked through Facebook and assigned to specific celebrations: trips (most recent user photo outside of their origin city), friends (largest number of tags in a photo), changes(different profile pics through the year), and holidays (photos during Christmas, birthday, and New Year).",
 			curious:
-				"Dado que en móvil no puede integrarse vídeo inline, se hizo una recopilación de fotos del video que se animaban para dar paso a las fotos del usuario.",
+				"Since we couldn't use inline video on mobile, we made an animated slideshow, and allowed the user to download the full version.",
 			list: [
 				{
 					icon: "facebook",
-					info: "Facebook nos rechazó los permisos que requeríamos un par de veces, hasta que los convencimos.",
+					info: "Facebook rejected the permissions we requested a couple of times, but eventually they approved it.",
 				},
 			],
 		},
@@ -399,7 +409,7 @@ export default {
 			name: "Sitio Snob",
 			client: "Snob",
 			via: "Play Interactive",
-			type: "Sitio Wordpress",
+			type: "Wordpress website",
 			tech: "html + css + wordpress",
 			year: "2013",
 			importance: 1,
@@ -413,12 +423,13 @@ export default {
 			},
 			video: "https://www.youtube.com/embed/sIzZN-oqDXs",
 			urls: [],
-			participation: "Desarrollo frontend + integración Wordpress.",
+			participation:
+				"Frontend development of the template in HTML/CSS/JS and Wordpress integration.",
 			about:
-				"Snob quería un sitio sencillo, con un administrador en Wordpress que fuera sencillo de utilizar. Se implementaron varias animaciones que resaltaban la elegancia y modernidad del restaruante.",
+				"Snob wanted a simple website with a Wordpress admin to be able to update frequently. I made several animations that highlighted the elegance and fancy spirit of the restaurant.",
 			technically:
-				"Se maquetó con LESS, Bootstrap y las animaciones y efectos se programaron en Javascript.",
-			curious: "No he podido probar un pastel de Snob todavía :(",
+				"I made it with LESS, and Bootstrap. The animations and effects were made with Javascript.",
+			curious: "I still haven't been able to taste one of their famous cakes :(",
 			list: [],
 		},
 		{
@@ -443,19 +454,19 @@ export default {
 			},
 			video: "https://www.youtube.com/embed/GktXS4Aff-Y",
 			urls: [],
-			participation: "Desarrollo AS3.",
+			participation: "Game proposal, game design, level design, game development in AS3.",
 			about:
-				"Para el lanzamiento de la paleta Pelapop, hicimos un sitio que consistía en un juego y un intro interactivo que ilustraba cómo se debía comer el producto: 'Muerde, pela y disfruta'. Hicimos también un nivel bonus de minijuego, tipo memoria o Fabuloso Fred, con pequeños clips de video.",
+				"Nestle released a new popsicle called Pelapop, and we made a website consisting in a game and an interactive intro that showcased how it was meant to be eaten. We also made a bonus minigame, Fabulous Fred style.",
 			technically:
-				"Utilicé el framework de Box2D para la física, haciendo una dinámica similar a la de Angry Birds donde mediante el salto del chimpancé y el ángulo de la tabla se generaba una trayectoria para la paleta que tenía que caer en manos de otro chimpancé.",
+				"I used Box2D framework for physics handling, creating a similar gameplay to Angry Birds.",
 			curious:
-				"El juego tuvo tanto éxito, que nos contactaron de Nestlé España para pedirnos los archivos originales para poder utilizarlo (allá la paleta tiene otro nombre). Además de incluirlo en su sitio, lo compilaron como app de iOS y lo subieron a la iTunes Store.",
+				"The game was so successful, that Nestle Spain contacted us to ask for the files to change it (the popsicle has a different name there) and release it on Spain. They also compiled it as an iOS app, and released in the iTunes Store.",
 			list: [
 				{
 					icon: "map-marker",
-					info: "Los productos españoles están bajo el nombre 'Pirulo Jungly'",
+					info: "The Spanish name of the popsicle is 'Pirulo Jungly'",
 				},
-				{ icon: "smile-o", info: "Comimos muchas paletas en el proceso" },
+				{ icon: "smile-o", info: "We ate A LOT of popsicles while working on this" },
 			],
 		},
 	],

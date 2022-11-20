@@ -12,10 +12,11 @@ NOTES as of 19/11
 
 - Fixed bugs from bugbash
 - Added language buttons to menu
+- Made language buttons work
+- Duplicate html to generate english ones
   Next:
-  - Make language buttons work
-  - Duplicate html to generate english ones
   - Translate
+  - Menu and footer should change languages too
 
 NOTES as of 18/11
 

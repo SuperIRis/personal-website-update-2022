@@ -1,13 +1,12 @@
 <!doctype html>
 <!--[if lte IE 9 ]> <html lang="es-LA" class="lteie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--><html lang="es-LA"><!--<![endif]-->
-
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <title>SuperIRis :: Projects</title>
+    <title>SuperIRis :: Contact</title>
 
     <!-- OG tags -->
     <meta property="og:image" content="http://superiris.com/images/share.jpg"/>
@@ -38,44 +37,61 @@
     <!--[if lte IE 9]>
             <p class="browsehappy"></p>
     <![endif]-->
-   <div id="main-wrapper" class="wrapper">
-    <header class="main-header">
-      <nav id="main-menu" class="main-menu">
-        <a class="main-logo" href="/"><img src="images/logo-iris.svg" alt="SuperIRis" /></a>
-        <button id="mobile-menu" class="hamburger-btn "><span>Menu</span></button>
-        <div class="menu-options">
-          <ul class="sections">
+    <div id="main-wrapper" class="wrapper">
+      <header class="main-header">
+        <nav id="main-menu" class="main-menu">
+          <a class="main-logo" href="/"><img src="images/logo-iris.svg" alt="SuperIRis" /></a>
+          <button id="mobile-menu" class="hamburger-btn "><span>Menu</span></button>
+          <div class="menu-options">
+            <ul class="sections">
               <li><a href="aboutme.html">About me</a></li>
               <li><a href="projects.html">Projects</a></li>
               <li><a href="contact.html">Contact</a></li>
-          </ul>
-          <ul class="languages">
-            <li><a data-url-lang="es" href="index-es.html">🇲🇽 <span class="countrycode">ES</span><span
-                  class="fullname">Español</span></a></li>
-            <li><a data-url-lang="en" class="selected" href="index.html">🇺🇸 <span class="countrycode">EN</span><span
-                  class="fullname">English</span></a></li>
-          </ul>
-        </div>
-      </nav>
-    </header>
+            </ul>
+            <ul class="languages">
+              <li><a data-url-lang="es" href="index-es.html">🇲🇽 <span class="countrycode">ES</span><span
+                    class="fullname">Español</span></a></li>
+              <li><a data-url-lang="en" class="selected" href="index.html">🇺🇸 <span class="countrycode">EN</span><span
+                    class="fullname">English</span></a></li>
+            </ul>
+          </div>
+        </nav>
+      </header>
 
-    <main id="main-container" class="main-container">
-      <div class="container projects-container">
-        <ul id="projects-list" class="projects-list">
-          <li class="project">
-            <a href="#">
-              <article class="project-info">
-                <h1>Warner</h1>
-                <h2>Batalla 300</h2>
-                <h3>nodejs + twitter api</h3>
-                <p class="extra-info">Lo que yo hice: Desarrollo en NodeJS para backend e implementación Javascript del sitio.</p>
-              </article>
-            </a>
-          </li>
-        </ul>
-      </div>
-    </main>
-      </div>
+      <main id="main-container" class="main-container">
+        <div class="container contact-container">
+
+          <aside id="map" class="map"></aside>
+          <article class="freelance-status">
+            <figure class="me-working">
+              <!--<figcaption>
+                <p>Disponibilidad:</p>
+                <meter class="availability-percentage" id="availability-percentage" min="0" max="100" value="20">
+                  <div class="meter-gauge">
+                    <span style="width:20%"></span>
+                  </div>
+                </meter>
+                <p class="label-percent">20%</p>
+              </figcaption>-->
+              <div class="me-working-status" id="me-working-status"></div>
+              <figcaption>Currently working on Meta, at Silicon Valley.</figcaption>
+            </figure>
+          </article><div class="contact-methods">
+            <p>Anything on your mind? Reach out through:</p>
+            <ul class="contact-addresses">
+              <li><a id="contact-twitter" href="http://twitter.com/superiris" target="_blank"><i class="fa fa-twitter"></i>
+                  @superiris</a></li>
+              <li><a id="contact-github" href="http://github.com/superiris" target="_blank"><i class="fa fa-github"></i>
+                  superiris</a></li>
+              <li><a id="contact-linkedin" href="https://linkedin.com/in/superiris" target="_blank"><i
+                    class="fa fa-linkedin"></i> Iris Vergara</a></li>
+            </ul>
+          </div>
+          </div>
+        </div>
+      </main>
+      
+    </div>
     <footer id="main-footer" class="main-footer">
       <nav class="footer-menu">
         <ul>
@@ -87,11 +103,12 @@
         </ul>
       </nav>
     </footer>
-    
     <div id="loader" class="full-loader preload">
       <div class="loader-back preload"></div>
       <div id="loader-me" class="loader-me"></div>
     </div>
+    <script src="//maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&key=AIzaSyBNAwmEPIfIlqyIh-2_7e9S2AfeXPnaYy4"></script>
+    <script src="js/vendor/snap.svg-min.js"></script>
     <script type="module" src="js/bundle2.js"></script>
 
     <!-- Google tag (gtag.js) -->

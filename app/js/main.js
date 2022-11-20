@@ -40,7 +40,7 @@ initPage(window.location.href);
 window.addEventListener("load", setLoads);
 window.addEventListener("popstate", handleBrowserNav);
 setNavigation();
-setTracking();
+//setTracking();
 
 function initPage(url) {
 	const path = url.substring(0, url.indexOf(".html")).substring(url.lastIndexOf("/") + 1);
@@ -60,7 +60,7 @@ function initPage(url) {
 		return !!language;
 	});
 	selectCurrentLanguageMenuItem(language);
-	section.classObject.init();
+	section.classObject.init(language);
 	currentSection = section.classObject;
 }
 
@@ -107,16 +107,19 @@ function getCurrentURLByLanguage(language) {
 	return `${window.location.origin}/${newPath}.html`;
 }
 
+/*
+GA4 already does external link tracking by default
 function setTracking() {
 	document.querySelector("body").addEventListener("click", track);
 }
+
 
 function track(e) {
 	const trackingElement = e.target.getAttribute("data-track") || e.target.closest("[data-track]");
 	if (trackingElement) {
 		trackEvent("external-link", "click", trackingElement.getAttribute("data-track"));
 	}
-}
+}*/
 
 function resetTracking() {
 	document.querySelector("body").removeEventListener("click", track);
