@@ -1,16 +1,20 @@
 "use strict";
 
-import PROJECTS from "../../data/projects.js";
-import { preloadImage } from "../lib/Utils.js";
+//import PROJECTS from "../../data/projects.js";
+import { getProjects, preloadImage } from "../lib/Utils.js";
 import ScrollMonitor from "../vendor/scrollMonitor.js";
 import AnimatedJsonSprite from "../lib/AnimatedJsonSprite.js";
 import EventfulClass from "../lib/EventfulClass.js";
 import { trackEvent } from "../lib/Utils.js";
+
+const PROJECTS = [];
 class Home extends EventfulClass {
-	init() {
+	init(language) {
 		this.setHomeAnimation();
-		this.getProjectData();
-		this.setProjects();
+		getProjects(language).then((projects) => {
+			this.projects = projects.filter((project) => project.images && project.images.home);
+			this.setProjects();
+		});
 		document.getElementById("home-down-btn").addEventListener("click", this.onScrollToProjects);
 	}
 
@@ -30,12 +34,6 @@ class Home extends EventfulClass {
 		this.homeMe.start();
 	}
 
-	getProjectData() {
-		//find home projects
-		const projects = PROJECTS.projects;
-		this.projects = projects.filter((project) => project.images && project.images.home);
-	}
-
 	setProjects() {
 		const allProjectNodes = document.querySelectorAll("#projects-preview-list li");
 		this.loadedProjects = 0;
@@ -43,11 +41,11 @@ class Home extends EventfulClass {
 	}
 
 	populateProjectData(projectNode, projectIndex) {
-		const projectURL = "proyecto.html#" + this.projects[projectIndex].stringID;
 		projectNode.querySelector(".project-title").innerHTML = this.projects[projectIndex].name;
 		projectNode.querySelector(".project-tech").innerHTML = this.projects[projectIndex].tech;
-		projectNode.querySelector("a").setAttribute("href", projectURL);
-
+		projectNode
+			.querySelector("a")
+			.setAttribute("data-project", this.projects[projectIndex].stringID);
 		projectNode.querySelector("a").addEventListener("click", this.onProjectClick.bind(this));
 
 		preloadImage("images/projects/" + this.projects[projectIndex].images.home).then(() => {
@@ -83,8 +81,8 @@ class Home extends EventfulClass {
 	onProjectClick(e) {
 		e.preventDefault();
 		this.homeMe.stop();
-		this.trigger("openSection", e.currentTarget.getAttribute("href"));
-		trackEvent("home-project", "click", e.currentTarget.querySelector(".project-title").innerHTML);
+		this.trigger("openProject", e.currentTarget.getAttribute("data-project"));
+		//trackEvent("home-project", "click", e.currentTarget.querySelector(".project-title").innerHTML);
 	}
 
 	destroy() {

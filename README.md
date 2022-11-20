@@ -8,6 +8,11 @@ Updated from 2015 portfolio.
 Run the site in dev mode with gulp serve (live reload, JS and SASS transpiling)
 Build the site for prod with gulp build (copy static files to dist / babelify, concat, and uglify JS / transpile, concat, and minify CSS)
 
+NOTES as of 20/11
+
+- Translated all content
+-
+
 NOTES as of 19/11
 
 - Fixed bugs from bugbash

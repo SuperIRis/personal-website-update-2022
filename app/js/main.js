@@ -21,6 +21,7 @@ const scriptLibraries = [
 	{ script: "circles.min.js", globalName: "Circles" },
 	{ script: "js?v=3.exp&signed_in=true", globalName: "google" },
 ];
+
 const loaderAnimation = new AnimatedJsonSprite(
 	"spritesheets/loader.png",
 	document.getElementById("loader-me"),
@@ -33,6 +34,7 @@ const loaderAnimation = new AnimatedJsonSprite(
 );
 
 let currentSection;
+let currentLanguage;
 
 AnimatedLoader.init(loaderAnimation, scriptLibraries);
 AnimatedLoader.addEventListener("done", initPage);
@@ -47,7 +49,7 @@ function initPage(url) {
 	let ajaxLoaded = false;
 	if (currentSection) {
 		currentSection.destroy();
-		resetTracking();
+		//resetTracking();
 		ajaxLoaded = true;
 	}
 	let language;
@@ -59,8 +61,9 @@ function initPage(url) {
 		}
 		return !!language;
 	});
-	selectCurrentLanguageMenuItem(language);
-	section.classObject.init(language);
+	currentLanguage = language;
+	selectCurrentLanguageMenuItem(currentLanguage);
+	section.classObject.init(currentLanguage);
 	currentSection = section.classObject;
 }
 
@@ -90,10 +93,21 @@ function setNavigation() {
 			AnimatedLoader.loadSection(url);
 		}
 	});
-	Projects.addEventListener("openProject", (url) => AnimatedLoader.loadSection(url));
-	Project.addEventListener("openProject", (url) => AnimatedLoader.loadSection(url));
-	Project.addEventListener("openSection", (url) => AnimatedLoader.loadSection(url));
-	Home.addEventListener("openSection", (url) => AnimatedLoader.loadSection(url));
+	Projects.addEventListener("openProject", onOpenProject);
+	Project.addEventListener("openProject", onOpenProject);
+	Project.addEventListener("openProjects", onOpenProjects);
+	Home.addEventListener("openProject", onOpenProject);
+}
+
+function onOpenProject(project) {
+	const section = sections.find((section) => section.classObject === Project);
+	const url = `${section[`${currentLanguage}Path`]}.html#${project}`;
+	AnimatedLoader.loadSection(url);
+}
+function onOpenProjects() {
+	const section = sections.find((section) => section.classObject === Projects);
+	const url = `${section[`${currentLanguage}Path`]}.html`;
+	AnimatedLoader.loadSection(url);
 }
 
 function getCurrentURLByLanguage(language) {
@@ -119,13 +133,13 @@ function track(e) {
 	if (trackingElement) {
 		trackEvent("external-link", "click", trackingElement.getAttribute("data-track"));
 	}
-}*/
+}
 
 function resetTracking() {
 	document.querySelector("body").removeEventListener("click", track);
 	setTracking();
 }
-
+*/
 function onToggleMobileMenu(e) {
 	toggleClass(e.currentTarget, "active");
 	toggleClass(document.getElementById("main-container"), "mobile-menu-on");

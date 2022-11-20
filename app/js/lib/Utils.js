@@ -134,3 +134,13 @@ export function appearOutphased(elements, delay, intervalTime = 1000) {
 		}
 	}, delay);
 }
+
+export function getProjects(language) {
+	const projectsUrl =
+		language === "es" ? "../../data/projects-es.json" : "../../data/projects.json";
+	return fetch(projectsUrl)
+		.then((res) => res.json())
+		.then((res) => {
+			return res.projects;
+		});
+}

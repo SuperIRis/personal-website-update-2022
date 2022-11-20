@@ -1,473 +1,473 @@
-export default {
-	projects: [
+{
+	"projects": [
 		{
-			id: 1,
-			stringID: "batalla300",
-			name: "Batalla 300",
-			client: "Warner",
-			via: "Element",
-			type: "Advergaming",
-			tech: "nodejs + twitter api",
-			year: "2014",
-			importance: 2,
-			images: {
-				home: "home-warner-batalla300.jpg",
-				thumb: "projects-warner-batalla300.jpg",
-				detail: [
+			"id": 1,
+			"stringID": "batalla300",
+			"name": "Batalla 300",
+			"client": "Warner",
+			"via": "Element",
+			"type": "Advergaming",
+			"tech": "nodejs + twitter api",
+			"year": "2014",
+			"importance": 2,
+			"images": {
+				"home": "home-warner-batalla300.jpg",
+				"thumb": "projects-warner-batalla300.jpg",
+				"detail": [
 					"projects-warner-batalla300-1.jpg",
 					"projects-warner-batalla300-2.jpg",
-					"projects-warner-batalla300-3.jpg",
-				],
+					"projects-warner-batalla300-3.jpg"
+				]
 			},
-			video: "",
-			urls: [],
-			participation:
+			"video": "",
+			"urls": [],
+			"participation":
 				"Architecture, system design, backend in NodeJS, Javascript frontend and styling.",
-			about:
+			"about":
 				"The sequel to 300 was close to be released in Mexico, and WB wanted to create awareness and community engagement. As the movie argument evolved in naval battles of greeks vs persians, we proposed a battleship game through Twitter, where the user became a greek soldier and mentioned one of our persian accounts to attack.",
-			technically:
+			"technically":
 				"The projects was developed in Javascript, MySQL, and used the Twitter API. Through it I created a stream that monitored all tweets with the #Batalla300 hashtag and stored it in MySQL. A daemon downloaded all new tweets, created a game board for each, and responded if the user had successfully hit a ship. We had a full army of Twitter accounts of various levels, so when the user won a match they automatically moved up to the next level until they reached the final boss (Artemisa)",
-			curious:
+			"curious":
 				"Originally we were not completely sure that the idea was feasible, as it was in theory but it had certain risk as it fully depended on a third party. We had to make several adjustments to avoid violating Twitter's policies, in a very tight schedule and with very little room to test. The game was quite successful, generating tens of thousands of tweets in a very short time. It was super fun, and we won an IAB bronze award for best Advergaming",
-			list: [
-				{ icon: "trophy", info: "IAB Bronze Advergaming" },
+			"list": [
+				{ "icon": "trophy", "info": "IAB Bronze Advergaming" },
 				{
-					icon: "twitter",
-					info: "Many soldiers were cancelled. We had to create accounts on the run to compensate them.",
+					"icon": "twitter",
+					"info": "Many soldiers were cancelled. We had to create accounts on the run to compensate them."
 				},
 				{
-					icon: "smile-o",
-					info: "Warner invited us to watch the movie in a special screening before the premiere.",
-				},
-			],
+					"icon": "smile-o",
+					"info": "Warner invited us to watch the movie in a special screening before the premiere."
+				}
+			]
 		},
 		{
-			id: 3,
-			stringID: "inspireka",
-			name: "Mundo Inspireka",
-			client: "Sonrics",
-			via: "Element",
-			type: "Advergaming",
-			tech: "html5 + javascript",
-			year: "2015",
-			importance: 1,
-			images: {
-				home: "home-sonrics-inspireka.jpg",
-				thumb: "projects-sonrics-inspireka.jpg",
-				detail: [
+			"id": 3,
+			"stringID": "inspireka",
+			"name": "Mundo Inspireka",
+			"client": "Sonrics",
+			"via": "Element",
+			"type": "Advergaming",
+			"tech": "html5 + javascript",
+			"year": "2015",
+			"importance": 1,
+			"images": {
+				"home": "home-sonrics-inspireka.jpg",
+				"thumb": "projects-sonrics-inspireka.jpg",
+				"detail": [
 					"projects-sonrics-inspireka-1.jpg",
 					"projects-sonrics-inspireka-2.jpg",
-					"projects-sonrics-inspireka-3.jpg",
-				],
+					"projects-sonrics-inspireka-3.jpg"
+				]
 			},
-			video: "https://www.youtube.com/embed/F88z4-s3FJE",
-			urls: [],
-			participation:
+			"video": "https://www.youtube.com/embed/F88z4-s3FJE",
+			"urls": [],
+			"participation":
 				"Game development in Javascript with PhaserJS. Concept creation, game design, and level design.",
-			about:
+			"about":
 				"Sonrics's site used to have a bunch of minigames showcasing their main products. When Inspireka became a full product line, a need arose to generate a new website section with its own minigame. Inspireka is a candy that promotes creativity and building (like legos), so in the game we presented all the different products and used them as building blocks on the game to help Fink (the product mascot) to advance through the levels",
-			technically:
+			"technically":
 				"I used PhaserJS framework and Tilemap tool to create each level, using a spritesheet.",
-			curious:
+			"curious":
 				"The hardest part was designing the levels. It was the first game of this kind that I developed, and I needed to make it easy enough to get resolved, but not too easy so it was boring.",
-			list: [
-				{ icon: "smile-o", info: "I tasted each one of the Inspireka candies" },
-				{ icon: "lightbulb-o", info: "Tiled is an excellent tool for level design" },
-				{ icon: "gamepad", info: "I got inspiration from Mario VS DK" },
-				{ icon: "child", info: "My nephews loved the game" },
-			],
+			"list": [
+				{ "icon": "smile-o", "info": "I tasted each one of the Inspireka candies" },
+				{ "icon": "lightbulb-o", "info": "Tiled is an excellent tool for level design" },
+				{ "icon": "gamepad", "info": "I got inspiration from Mario VS DK" },
+				{ "icon": "child", "info": "My nephews loved the game" }
+			]
 		},
 		{
-			id: 6,
-			stringID: "mustang50",
-			name: "Mustang 50 years",
-			client: "Ford",
-			via: "Element",
-			type: "Web microsite",
-			tech: "html5 + javascript + nodejs + twitter api",
-			year: "2014",
-			importance: 1,
-			images: {
-				thumb: "projects-ford-mustang50.jpg",
-				detail: [
+			"id": 6,
+			"stringID": "mustang50",
+			"name": "Mustang 50 years",
+			"client": "Ford",
+			"via": "Element",
+			"type": "Web microsite",
+			"tech": "html5 + javascript + nodejs + twitter api",
+			"year": "2014",
+			"importance": 1,
+			"images": {
+				"thumb": "projects-ford-mustang50.jpg",
+				"detail": [
 					"projects-ford-mustang50-1.jpg",
 					"projects-ford-mustang50-2.jpg",
 					"projects-ford-mustang50-3.jpg",
-					"projects-ford-mustang50-4.jpg",
-				],
+					"projects-ford-mustang50-4.jpg"
+				]
 			},
-			video: "https://www.youtube.com/embed/nbuzxBZuElY",
-			urls: [],
-			participation:
+			"video": "https://www.youtube.com/embed/nbuzxBZuElY",
+			"urls": [],
+			"participation":
 				"NodeJS backend development with MongoDB, and frontend development HTML / CSS / JS",
-			about:
+			"about":
 				"During Mustang anniversary, the company hosted an event in Acapulco where they projected this microsite in giant screens, showing up real time tweets containing terms related to Mustang. The microsite was left alive for some months, so anyone could see the Mustang car created from tweets, and search for their own tweet",
-			technically:
+			"technically":
 				"I used the Twitter Stream API to store all relevant tweets as soon as they were generated. Later, through Express and Socket.io I sent the info to the frontend.",
-			curious:
+			"curious":
 				"The implementation had to be super fast because we had a very tight deadline. Everything was completed in ~5 days.",
-			list: [
-				{ icon: "photo", info: "We tested five photos before picking one." },
+			"list": [
+				{ "icon": "photo", "info": "We tested five photos before picking one." },
 				{
-					icon: "smile-o",
-					info: "People in the event were excitedly looking for their tweets in the screens.",
-				},
-			],
+					"icon": "smile-o",
+					"info": "People in the event were excitedly looking for their tweets in the screens."
+				}
+			]
 		},
 		{
-			id: 4,
-			stringID: "minitoons",
-			name: "Minitoons",
-			client: "Metlife",
-			via: "Wunderman",
-			type: "Web application",
-			tech: "html5 + javascript",
-			year: "2013",
-			importance: 1,
-			images: {
-				thumb: "projects-metlife-minitoons.jpg",
-				detail: [
+			"id": 4,
+			"stringID": "minitoons",
+			"name": "Minitoons",
+			"client": "Metlife",
+			"via": "Wunderman",
+			"type": "Web application",
+			"tech": "html5 + javascript",
+			"year": "2013",
+			"importance": 1,
+			"images": {
+				"thumb": "projects-metlife-minitoons.jpg",
+				"detail": [
 					"projects-metlife-minitoons-1.jpg",
 					"projects-metlife-minitoons-2.jpg",
 					"projects-metlife-minitoons-3.jpg",
 					"projects-metlife-minitoons-4.jpg",
-					"projects-metlife-minitoons-5.jpg",
-				],
+					"projects-metlife-minitoons-5.jpg"
+				]
 			},
-			video: "https://www.youtube.com/embed/G4__MYjhEJo",
-			urls: [],
-			participation:
+			"video": "https://www.youtube.com/embed/G4__MYjhEJo",
+			"urls": [],
+			"participation":
 				"PHP backend development and HTML/CSS/JS for frontend (not including generator).",
-			about:
+			"about":
 				"We developed a web app to create Peanuts styled avatars, so that they could be used as profile and cover pics. The user could pick every small aspect, including eyes, clothes, noses, skin color, etc.",
-			technically:
+			"technically":
 				"This app was developed in three languages (English, Spanish, and Portuguese). Texts were dynamically created through PHP and MySQL. The avatar generation process was done through canvas and JS, with jQuery. I made a small admin with a list of users and their avatars.",
-			curious:
+			"curious":
 				"The implementation became increasingly complicated as the client required IE8 support. I had to do a fallback version in Flash (AS3) to compensate the lack of canvas on this browser, but due to limitations on length (as I was using base64), I had to invest a lot more time than originally expected.",
-			list: [
+			"list": [
 				{
-					icon: "internet-explorer",
-					info: "To add IE8 compatible, I had to do a fallback version with Flash.",
+					"icon": "internet-explorer",
+					"info": "To add IE8 compatible, I had to do a fallback version with Flash."
 				},
-				{ icon: "smile-o", info: "I love Snoopy, so this was a very fun experience." },
+				{ "icon": "smile-o", "info": "I love Snoopy, so this was a very fun experience." },
 				{
-					icon: "lock",
-					info: "Peanuts is very strict with how the characters / illustrations are handled.",
-				},
-			],
+					"icon": "lock",
+					"info": "Peanuts is very strict with how the characters / illustrations are handled."
+				}
+			]
 		},
 		{
-			id: 2,
-			stringID: "rescatextreme",
-			name: "Rescate Xtreme",
-			client: "Speed Stick",
-			via: "Element",
-			type: "Advergaming",
-			tech: "html5 + javascript",
-			year: "2015",
-			importance: 2,
-			images: {
-				home: "home-speedstick-rescatextreme.jpg",
-				thumb: "projects-speedstick-rescatextreme.jpg",
-				detail: [
+			"id": 2,
+			"stringID": "rescatextreme",
+			"name": "Rescate Xtreme",
+			"client": "Speed Stick",
+			"via": "Element",
+			"type": "Advergaming",
+			"tech": "html5 + javascript",
+			"year": "2015",
+			"importance": 2,
+			"images": {
+				"home": "home-speedstick-rescatextreme.jpg",
+				"thumb": "projects-speedstick-rescatextreme.jpg",
+				"detail": [
 					"projects-speedstick-rescatextreme-1.jpg",
 					"projects-speedstick-rescatextreme-2.jpg",
 					"projects-speedstick-rescatextreme-3.jpg",
 					"projects-speedstick-rescatextreme-4.jpg",
-					"projects-speedstick-rescatextreme-5.jpg",
-				],
+					"projects-speedstick-rescatextreme-5.jpg"
+				]
 			},
-			video: "https://www.youtube.com/embed/Q3SmLlu4qTg",
-			urls: [],
-			participation:
+			"video": "https://www.youtube.com/embed/Q3SmLlu4qTg",
+			"urls": [],
+			"participation":
 				"Concept proposal, game design, game development in JS, UI implementation of the website",
-			about:
+			"about":
 				"Speed Stick wanted a game to attract young people to the brand. As usual, they wanted it to work on all (or most) devices in a really easy way. We proposed a runner in HTML that was a great fit with the overall marketing campaign. The game has no ending, so each player can get as far as their skill allows it. Speed and enemies get progressively harder, and the stage, items, and powerups were generated randomly, so the game was a mix of skill and luck.",
-			technically:
+			"technically":
 				"I used PhaserJS, and optimized it to be used in mobile devices and tablets. It was tested in several of them and the performace was pretty good.",
-			curious:
+			"curious":
 				"The game originally was only meant to be used in Mexico, but it was so successful that it was released in all Latin America with different prizes depending on the country. We got more than 40K returning players.",
-			list: [
-				{ icon: "thumbs-o-down", info: "We caught a lot of users trying to cheat" },
-				{ icon: "television", info: "The game was advertised on a national TV ad" },
-			],
+			"list": [
+				{ "icon": "thumbs-o-down", "info": "We caught a lot of users trying to cheat" },
+				{ "icon": "television", "info": "The game was advertised on a national TV ad" }
+			]
 		},
 		{
-			id: 5,
-			stringID: "sonrics",
-			name: "Sonrics",
-			client: "Sonrics",
-			via: "Element",
-			type: "Website",
-			tech: "html5 + css + js",
-			year: "2012",
-			importance: 1,
-			images: {
-				thumb: "projects-sonrics.jpg",
-				detail: ["projects-sonrics-1.jpg", "projects-sonrics-2.jpg", "projects-sonrics-3.jpg"],
+			"id": 5,
+			"stringID": "sonrics",
+			"name": "Sonrics",
+			"client": "Sonrics",
+			"via": "Element",
+			"type": "Website",
+			"tech": "html5 + css + js",
+			"year": "2012",
+			"importance": 1,
+			"images": {
+				"thumb": "projects-sonrics.jpg",
+				"detail": ["projects-sonrics-1.jpg", "projects-sonrics-2.jpg", "projects-sonrics-3.jpg"]
 			},
-			video: "https://www.youtube.com/embed/YKi-4Tg6OPE",
-			urls: [],
-			participation: "Markup in HTML and CSS with JS visual effects",
-			about:
+			"video": "https://www.youtube.com/embed/YKi-4Tg6OPE",
+			"urls": [],
+			"participation": "Markup in HTML and CSS with JS visual effects",
+			"about":
 				"The Sonrics website had the goal of showcasing all of their product lines, in an attractive way for children. We made a series of illustrations representing imaginary worlds where the products 'lived', where you could see all the information of each one of them. I made a horizontal navigation with a parallax effect to give it depth and more visual impact.",
-			technically:
+			"technically":
 				"I used jQuery, coding all the effect formulas manually in JS (no plugins). This gave me a lot of freedom to get the exact visual effect that I wanted.",
-			curious:
+			"curious":
 				"The website had a bunch of HTML games embedded, but most of them were developed externally. As we did a great job with the website, later on they asked us to develop the game of their latest product Inspireka.",
-			list: [
-				{ icon: "paint-brush", info: "Illustrations were made by the talented @Rafahu" },
+			"list": [
+				{ "icon": "paint-brush", "info": "Illustrations were made by the talented @Rafahu" },
 				{
-					icon: "smile-o",
-					info: "They gave us a sample of each product and of course I ate them all",
+					"icon": "smile-o",
+					"info": "They gave us a sample of each product and of course I ate them all"
 				},
-				{ icon: "code", info: "No plugins!" },
+				{ "icon": "code", "info": "No plugins!" },
 				{
-					icon: "lightbulb-o",
-					info: "Me and the art director together came up with each world's concept",
-				},
-			],
+					"icon": "lightbulb-o",
+					"info": "Me and the art director together came up with each world's concept"
+				}
+			]
 		},
 		{
-			id: 6,
-			stringID: "piojo",
-			name: "Piojo Escúchanos",
-			client: "Telcel",
-			via: "Element",
-			type: "Web application",
-			tech: "nodejs + mongodb + html5 + javascript",
-			year: "2014",
-			importance: 2,
-			images: {
-				thumb: "projects-telcel-piojoescuchanos.jpg",
-				detail: [
+			"id": 6,
+			"stringID": "piojo",
+			"name": "Piojo Escúchanos",
+			"client": "Telcel",
+			"via": "Element",
+			"type": "Web application",
+			"tech": "nodejs + mongodb + html5 + javascript",
+			"year": "2014",
+			"importance": 2,
+			"images": {
+				"thumb": "projects-telcel-piojoescuchanos.jpg",
+				"detail": [
 					"projects-telcel-piojoescuchanos-1.jpg",
 					"projects-telcel-piojoescuchanos-2.jpg",
 					"projects-telcel-piojoescuchanos-3.jpg",
 					"projects-telcel-piojoescuchanos-4.jpg",
 					"projects-telcel-piojoescuchanos-5.jpg",
-					"projects-telcel-piojoescuchanos-6.jpg",
-				],
+					"projects-telcel-piojoescuchanos-6.jpg"
+				]
 			},
-			video: "",
-			urls: [],
-			participation:
+			"video": "",
+			"urls": [],
+			"participation":
 				"Backend with NodeJS and MongoDB, frontend including animations with HTML/CSS/JS",
-			about:
+			"about":
 				"We released this project for the 2014 World Cup, totally based on Twitter and bringing relevant real time data to the user to enrich the matches experience. Through the Twitter API, the system evaluated the words in real time to measure the communitie's mood, the amount of fans celebrating each goal, the most mentioned players, most common reactions, etc. We also had a specialist narrating the games and mentioning important highlights through each match.",
-			technically:
+			"technically":
 				"The project lived while Mexico stayed in the World Cup. We generated new modules and features as the matches went by, to keep the site fresh and give the fans more content and analysis. Everything was shareable, so users could share each piece of data individually.",
-			curious:
+			"curious":
 				"The UI was different while the matches were ongoing. It showed matches real time data, while the rest of the time it showed general statistics, users predictions, and memes.",
-			list: [
+			"list": [
 				{
-					icon: "television",
-					info: "The whole team met during the matches to monitor transimission.",
+					"icon": "television",
+					"info": "The whole team met during the matches to monitor transimission."
 				},
-				{ icon: "soccer-ball-o", info: "Thousands of users celebrated every goal in Twitter." },
-				{ icon: "users", info: "I learned the names of all the players in the Mexican team." },
-			],
+				{ "icon": "soccer-ball-o", "info": "Thousands of users celebrated every goal in Twitter." },
+				{ "icon": "users", "info": "I learned the names of all the players in the Mexican team." }
+			]
 		},
 		{
-			id: 7,
-			stringID: "urbanfonts",
-			name: "Urban Fonts",
-			client: "Nike",
-			via: "JWT",
-			type: "Web application",
-			tech: "html5 + javascript + google maps",
-			year: "2012",
-			importance: 1,
-			images: {
-				thumb: "projects-nike-urbanfonts.jpg",
-				detail: [
+			"id": 7,
+			"stringID": "urbanfonts",
+			"name": "Urban Fonts",
+			"client": "Nike",
+			"via": "JWT",
+			"type": "Web application",
+			"tech": "html5 + javascript + google maps",
+			"year": "2012",
+			"importance": 1,
+			"images": {
+				"thumb": "projects-nike-urbanfonts.jpg",
+				"detail": [
 					"projects-nike-urbanfonts-1.jpg",
 					"projects-nike-urbanfonts-2.jpg",
 					"projects-nike-urbanfonts-3.jpg",
-					"projects-nike-urbanfonts-4.jpg",
-				],
+					"projects-nike-urbanfonts-4.jpg"
+				]
 			},
-			video: "https://www.youtube.com/embed/fY5aRCo7P1A",
-			urls: [],
-			participation: "Frontend implementation for the microsite excluding the poster generation.",
-			about:
+			"video": "https://www.youtube.com/embed/fY5aRCo7P1A",
+			"urls": [],
+			"participation": "Frontend implementation for the microsite excluding the poster generation.",
+			"about":
 				"Nike was trying to create a community of urban runners, and launched this website that assigned each user to an urban tribe. Each tribe had its own custom designed typography, and could create a message that turned into a nice downloadable poster. The poster was saved in the map, so other runners could be inspired by their tribes' messages.",
-			technically:
+			"technically":
 				"I worked on this project with a good friend, who made the poster module in canvas. I made the rest of the UI, the Google Maps implementation, markers, and animations.",
-			curious:
+			"curious":
 				"I worked with very talented people while creating this website, it was a great experience that taught me a lot.",
-			list: [],
+			"list": []
 		},
 		{
-			id: 11,
-			stringID: "doritosinferno",
-			name: "Inferno",
-			client: "Doritos",
-			via: "Element",
-			type: "Web application",
-			tech: "flash + as3",
-			year: "2012",
-			importance: 1,
-			images: {
-				thumb: "projects-doritosinferno.jpg",
-				detail: [
+			"id": 11,
+			"stringID": "doritosinferno",
+			"name": "Inferno",
+			"client": "Doritos",
+			"via": "Element",
+			"type": "Web application",
+			"tech": "flash + as3",
+			"year": "2012",
+			"importance": 1,
+			"images": {
+				"thumb": "projects-doritosinferno.jpg",
+				"detail": [
 					"projects-doritos-inferno-1.jpg",
 					"projects-doritos-inferno-2.jpg",
 					"projects-doritos-inferno-3.jpg",
 					"projects-doritos-inferno-4.jpg",
 					"projects-doritos-inferno-5.jpg",
-					"projects-doritos-inferno-6.jpg",
-				],
+					"projects-doritos-inferno-6.jpg"
+				]
 			},
-			video: "https://www.youtube.com/embed/ldho-VJ5QFY",
-			urls: [],
-			participation: "Feature proposals, Flash/AS3 implementation",
-			about:
+			"video": "https://www.youtube.com/embed/ldho-VJ5QFY",
+			"urls": [],
+			"participation": "Feature proposals, Flash/AS3 implementation",
+			"about":
 				"The whole Doritos Inferno concept and the elevator was part of the marketing campaign proposed for the new Doritos flavor. The essence of the website was a sexy hell, with seductive women and a trip down to hell. The user had to cross three levels to reach it: the first analyzed their Facebook account and evaluated it to come up with the most prevalent sin of the user. The second featured a stalker woman that showed how she had located every place the user had been, and had stabbed their partner's photo. The third one allowed to download graphic material through a voyeurist experience. In the end, the user arrived to hell, and to save themself they had to sell the soul of three friends by sharing their Facebook profiles.",
-			technically:
+			"technically":
 				"We used videos loaded through AS3 and the Facebook API. The initial account analysis took into account general page likes, activities, relationship status, amount of friends, most used words in posts, etc.",
-			curious: "We won silver IAB for best Website.",
-			list: [
-				{ icon: "lock", info: "I won't say what sin I got in the first floor" },
-				{ icon: "smile-o", info: "We made a special buggy version as a prank for my boss" },
-			],
+			"curious": "We won silver IAB for best Website.",
+			"list": [
+				{ "icon": "lock", "info": "I won't say what sin I got in the first floor" },
+				{ "icon": "smile-o", "info": "We made a special buggy version as a prank for my boss" }
+			]
 		},
 		{
-			id: 9,
-			stringID: "element",
-			name: "Sitio Element",
-			client: "Element",
-			via: "Element",
-			type: "Website",
-			tech: "html5 + css + js",
-			year: "2015",
-			importance: 1,
-			images: {
-				thumb: "projects-element.jpg",
-				detail: [
+			"id": 9,
+			"stringID": "element",
+			"name": "Sitio Element",
+			"client": "Element",
+			"via": "Element",
+			"type": "Website",
+			"tech": "html5 + css + js",
+			"year": "2015",
+			"importance": 1,
+			"images": {
+				"thumb": "projects-element.jpg",
+				"detail": [
 					"projects-element-element-1.jpg",
 					"projects-element-element-2.jpg",
 					"projects-element-element-3.jpg",
 					"projects-element-element-4.jpg",
-					"projects-element-element-5.jpg",
-				],
+					"projects-element-element-5.jpg"
+				]
 			},
-			video: "https://www.youtube.com/embed/Dkiya_FJ5Js",
-			urls: [],
-			participation: "Frontend implementation with HTML/CSS/JS.",
-			about:
+			"video": "https://www.youtube.com/embed/Dkiya_FJ5Js",
+			"urls": [],
+			"participation": "Frontend implementation with HTML/CSS/JS.",
+			"about":
 				"Element meant to redesign their website to show a fresher image and highlight its recent projects and achievements.",
-			technically:
+			"technically":
 				"I made it everything from scratch, with Browersify, SASS, and jQuery. The projects were read through an external JSON file, to make it easier to update. The site later integrated an English version, solved in the frontend. I created a jQuery plugin for l18n that loaded the JSON contents on the texts.",
-			curious: "The site has an easter egg in the JS console, used for developers interviews.",
-			list: [
-				{ icon: "code", info: "Plugin free" },
+			"curious": "The site has an easter egg in the JS console, used for developers interviews.",
+			"list": [
+				{ "icon": "code", "info": "Plugin free" },
 				{
-					icon: "smile-o",
-					info: "It's always nice to be the one doing the website of your company :)",
-				},
-			],
+					"icon": "smile-o",
+					"info": "It's always nice to be the one doing the website of your company :)"
+				}
+			]
 		},
 		{
-			id: 10,
-			stringID: "televisagracias",
-			name: "Gracias 2014",
-			client: "Televisa",
-			via: "Element",
-			type: "Web application",
-			tech: "html5 + css + js + backbone",
-			year: "2014",
-			importance: 1,
-			images: {
-				thumb: "projects-televisa-gracias.jpg",
-				detail: [
+			"id": 10,
+			"stringID": "televisagracias",
+			"name": "Gracias 2014",
+			"client": "Televisa",
+			"via": "Element",
+			"type": "Web application",
+			"tech": "html5 + css + js + backbone",
+			"year": "2014",
+			"importance": 1,
+			"images": {
+				"thumb": "projects-televisa-gracias.jpg",
+				"detail": [
 					"projects-televisa-gracias-1.jpg",
 					"projects-televisa-gracias-2.jpg",
 					"projects-televisa-gracias-3.jpg",
-					"projects-televisa-gracias-4.jpg",
-				],
+					"projects-televisa-gracias-4.jpg"
+				]
 			},
-			video: "https://www.youtube.com/embed/ipt_Lv3KuYw",
-			urls: [],
-			participation: "Frontend development with HTML/CSS/JS.",
-			about:
+			"video": "https://www.youtube.com/embed/ipt_Lv3KuYw",
+			"urls": [],
+			"participation": "Frontend development with HTML/CSS/JS.",
+			"about":
 				"Televisa wanted an interactive experience that brought their stars (celebrities) closer to the users. We made a video where we integrated the best moments of the user's year, integrated with famous TV show scenes.",
-			technically:
+			"technically":
 				"The photos were picked through Facebook and assigned to specific celebrations: trips (most recent user photo outside of their origin city), friends (largest number of tags in a photo), changes(different profile pics through the year), and holidays (photos during Christmas, birthday, and New Year).",
-			curious:
+			"curious":
 				"Since we couldn't use inline video on mobile, we made an animated slideshow, and allowed the user to download the full version.",
-			list: [
+			"list": [
 				{
-					icon: "facebook",
-					info: "Facebook rejected the permissions we requested a couple of times, but eventually they approved it.",
-				},
-			],
+					"icon": "facebook",
+					"info": "Facebook rejected the permissions we requested a couple of times, but eventually they approved it."
+				}
+			]
 		},
 		{
-			id: 12,
-			stringID: "snob",
-			name: "Sitio Snob",
-			client: "Snob",
-			via: "Play Interactive",
-			type: "Wordpress website",
-			tech: "html + css + wordpress",
-			year: "2013",
-			importance: 1,
-			images: {
-				thumb: "projects-snob.jpg",
-				detail: [
+			"id": 12,
+			"stringID": "snob",
+			"name": "Sitio Snob",
+			"client": "Snob",
+			"via": "Play Interactive",
+			"type": "Wordpress website",
+			"tech": "html + css + wordpress",
+			"year": "2013",
+			"importance": 1,
+			"images": {
+				"thumb": "projects-snob.jpg",
+				"detail": [
 					"projects-snob-snob-1.jpg",
 					"projects-snob-snob-2.jpg",
-					"projects-snob-snob-3.jpg",
-				],
+					"projects-snob-snob-3.jpg"
+				]
 			},
-			video: "https://www.youtube.com/embed/sIzZN-oqDXs",
-			urls: [],
-			participation:
+			"video": "https://www.youtube.com/embed/sIzZN-oqDXs",
+			"urls": [],
+			"participation":
 				"Frontend development of the template in HTML/CSS/JS and Wordpress integration.",
-			about:
+			"about":
 				"Snob wanted a simple website with a Wordpress admin to be able to update frequently. I made several animations that highlighted the elegance and fancy spirit of the restaurant.",
-			technically:
+			"technically":
 				"I made it with LESS, and Bootstrap. The animations and effects were made with Javascript.",
-			curious: "I still haven't been able to taste one of their famous cakes :(",
-			list: [],
+			"curious": "I still haven't been able to taste one of their famous cakes :(",
+			"list": []
 		},
 		{
-			id: 8,
-			stringID: "pelapop",
-			name: "Pelapop",
-			client: "Nestlé",
-			via: "Element",
-			type: "Juego AS3",
-			tech: "flash + as3",
-			year: "2012",
-			importance: 1,
-			images: {
-				thumb: "projects-nestle-pelapop.jpg",
-				detail: [
+			"id": 8,
+			"stringID": "pelapop",
+			"name": "Pelapop",
+			"client": "Nestlé",
+			"via": "Element",
+			"type": "Juego AS3",
+			"tech": "flash + as3",
+			"year": "2012",
+			"importance": 1,
+			"images": {
+				"thumb": "projects-nestle-pelapop.jpg",
+				"detail": [
 					"projects-nestle-pelapop-1.jpg",
 					"projects-nestle-pelapop-2.jpg",
 					"projects-nestle-pelapop-3.jpg",
 					"projects-nestle-pelapop-4.jpg",
-					"projects-nestle-pelapop-5.jpg",
-				],
+					"projects-nestle-pelapop-5.jpg"
+				]
 			},
-			video: "https://www.youtube.com/embed/GktXS4Aff-Y",
-			urls: [],
-			participation: "Game proposal, game design, level design, game development in AS3.",
-			about:
+			"video": "https://www.youtube.com/embed/GktXS4Aff-Y",
+			"urls": [],
+			"participation": "Game proposal, game design, level design, game development in AS3.",
+			"about":
 				"Nestle released a new popsicle called Pelapop, and we made a website consisting in a game and an interactive intro that showcased how it was meant to be eaten. We also made a bonus minigame, Fabulous Fred style.",
-			technically:
+			"technically":
 				"I used Box2D framework for physics handling, creating a similar gameplay to Angry Birds.",
-			curious:
+			"curious":
 				"The game was so successful, that Nestle Spain contacted us to ask for the files to change it (the popsicle has a different name there) and release it on Spain. They also compiled it as an iOS app, and released in the iTunes Store.",
-			list: [
+			"list": [
 				{
-					icon: "map-marker",
-					info: "The Spanish name of the popsicle is 'Pirulo Jungly'",
+					"icon": "map-marker",
+					"info": "The Spanish name of the popsicle is 'Pirulo Jungly'"
 				},
-				{ icon: "smile-o", info: "We ate A LOT of popsicles while working on this" },
-			],
-		},
-	],
-};
+				{ "icon": "smile-o", "info": "We ate A LOT of popsicles while working on this" }
+			]
+		}
+	]
+}

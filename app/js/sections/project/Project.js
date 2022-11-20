@@ -1,10 +1,9 @@
 "use strict";
-import PROJECTS from "../../../data/projects.js";
 import EventfulClass from "../../lib/EventfulClass.js";
+import { getProjects } from "../../lib/Utils.js";
 import {
 	bulkNodeAction,
 	getProjectByStringID,
-	trackView,
 	isDesktop,
 	throttle,
 	appearOutphased,
@@ -15,21 +14,23 @@ import {
 	changeMinusBtnTxtToExtra,
 } from "./ProjectVisualEffectsUtils.js";
 import VideoHandler from "./VideoHandler.js";
-
 class Project extends EventfulClass {
-	init() {
+	init(language) {
 		this.id = window.location.hash;
-		this.info = getProjectByStringID(this.id.substring(1), PROJECTS.projects);
-		if (!this.info) {
-			window.location = "/";
-			return;
-		}
+		getProjects(language).then((projects) => {
+			this.info = getProjectByStringID(this.id.substring(1), projects);
+			if (!this.info) {
+				window.location = "/";
+				return;
+			}
+			this.populateData();
+		});
 		this.isDesktop = isDesktop();
 		this.nodes = this.getNodes();
 		this.removeSetupNodes();
 		this.addSetupEvents();
-		this.populateData();
-		trackView("Proyecto-" + this.info.client + "-" + this.info.name);
+
+		//trackView("Proyecto-" + this.info.client + "-" + this.info.name);
 	}
 	getNodes() {
 		const nodes = {};
@@ -114,9 +115,9 @@ class Project extends EventfulClass {
 	}
 
 	populateExtrainfo() {
-		this.nodes.year.innerHTML = "Año: " + this.info.year;
-		this.nodes.via.innerHTML = "Vía: " + this.info.via;
-		this.nodes.participation.innerHTML = "Lo que yo hice: " + this.info.participation;
+		this.nodes.year.innerHTML = this.info.year;
+		this.nodes.via.innerHTML = this.info.via;
+		this.nodes.participation.innerHTML = this.info.participation;
 		this.nodes.about.innerHTML = this.info.about.replace(/\n/g, "</p><p>");
 		this.nodes.technically.innerHTML = this.info.technically;
 		this.nodes.curious.innerHTML = this.info.curious;
@@ -233,18 +234,18 @@ class Project extends EventfulClass {
 			this.nodes.overlay.classList.add("unshown");
 		}, 500);
 		setTimeout(() => {
-			window.innerWidth >= mobileWidthLimit && this.nodes.overlay.classList.add("hidden");
+			isDesktop() && this.nodes.overlay.classList.add("hidden");
 			this.nodes.extraInfo.classList.add("hidden");
 			button.disabled = false;
 		}, 1000);
 	}
 
 	onGoToProject(e) {
-		this.trigger("openProject", "proyecto.html#" + e.currentTarget.getAttribute("data-id"));
+		this.trigger("openProject", e.currentTarget.getAttribute("data-id"));
 	}
 	onCloseProjects(e) {
 		e.currentTarget.setAttribute("href", "proyectos.html");
-		this.trigger("openSection", "proyectos.html");
+		this.trigger("openProjects");
 	}
 	destroy() {
 		this.destroyVideo();

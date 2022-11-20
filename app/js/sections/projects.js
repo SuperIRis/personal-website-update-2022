@@ -1,21 +1,25 @@
 "use strict";
 
-import PROJECTS from "../../data/projects.js";
 import EventfulClass from "../lib/EventfulClass.js";
+import { getProjects } from "../lib/Utils.js";
 
 class Projects extends EventfulClass {
-	init() {
+	init(language) {
 		this.list = [];
-		this.orderDisplayByImportance();
-		this.setProjects();
+		this.language = language;
+		this.projects = getProjects(language).then((projects) => {
+			this.projects = projects;
+			this.orderDisplayByImportance();
+			this.setProjects();
+		});
 		document
 			.getElementById("projects-list")
 			.addEventListener("click", this.onGoToProject.bind(this));
 	}
 	orderDisplayByImportance() {
 		let inRow = 0;
-		for (let i = 0; i < PROJECTS.projects.length; i++) {
-			inRow += PROJECTS.projects[i].importance;
+		for (let i = 0; i < this.projects.length; i++) {
+			inRow += this.projects[i].importance;
 			if (inRow > 4) {
 				inRow = 0;
 				this.list.push(this.getProjectByImportance(1, i));
@@ -24,14 +28,14 @@ class Projects extends EventfulClass {
 				if (inRow === 4) {
 					inRow = 0;
 				}
-				this.list.push(PROJECTS.projects[i]);
+				this.list.push(this.projects[i]);
 			}
 		}
 	}
 	getProjectByImportance(importance, startIndex) {
-		for (let i = startIndex, limit = PROJECTS.projects.length; i < limit; i++) {
-			if (importance === PROJECTS.projects[i].importance) {
-				return PROJECTS.projects.splice(i, 1)[0];
+		for (let i = startIndex, limit = this.projects.length; i < limit; i++) {
+			if (importance === this.projects[i].importance) {
+				return this.projects.splice(i, 1)[0];
 			}
 		}
 	}
@@ -41,7 +45,6 @@ class Projects extends EventfulClass {
 		const projectsList = document.getElementById("projects-list");
 		projectsList.innerHTML = "";
 		projectsList.remove();
-
 		for (let i = 0; i < this.list.length; i++) {
 			projectsList.append(this.createProject(this.list[i]));
 		}
@@ -53,7 +56,7 @@ class Projects extends EventfulClass {
 		project.querySelector("h2").innerHTML = projectData.name;
 		project.querySelector("h3").innerHTML = projectData.tech;
 		project.querySelector(".extra-info").innerHTML = projectData.participation;
-		project.querySelector("a").setAttribute("href", "proyecto.html#" + projectData.stringID);
+		project.setAttribute("data-project", projectData.stringID);
 		project.querySelector("s2")?.classList.remove("s2");
 		project.querySelector("s1")?.classList.remove("s1");
 		project.classList.add("s" + projectData.importance);
@@ -68,7 +71,8 @@ class Projects extends EventfulClass {
 		e.preventDefault();
 		const project = e.target.closest(".project");
 		if (project) {
-			this.trigger("openProject", project.querySelector("a").getAttribute("href"));
+			console.log(project);
+			this.trigger("openProject", project.getAttribute("data-project"));
 		}
 	}
 	destroy() {}
