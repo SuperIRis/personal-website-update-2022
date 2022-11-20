@@ -62,6 +62,7 @@ function initPage(url) {
 		return !!language;
 	});
 	currentLanguage = language;
+	selectCurrentSectionMenuItem(section[`${currentLanguage}Path`]);
 	selectCurrentLanguageMenuItem(currentLanguage);
 	section.classObject.init(currentLanguage);
 	currentSection = section.classObject;
@@ -72,13 +73,19 @@ function selectCurrentLanguageMenuItem(language) {
 	document.querySelector(`[data-url-lang="${language}"]`).classList.add("selected");
 }
 
+function selectCurrentSectionMenuItem(path) {
+	document.querySelector(".main-header").classList.remove("selected");
+	path !== "" &&
+		document.querySelector(`.main-header [href*="${path[0]}"]`).classList.add("selected");
+}
+
 function setLoads() {
 	removeClassFromAll(document.querySelectorAll(".preload"), "preload");
 	document.getElementById("loader").classList.add("unshown");
 }
 
 function handleBrowserNav() {
-	AnimatedLoader.loadSection(window.location.href, true);
+	AnimatedLoader.loadSection(window.location.href, { browserNav: true });
 }
 
 function setNavigation() {
@@ -87,10 +94,10 @@ function setNavigation() {
 		const target = e.target.closest("a");
 		e.preventDefault();
 		if (target && !target.classList.contains("selected")) {
-			const url = target.getAttribute("data-url-lang")
-				? getCurrentURLByLanguage(target.getAttribute("data-url-lang"))
-				: target.getAttribute("href");
-			AnimatedLoader.loadSection(url);
+			//If data-url-lang exists then it is a language change
+			const newLanguage = target.getAttribute("data-url-lang");
+			const url = newLanguage ? getCurrentURLByLanguage(newLanguage) : target.getAttribute("href");
+			AnimatedLoader.loadSection(url, { changeLanguage: !!newLanguage });
 		}
 	});
 	Projects.addEventListener("openProject", onOpenProject);
@@ -118,7 +125,7 @@ function getCurrentURLByLanguage(language) {
 		return console.warn("Cannot find current section");
 	}
 	const newPath = section[`${language}Path`][0];
-	return `${window.location.origin}/${newPath}.html`;
+	return `${newPath}.html${window.location.hash}`;
 }
 
 /*

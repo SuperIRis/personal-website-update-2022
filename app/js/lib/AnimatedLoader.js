@@ -39,11 +39,13 @@ class AnimatedLoader extends EventfulClass {
 	cleanPageState() {
 		document.querySelector(".selected")?.classList.remove("selected");
 	}
-	loadSection(url, browserNav = false) {
+	loadSection(url, settings = {}) {
 		if (!this.animation) {
 			return console.error("AnimatedLoader hasn't been initiated");
 		}
+		const { browserNav = false, changeLanguage = false } = settings;
 		this.browserNav = browserNav;
+		this.changeLanguage = changeLanguage;
 		this.nodes = this.getNodes();
 		this.url = url;
 		this.loadReady = false;
@@ -60,7 +62,6 @@ class AnimatedLoader extends EventfulClass {
 				this.onLoadReady();
 			}
 			this.cleanPageState();
-			document.querySelector("a[href='" + this.url + "']")?.classList.add("selected");
 		}, 1000);
 	}
 	onSectionDOMReady(data) {
@@ -76,8 +77,11 @@ class AnimatedLoader extends EventfulClass {
 			const tempElement = document.createElement("div");
 			tempElement.innerHTML = this.htmlData;
 			const title = tempElement.querySelector("title").innerHTML;
-			this.nodes["mainContainer"].innerHTML =
-				tempElement.querySelector("#main-container").innerHTML;
+			this.nodes.mainContainer.innerHTML = tempElement.querySelector("#main-container").innerHTML;
+			if (this.changeLanguage) {
+				this.nodes.mainHeader.innerHTML = tempElement.querySelector(".main-header").innerHTML;
+				this.nodes.mainFooter.innerHTML = tempElement.querySelector(".main-footer").innerHTML;
+			}
 			onAllImagesLoaded(tempElement.querySelector("#main-container")).then(() => {
 				if (this.animationReady) {
 					const scripts = tempElement.querySelectorAll("script");

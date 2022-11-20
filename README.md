@@ -11,7 +11,7 @@ Build the site for prod with gulp build (copy static files to dist / babelify, c
 NOTES as of 20/11
 
 - Translated all content
--
+- Menu and footer now change languages
 
 NOTES as of 19/11
 
