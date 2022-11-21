@@ -7,7 +7,6 @@ const browserSync = require("browser-sync").create();
 const rename = require("gulp-rename");
 const imagemin = require("gulp-imagemin");
 const babel = require("gulp-babel");
-const concat = require("gulp-concat");
 const { series, dest, src, parallel, watch } = require("gulp");
 
 const buildDir = "../superiris.github.io";
@@ -71,9 +70,10 @@ const copyDocs = () => src("./app/docs/*").pipe(dest(buildDir + "/docs/"));
 const copyIcon = () => src("./app/*.{ico,txt}").pipe(dest(buildDir + "/"));
 const copySpritesheets = () => src("./app/spritesheets/*").pipe(dest(buildDir + "/spritesheets/"));
 const optimizeImages = () =>
-	src("./app/images/**/*")
+	src("./app/images/**/*.(png|jpg")
 		.pipe(imagemin())
 		.pipe(dest(buildDir + "/images"));
+const copySVG = () => src("./app/images/*.svg").pipe(dest(buildDir + "/images/"));
 
 exports.serve = series(processJSDev, processCSSDev, browserSyncServe);
 
@@ -84,6 +84,7 @@ exports.build = parallel(
 	copySpritesheets,
 	copyIcon,
 	optimizeImages,
+	copySVG,
 	processCSSProd,
 	processJSProd,
 	copyJSVendor,

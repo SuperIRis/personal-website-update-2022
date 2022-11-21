@@ -71,7 +71,6 @@ class Projects extends EventfulClass {
 		e.preventDefault();
 		const project = e.target.closest(".project");
 		if (project) {
-			console.log(project);
 			this.trigger("openProject", project.getAttribute("data-project"));
 		}
 	}
