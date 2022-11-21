@@ -7,7 +7,10 @@ const browserSync = require("browser-sync").create();
 const rename = require("gulp-rename");
 const imagemin = require("gulp-imagemin");
 const babel = require("gulp-babel");
+const concat = require("gulp-concat");
 const { series, dest, src, parallel, watch } = require("gulp");
+
+const buildDir = "../superiris.github.io";
 
 function browserSyncServe() {
 	browserSync.init({
@@ -33,9 +36,9 @@ const processJSDev = () => {
 const processJSProd = () => {
 	return src("./app/js/main.js")
 		.pipe(babel())
-		.pipe(rename("bundle2.js"))
 		.pipe(uglify())
-		.pipe(dest("./dist/js/", { overwrite: true }));
+		.pipe(rename("bundle2.js"))
+		.pipe(dest(buildDir + "/js/", { overwrite: true }));
 };
 
 const processCSSDev = () => {
@@ -49,17 +52,28 @@ const processCSSDev = () => {
 const processCSSProd = () => {
 	return src("./app/sass/**/*.scss")
 		.pipe(sass.sync({ outputStyle: "compressed" }).on("error", sass.logError))
-		.pipe(dest("./dist/css/"), { overwrite: true })
+		.pipe(dest(buildDir + "/css/"), { overwrite: true })
 		.pipe(browserSync.stream({ match: "**/*.css" }));
 };
 
-const copyHTML = () => src("./app/*.html").pipe(dest("./dist/"));
-const copyData = () => src("./app/data/*").pipe(dest("./dist/data/"));
-const copyDocs = () => src("./app/docs/*").pipe(dest("./dist/docs/"));
-const copyIcon = () => src("./app/*.{ico,txt}").pipe(dest("./dist/"));
-const copyServerCode = () => src("./app/process/*").pipe(dest("./dist/process/"));
-const copySpritesheets = () => src("./app/spritesheets/*").pipe(dest("./dist/spritesheets/"));
-const optimizeImages = () => src("./app/images/**/*").pipe(imagemin()).pipe(dest("./dist/images"));
+const copyHTML = () => src("./app/*.html").pipe(dest(buildDir + "/"));
+const copyData = () => src("./app/data/*").pipe(dest(buildDir + "/data/"));
+const copyJSVendor = () => src("./app/js/vendor/*.js").pipe(dest(buildDir + "/js/vendor/"));
+const copyJSLib = () =>
+	src("./app/js/lib/*.js")
+		.pipe(uglify())
+		.pipe(dest(buildDir + "/js/lib/"));
+const copyJSSections = () =>
+	src("./app/js/sections/**/*.js")
+		.pipe(uglify())
+		.pipe(dest(buildDir + "/js/sections/"));
+const copyDocs = () => src("./app/docs/*").pipe(dest(buildDir + "/docs/"));
+const copyIcon = () => src("./app/*.{ico,txt}").pipe(dest(buildDir + "/"));
+const copySpritesheets = () => src("./app/spritesheets/*").pipe(dest(buildDir + "/spritesheets/"));
+const optimizeImages = () =>
+	src("./app/images/**/*")
+		.pipe(imagemin())
+		.pipe(dest(buildDir + "/images"));
 
 exports.serve = series(processJSDev, processCSSDev, browserSyncServe);
 
@@ -69,8 +83,10 @@ exports.build = parallel(
 	copyDocs,
 	copySpritesheets,
 	copyIcon,
-	copyServerCode,
 	optimizeImages,
 	processCSSProd,
-	processJSProd
+	processJSProd,
+	copyJSVendor,
+	copyJSLib,
+	copyJSSections
 );
